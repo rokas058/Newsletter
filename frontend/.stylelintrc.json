@@ -1,0 +1,30 @@
+{
+  "extends": ["stylelint-config-standard", "stylelint-config-styled-components"],
+  "customSyntax": "postcss-styled-syntax",
+  "defaultSeverity": "warning",
+  "rules": {
+    "no-empty-source": true,
+    "declaration-property-value-disallowed-list": {
+      "/^border/": ["none"],
+      "transition": ["all"]
+    },
+    "declaration-no-important": true,
+    "length-zero-no-unit": true,
+    "selector-pseudo-element-colon-notation": "double",
+    "selector-max-id": 0,
+    "color-named": "never",
+    "at-rule-disallowed-list": ["debug"],
+    "color-no-invalid-hex": true,
+    "block-no-empty": true,
+    "declaration-block-no-duplicate-properties": true,
+    "color-hex-length": "short",
+    "function-url-no-scheme-relative": true,
+    "function-url-scheme-disallowed-list": ["ftp", "/^http/"],
+    "declaration-block-single-line-max-declarations": 1,
+    "shorthand-property-no-redundant-values": true,
+    "no-duplicate-selectors": true,
+    "property-no-unknown": true,
+    "selector-no-qualifying-type": [true, { "ignore": ["attribute", "class"] }],
+    "max-nesting-depth": 5
+  }
+}

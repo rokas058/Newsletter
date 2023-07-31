@@ -1,0 +1,4 @@
+*.js
+@generated/
+src/app/shared/@types/*.d.ts
+dist/
