@@ -1,0 +1,13 @@
+version: '3.1'
+
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: S*DLf5wM782C
+      MYSQL_DATABASE: month_with_id_db
+      MYSQL_USER: monthWithIT
+      MYSQL_PASSWORD: 2Tw!q1A7856W
+    ports:
+      - 3306:3306

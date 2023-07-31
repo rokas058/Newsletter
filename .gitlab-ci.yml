@@ -1,0 +1,86 @@
+default:
+  tags:
+    - docker
+
+stages:
+  - prepare
+  - build
+  - deploy
+
+prepare-frontend:
+  image: node:16
+  stage: prepare
+  allow_failure: false
+  script:
+    - cd frontend
+    - yarn install
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - frontend/node_modules/
+
+build-frontend:
+  image: node:16
+  stage: build
+  dependencies:
+    - prepare-frontend
+  script:
+    - cd frontend
+    - yarn build
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - frontend/dist/**
+
+build-backend:
+  image: maven:3.9.3-eclipse-temurin-17
+  stage: build
+  script:
+    - cd backend
+    - mvn clean install
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - backend/target/*.jar
+
+deploy-frontend:
+  image: alpine:3.18.2
+  stage: deploy
+  dependencies:
+    - build-frontend
+  only:
+    refs:
+      - main
+  script:
+    - apk add openssh
+    - mkdir -p ~/.ssh
+    - echo "$SERVER_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - eval "$(ssh-agent -s)"
+    - ssh-add ~/.ssh/id_rsa
+    - ssh-keyscan -H java-menuo-su-it.northeurope.cloudapp.azure.com >> ~/.ssh/known_hosts
+    - cd frontend/dist
+    - ssh tieto@java-menuo-su-it.northeurope.cloudapp.azure.com "mkdir -p ~/frontend/deployments/$CI_COMMIT_SHA"
+    - scp -r * tieto@java-menuo-su-it.northeurope.cloudapp.azure.com:~/frontend/deployments/$CI_COMMIT_SHA
+    - ssh tieto@java-menuo-su-it.northeurope.cloudapp.azure.com "cd ~/frontend && rm -f current_deployment && ln -s deployments/$CI_COMMIT_SHA current_deployment"
+
+deploy-backend:
+  image: alpine:3.18.2
+  stage: deploy
+  dependencies:
+    - build-backend
+  only:
+    refs:
+      - main
+  script:
+    - apk add openssh
+    - mkdir -p ~/.ssh
+    - echo "$SERVER_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - eval "$(ssh-agent -s)"
+    - ssh-add ~/.ssh/id_rsa
+    - ssh-keyscan -H java-menuo-su-it.northeurope.cloudapp.azure.com >> ~/.ssh/known_hosts
+    - cd backend/target
+    - ssh tieto@java-menuo-su-it.northeurope.cloudapp.azure.com "mkdir -p ~/backend/deployments/$CI_COMMIT_SHA"
+    - scp *.jar tieto@java-menuo-su-it.northeurope.cloudapp.azure.com:~/backend/deployments/$CI_COMMIT_SHA
+    - ssh tieto@java-menuo-su-it.northeurope.cloudapp.azure.com "cd ~/backend && rm -f current_deployment && ln -s ~/backend/deployments/$CI_COMMIT_SHA current_deployment && sudo systemctl restart backend"
