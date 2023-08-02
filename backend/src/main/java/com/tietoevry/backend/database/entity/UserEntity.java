@@ -26,11 +26,15 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
     private String username;
-    @Column(insertable = false, updatable = false)
     private String password;
     @ElementCollection(targetClass = Role.class)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "users_id"))
     @Enumerated(EnumType.STRING)
     private List<Role> roles;
+    @Column(unique = true)
+    private String email;
+    private String firstName;
+    private String lastName;
 }
