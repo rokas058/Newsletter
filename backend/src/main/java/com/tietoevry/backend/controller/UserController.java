@@ -26,6 +26,7 @@ import org.springframework.web.server.ResponseStatusException;
 public class UserController {
     private final UserService userService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public List<User> getUsers() {
         return userService.getUsers();

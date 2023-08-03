@@ -28,4 +28,7 @@ public class EditUserForm {
     @NotNull
     //Fixme
     boolean confirmBirthday = false;
+    @NotNull
+    //Fixme
+    String password = "1234";
 }
