@@ -13,6 +13,9 @@ import { LoginPage } from '@app/page/login';
 import { LogoutPage } from '@app/page/logout';
 import { NavigationService } from '@app/services/navigation-service.ts';
 import { App } from '@app/app.tsx';
+import { UsersPage } from '@app/page/users/users-page.tsx';
+import { AddUserPage } from '@app/page/add-user/add-user-page.tsx';
+import { EditUserPage } from '@app/page/edit-user/edit-user-page.tsx';
 
 export const appRouter = createBrowserRouter(
   createRoutesFromElements(
@@ -24,6 +27,30 @@ export const appRouter = createBrowserRouter(
           element={
             <RequireAuth>
               <HomePage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path={NavigationService.USERS_PATH}
+          element={
+            <RequireAuth>
+              <UsersPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path={NavigationService.ADD_USER_PATH}
+          element={
+            <RequireAuth>
+              <AddUserPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path={NavigationService.EDIT_USER_PATH}
+          element={
+            <RequireAuth>
+              <EditUserPage />
             </RequireAuth>
           }
         />
