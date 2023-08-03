@@ -1,3 +1,10 @@
 import { Container } from '@app/components/container/container.tsx';
 
-export const HomePage = () => <Container>Home</Container>;
+// import imageArrow from '../assets/brandbook-navigation-icons/Decorative Graphic - 03.svg';
+
+export const HomePage = () => (
+  <Container>
+    {/* <img src={imageArrow} alt="image-test" />*/}
+    Hello
+  </Container>
+);
