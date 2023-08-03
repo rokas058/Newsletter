@@ -12,7 +12,9 @@ export default defineConfig({
     checker({
       typescript: true,
       stylelint: { lintCommand: 'stylelint ./src/**/*.{ts,tsx}' },
-      eslint: { lintCommand: 'eslint -c .eslintrc.cjs --cache --ext .ts,.tsx .' },
+      eslint: {
+        lintCommand: 'eslint -c .eslintrc.cjs --cache --ext .ts,.tsx .',
+      },
     }),
     tsconfigPaths(),
   ],

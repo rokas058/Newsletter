@@ -4,7 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { useSessionContext } from '@app/app-context';
 import { NavigationService } from '@app/services/navigation-service.ts';
 
-import { StyledHeader, StyledHeaderContent } from './header.styled.ts';
+import {
+  StyledHeader,
+  StyledHeaderContent,
+  StyledHeaderLink,
+  StyledGreeting,
+  StyledLinksAndGreeting,
+} from './header.styled.ts';
 
 export const Header = () => {
   const { username } = useSessionContext();
@@ -21,7 +27,13 @@ export const Header = () => {
   return (
     <StyledHeader>
       <StyledHeaderContent>
-        <div>Hello, {username}</div>
+        <StyledLinksAndGreeting>
+          <StyledGreeting>Hello, {username}</StyledGreeting>
+          <StyledHeaderLink to={NavigationService.USERS_PATH}>
+            Users
+          </StyledHeaderLink>
+        </StyledLinksAndGreeting>
+
         <Button onClick={handleLogout}>Logout</Button>
       </StyledHeaderContent>
     </StyledHeader>
