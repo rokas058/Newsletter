@@ -1,5 +1,6 @@
 package com.tietoevry.backend.database.entity;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -37,4 +38,6 @@ public class UserEntity {
     private String email;
     private String firstName;
     private String lastName;
+    private LocalDate birthday;
+    private boolean confirm_birthday;
 }

@@ -1,5 +1,6 @@
 package com.tietoevry.backend.model;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.tietoevry.backend.database.entity.Role;
@@ -21,4 +22,9 @@ public class CreateUserForm {
     String username;
     @NotNull
     String email;
+    @NotNull
+    LocalDate birthday = LocalDate.parse("2018-05-05");
+    @NotNull
+    boolean confirm_birthday = false;
+
 }
