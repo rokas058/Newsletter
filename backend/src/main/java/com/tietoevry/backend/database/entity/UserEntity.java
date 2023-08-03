@@ -39,5 +39,5 @@ public class UserEntity {
     private String firstName;
     private String lastName;
     private LocalDate birthday;
-    private boolean confirm_birthday;
+    private boolean confirmBirthday;
 }

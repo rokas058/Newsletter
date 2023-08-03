@@ -16,7 +16,7 @@ public class CreateUserFormMapper {
             .email(user.getEmail())
             .roles(user.getRoles())
             .birthday(user.getBirthday())
-            .confirm_birthday(user.isConfirm_birthday())
+            .confirmBirthday(user.isConfirmBirthday())
             .build();
     }
 }

@@ -23,8 +23,10 @@ public class CreateUserForm {
     @NotNull
     String email;
     @NotNull
+    // Fixme
     LocalDate birthday = LocalDate.parse("2018-05-05");
     @NotNull
-    boolean confirm_birthday = false;
+    //Fixme
+    boolean confirmBirthday = false;
 
 }
