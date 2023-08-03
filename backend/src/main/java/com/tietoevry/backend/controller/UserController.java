@@ -22,16 +22,17 @@ import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequiredArgsConstructor
-@PreAuthorize("hasRole('ADMIN')")
 @RequestMapping("/api/user")
 public class UserController {
     private final UserService userService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public List<User> getUsers() {
         return userService.getUsers();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(path = "/{id}")
     public User getUser(@PathVariable Long id) {
         return userService.getUser(id)
@@ -43,11 +44,13 @@ public class UserController {
         return userService.createUser(createUserForm);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(path = "/{id}")
     public User editUser(@PathVariable Long id, @Valid @RequestBody EditUserForm editUserForm) {
         return userService.editUser(id, editUserForm);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping(path = "/{id}")
     public void deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
