@@ -6,6 +6,7 @@ export const StyledDashboardContainer = styled.div`
   width: 100%;
   min-height: 100%;
   margin-top: ${spacing2};
+  padding: 0 ${spacing2};
 `;
 
 export const StyledFlexRowContainer = styled.div`
