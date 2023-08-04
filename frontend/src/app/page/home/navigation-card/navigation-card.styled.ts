@@ -21,6 +21,8 @@ export const StyledNavLink = styled(NavLink)`
   text-decoration: none;
   display: grid;
   place-items: center;
+  width: 100%;
+  height: 100%;
 `;
 
 export const StyledImageContainer = styled.div`
@@ -36,4 +38,6 @@ export const StyledIconImage = styled.img`
 export const StyledSectionTitle = styled.h1`
   color: ${colorCoolGrey};
   text-transform: uppercase;
+  text-align: center;
+  margin: 0;
 `;

@@ -68,7 +68,7 @@ export const NavigationDashboard = () => (
           navigationURL={NavigationService.CALENDAR_PATH}
         />
         <NavigationCard
-          title="Anekdotai"
+          title="Mediniai bajeriai"
           iconImage={jokeSectionImage}
           navigationURL={NavigationService.JOKES_PATH}
         />
