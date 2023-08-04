@@ -14,12 +14,18 @@ import vacancyImage from '@app/assets/icons/vacancy.png';
 import ukraineImage from '@app/assets/icons/ukraine.png';
 import calendarImage from '@app/assets/icons/calendar.png';
 import jokeSectionImage from '@app/assets/icons/anekdotai.png';
+// Routes
+import { NavigationService } from '@app/services/navigation-service.ts';
 
 export const NavigationDashboard = () => (
   <StyledDashboardContainer>
     <StyledFlexColumnContainer>
       <StyledFlexRowContainer>
-        <NavigationCard title="Hr frontas" iconImage={hrFrontImage} />
+        <NavigationCard
+          title="Hr frontas"
+          iconImage={hrFrontImage}
+          navigationURL={NavigationService.USERS_PATH}
+        />
         <NavigationCard
           title="Vadovų Skyriaus Naujienos"
           iconImage={headDepartmentImage}

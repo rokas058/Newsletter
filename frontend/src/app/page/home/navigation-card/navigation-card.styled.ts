@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 import { colorCoolGrey, colorViolet, colorYellow } from '@app/styles/colors.ts';
 
@@ -10,11 +11,16 @@ export const StyledNavigationCard = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px solid ${colorCoolGrey};
 
   &:hover {
     border: 5px solid ${colorYellow};
   }
+`;
+
+export const StyledNavLink = styled(NavLink)`
+  text-decoration: none;
+  display: grid;
+  place-items: center;
 `;
 
 export const StyledImageContainer = styled.div`
