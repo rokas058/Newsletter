@@ -5,9 +5,8 @@ import bannerImage from '@app/assets/banner-image/banner.png';
 
 export const StyledBannerSection = styled.div`
   width: 100%;
-  height: 300px;
+  height: 350px;
   background-color: ${colorVibrantGreen};
   background-image: url('${bannerImage}');
-  background-position: 30% 20%;
-  background-size: cover;
+  background-size: contain;
 `;
