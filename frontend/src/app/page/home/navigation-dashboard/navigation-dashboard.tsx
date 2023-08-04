@@ -24,17 +24,17 @@ export const NavigationDashboard = () => (
         <NavigationCard
           title="Hr frontas"
           iconImage={hrFrontImage}
-          navigationURL={NavigationService.USERS_PATH}
+          navigationURL={NavigationService.HR_PATH}
         />
         <NavigationCard
           title="Vadovų Skyriaus Naujienos"
           iconImage={headDepartmentImage}
-          navigationURL={NavigationService.USERS_PATH}
+          navigationURL={NavigationService.NEWS_PATH}
         />
         <NavigationCard
           title="Apžvalgystės"
           iconImage={travelStoriesImage}
-          navigationURL={NavigationService.USERS_PATH}
+          navigationURL={NavigationService.TRAVEL_PATH}
         />
       </StyledFlexRowContainer>
 
@@ -42,17 +42,17 @@ export const NavigationDashboard = () => (
         <NavigationCard
           title="Naujokai"
           iconImage={newTeamMembersImage}
-          navigationURL={NavigationService.USERS_PATH}
+          navigationURL={NavigationService.NEWBIES_PATH}
         />
         <NavigationCard
           title="Ukraina"
           iconImage={ukraineImage}
-          navigationURL={NavigationService.USERS_PATH}
+          navigationURL={NavigationService.UKRAINA_PATH}
         />
         <NavigationCard
           title="Atviros pozicijos"
           iconImage={vacancyImage}
-          navigationURL={NavigationService.USERS_PATH}
+          navigationURL={NavigationService.VACANCIES_PATH}
         />
       </StyledFlexRowContainer>
 
@@ -60,17 +60,17 @@ export const NavigationDashboard = () => (
         <NavigationCard
           title="Off topic"
           iconImage={offTopicImage}
-          navigationURL={NavigationService.USERS_PATH}
+          navigationURL={NavigationService.OFFTOPIC_PATH}
         />
         <NavigationCard
           title="Kalendorius"
           iconImage={calendarImage}
-          navigationURL={NavigationService.USERS_PATH}
+          navigationURL={NavigationService.CALENDAR_PATH}
         />
         <NavigationCard
           title="Anekdotai"
           iconImage={jokeSectionImage}
-          navigationURL={NavigationService.USERS_PATH}
+          navigationURL={NavigationService.JOKES_PATH}
         />
       </StyledFlexRowContainer>
     </StyledFlexColumnContainer>
