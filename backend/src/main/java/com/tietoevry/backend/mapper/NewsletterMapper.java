@@ -10,10 +10,11 @@ public class NewsletterMapper {
 
     public static Newsletter toNewsletter(NewsletterEntity newsletter) {
         return Newsletter.builder()
-            .id(newsletter.getId())
+            .id(newsletter.getNewsletter_id())
             .publishDate(newsletter.getPublishDate())
             .isPublished(newsletter.getIsPublished())
-            .pages(newsletter.getPages()).build();
+            .pages(newsletter.getPages())
+            .build();
     }
 
 }

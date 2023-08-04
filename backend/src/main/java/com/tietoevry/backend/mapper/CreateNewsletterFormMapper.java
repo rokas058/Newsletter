@@ -11,6 +11,6 @@ public class CreateNewsletterFormMapper {
         return NewsletterEntity.builder()
             .publishDate(newsletter.getPublishDate())
             .isPublished(newsletter.getIsPublished())
-            .pages(newsletter.getPages()).build();
+            .build();
     }
 }

@@ -6,20 +6,15 @@ import lombok.Getter;
 @Getter
 @Schema(enumAsRef = true)
 public enum Type {
-    HR_FRONT("hr-front"),
-    OFF_TOPIC("off-topic"),
-    STAR("star"),
-    NEWS("news"),
-    JOBS("jobs"),
-    CALENDER("calender"),
-    TRAVELS("travels"),
-    RECOMMENDATIONS("recommendations"),
-    ANNOUNCEMENTS("announcements");
+    HR_FRONT,
+    OFF_TOPIC,
+    STAR,
+    NEWS,
+    JOBS,
+    CALENDER,
+    TRAVELS,
+    RECOMMENDATIONS,
+    ANNOUNCEMENTS
 
-    private final String value;
-
-    Type(String value) {
-        this.value = value;
-    }
 
 }

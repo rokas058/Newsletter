@@ -7,11 +7,11 @@ import lombok.Value;
 
 @Builder
 @Value
-public class Page {
-    @NotNull
-    Long id;
+public class CreatePageForm {
     @NotNull
     String title;
+    @NotNull
+    long newsletterId;
     @NotNull
     Type type;
 }
