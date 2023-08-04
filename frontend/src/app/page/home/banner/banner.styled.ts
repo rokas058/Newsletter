@@ -9,4 +9,5 @@ export const StyledBannerSection = styled.div`
   background-color: ${colorVibrantGreen};
   background-image: url('${bannerImage}');
   background-size: contain;
+  background-repeat: repeat;
 `;

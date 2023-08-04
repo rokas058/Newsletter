@@ -5,6 +5,6 @@ import {
 
 export const JokesPage = () => (
   <StyledPageTitleContainer>
-    <StyledPageTitle>ANEKDOTAI</StyledPageTitle>
+    <StyledPageTitle>MEDINIAI BAJERIAI</StyledPageTitle>
   </StyledPageTitleContainer>
 );
