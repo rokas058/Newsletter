@@ -29,20 +29,49 @@ export const NavigationDashboard = () => (
         <NavigationCard
           title="Vadovų Skyriaus Naujienos"
           iconImage={headDepartmentImage}
+          navigationURL={NavigationService.USERS_PATH}
         />
-        <NavigationCard title="Apžvalgystės" iconImage={travelStoriesImage} />
+        <NavigationCard
+          title="Apžvalgystės"
+          iconImage={travelStoriesImage}
+          navigationURL={NavigationService.USERS_PATH}
+        />
       </StyledFlexRowContainer>
 
       <StyledFlexRowContainer>
-        <NavigationCard title="Naujokai" iconImage={newTeamMembersImage} />
-        <NavigationCard title="Ukraina" iconImage={ukraineImage} />
-        <NavigationCard title="Atviros pozicijos" iconImage={vacancyImage} />
+        <NavigationCard
+          title="Naujokai"
+          iconImage={newTeamMembersImage}
+          navigationURL={NavigationService.USERS_PATH}
+        />
+        <NavigationCard
+          title="Ukraina"
+          iconImage={ukraineImage}
+          navigationURL={NavigationService.USERS_PATH}
+        />
+        <NavigationCard
+          title="Atviros pozicijos"
+          iconImage={vacancyImage}
+          navigationURL={NavigationService.USERS_PATH}
+        />
       </StyledFlexRowContainer>
 
       <StyledFlexRowContainer>
-        <NavigationCard title="Off topic" iconImage={offTopicImage} />
-        <NavigationCard title="Kalendorius" iconImage={calendarImage} />
-        <NavigationCard title="Anekdotai" iconImage={jokeSectionImage} />
+        <NavigationCard
+          title="Off topic"
+          iconImage={offTopicImage}
+          navigationURL={NavigationService.USERS_PATH}
+        />
+        <NavigationCard
+          title="Kalendorius"
+          iconImage={calendarImage}
+          navigationURL={NavigationService.USERS_PATH}
+        />
+        <NavigationCard
+          title="Anekdotai"
+          iconImage={jokeSectionImage}
+          navigationURL={NavigationService.USERS_PATH}
+        />
       </StyledFlexRowContainer>
     </StyledFlexColumnContainer>
   </StyledDashboardContainer>
