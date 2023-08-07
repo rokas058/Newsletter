@@ -58,11 +58,11 @@ deploy-frontend:
     - chmod 600 ~/.ssh/id_rsa
     - eval "$(ssh-agent -s)"
     - ssh-add ~/.ssh/id_rsa
-    - ssh-keyscan -H java-menuo-su-it.northeurope.cloudapp.azure.com >> ~/.ssh/known_hosts
+    - ssh-keyscan -H java2-menuo-su-it.northeurope.cloudapp.azure.com >> ~/.ssh/known_hosts
     - cd frontend/dist
-    - ssh tieto@java-menuo-su-it.northeurope.cloudapp.azure.com "mkdir -p ~/frontend/deployments/$CI_COMMIT_SHA"
-    - scp -r * tieto@java-menuo-su-it.northeurope.cloudapp.azure.com:~/frontend/deployments/$CI_COMMIT_SHA
-    - ssh tieto@java-menuo-su-it.northeurope.cloudapp.azure.com "cd ~/frontend && rm -f current_deployment && ln -s deployments/$CI_COMMIT_SHA current_deployment"
+    - ssh tieto@java2-menuo-su-it.northeurope.cloudapp.azure.com "mkdir -p ~/frontend/deployments/$CI_COMMIT_SHA"
+    - scp -r * tieto@java2-menuo-su-it.northeurope.cloudapp.azure.com:~/frontend/deployments/$CI_COMMIT_SHA
+    - ssh tieto@java2-menuo-su-it.northeurope.cloudapp.azure.com "cd ~/frontend && rm -f current_deployment && ln -s deployments/$CI_COMMIT_SHA current_deployment"
 
 deploy-backend:
   image: alpine:3.18.2
@@ -79,8 +79,8 @@ deploy-backend:
     - chmod 600 ~/.ssh/id_rsa
     - eval "$(ssh-agent -s)"
     - ssh-add ~/.ssh/id_rsa
-    - ssh-keyscan -H java-menuo-su-it.northeurope.cloudapp.azure.com >> ~/.ssh/known_hosts
+    - ssh-keyscan -H java2-menuo-su-it.northeurope.cloudapp.azure.com >> ~/.ssh/known_hosts
     - cd backend/target
-    - ssh tieto@java-menuo-su-it.northeurope.cloudapp.azure.com "mkdir -p ~/backend/deployments/$CI_COMMIT_SHA"
-    - scp *.jar tieto@java-menuo-su-it.northeurope.cloudapp.azure.com:~/backend/deployments/$CI_COMMIT_SHA
-    - ssh tieto@java-menuo-su-it.northeurope.cloudapp.azure.com "cd ~/backend && rm -f current_deployment && ln -s ~/backend/deployments/$CI_COMMIT_SHA current_deployment && sudo systemctl restart backend"
+    - ssh tieto@java2-menuo-su-it.northeurope.cloudapp.azure.com "mkdir -p ~/backend/deployments/$CI_COMMIT_SHA"
+    - scp *.jar tieto@java2-menuo-su-it.northeurope.cloudapp.azure.com:~/backend/deployments/$CI_COMMIT_SHA
+    - ssh tieto@java2-menuo-su-it.northeurope.cloudapp.azure.com "cd ~/backend && rm -f current_deployment && ln -s ~/backend/deployments/$CI_COMMIT_SHA current_deployment && sudo systemctl restart backend"

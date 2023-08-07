@@ -16,6 +16,8 @@ public class EditUserFormMapper {
             .lastName(user.getLastName())
             .email(user.getEmail())
             .roles(user.getRoles())
+            .birthday(user.getBirthday())
+            .confirmBirthday(user.isConfirmBirthday())
             .build();
     }
 }
