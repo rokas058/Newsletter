@@ -4,6 +4,8 @@ databaseChangeLog:
   - include:
       file: db/changelog/changes/db.changelog-02.sql
   - include:
+      file: db/changelog/changes/db.changelog-03.sql
+  - include:
       file: db/changelog/changes/db.changelog-04.sql
 
 
