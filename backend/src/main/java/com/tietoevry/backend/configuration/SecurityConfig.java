@@ -29,6 +29,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/session/**").permitAll()
                 .requestMatchers("/v3/**", "/swagger-ui/**").permitAll()
                 .requestMatchers("/error").permitAll()
+                .requestMatchers("/api/newsletter/**").permitAll()
                 .anyRequest().authenticated()
             )
             .logout(logout -> logout

@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface NewsletterRepository extends JpaRepository<NewsletterEntity, Long> {
-    //Optional<NewsletterEntity> findById(Long id);
 
 
 }
