@@ -16,6 +16,15 @@ import { App } from '@app/app.tsx';
 import { UsersPage } from '@app/page/users/users-page.tsx';
 import { AddUserPage } from '@app/page/add-user/add-user-page.tsx';
 import { EditUserPage } from '@app/page/edit-user/edit-user-page.tsx';
+import { NewbiesPage } from '@app/page/newbies';
+import { NewsPage } from '@app/page/news';
+import { VacanciesPage } from '@app/page/vacancies/vacancies.tsx';
+import { UkrainaPage } from '@app/page/ukraina';
+import { HrPage } from '@app/page/hr';
+import { CalendarPage } from '@app/page/calendar';
+import { TravelPage } from '@app/page/travel';
+import { OffTopicPage } from '@app/page/off-topic';
+import { JokesPage } from '@app/page/jokes';
 
 export const appRouter = createBrowserRouter(
   createRoutesFromElements(
@@ -27,6 +36,78 @@ export const appRouter = createBrowserRouter(
           element={
             <RequireAuth>
               <HomePage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path={NavigationService.NEWBIES_PATH}
+          element={
+            <RequireAuth>
+              <NewbiesPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path={NavigationService.NEWS_PATH}
+          element={
+            <RequireAuth>
+              <NewsPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path={NavigationService.VACANCIES_PATH}
+          element={
+            <RequireAuth>
+              <VacanciesPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path={NavigationService.UKRAINA_PATH}
+          element={
+            <RequireAuth>
+              <UkrainaPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path={NavigationService.HR_PATH}
+          element={
+            <RequireAuth>
+              <HrPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path={NavigationService.CALENDAR_PATH}
+          element={
+            <RequireAuth>
+              <CalendarPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path={NavigationService.TRAVEL_PATH}
+          element={
+            <RequireAuth>
+              <TravelPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path={NavigationService.OFFTOPIC_PATH}
+          element={
+            <RequireAuth>
+              <OffTopicPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path={NavigationService.JOKES_PATH}
+          element={
+            <RequireAuth>
+              <JokesPage />
             </RequireAuth>
           }
         />

@@ -47,7 +47,7 @@ public class UserService {
             throw new EmailIsNotUniqueException(String.format("%s email already exists.", createUserForm.getEmail()));
         }
         String password = PasswordGenerator.generatePassword();
-        String encodedPassword = passwordEncoder.encode(password);
+        String encodedPassword = passwordEncoder.encode(createUserForm.getPassword());
         UserEntity userToCreate = CreateUserFormMapper.toUserEntity(createUserForm, encodedPassword);
 
         UserEntity createdUser = userRepository.save(userToCreate);
