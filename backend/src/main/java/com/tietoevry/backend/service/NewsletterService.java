@@ -26,7 +26,6 @@ public class NewsletterService {
             .toList();
     }
 
-
     public Newsletter createNewsletter(CreateNewsletterForm createNewsletterForm) {
         NewsletterEntity newsletterToCreate = CreateNewsletterFormMapper.toNewsletterEntity(createNewsletterForm);
         NewsletterEntity createdNewsletter = newsletterRepository.save(newsletterToCreate);

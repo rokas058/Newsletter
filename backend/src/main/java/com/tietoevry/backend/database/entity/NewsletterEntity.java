@@ -24,13 +24,12 @@ import lombok.NoArgsConstructor;
 public class NewsletterEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long newsletter_id;
+    private Long newsletterId;
     @NotNull
     private LocalDateTime publishDate;
     @NotNull
     private Boolean isPublished;
     @JsonIgnore
-    //@OneToMany(mappedBy = "newsletter", cascade = CascadeType.MERGE, orphanRemoval = true)
     @OneToMany(mappedBy = "newsletter", cascade = CascadeType.ALL)
     private List<PageEntity> pages;
 }
