@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { spacing1 } from '@app/styles/spacing.ts';
+import { spacing0 } from '@app/styles/spacing.ts';
 
 export interface ColorButtonProps {
   $backgroundColor: string;
@@ -9,8 +9,8 @@ export interface ColorButtonProps {
 
 export const StyledButton = styled.button<ColorButtonProps>`
   border-radius: 50px;
-  border: none;
-  padding: ${spacing1};
+  border: 0 solid transparent;
+  padding: ${spacing0};
   color: ${(props) => props.$color};
   background: ${(props) => props.$backgroundColor};
 

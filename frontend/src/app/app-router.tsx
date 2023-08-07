@@ -25,6 +25,7 @@ import { CalendarPage } from '@app/page/calendar';
 import { TravelPage } from '@app/page/travel';
 import { OffTopicPage } from '@app/page/off-topic';
 import { JokesPage } from '@app/page/jokes';
+import { NewslettersPage } from '@app/page/newsletters/newsletters.tsx';
 
 export const appRouter = createBrowserRouter(
   createRoutesFromElements(
@@ -36,6 +37,14 @@ export const appRouter = createBrowserRouter(
           element={
             <RequireAuth>
               <HomePage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path={NavigationService.NEWSLETTERS_PATH}
+          element={
+            <RequireAuth>
+              <NewslettersPage />
             </RequireAuth>
           }
         />

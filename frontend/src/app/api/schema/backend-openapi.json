@@ -102,6 +102,98 @@
         }
       }
     },
+    "/api/newsletter/{id}": {
+      "get": {
+        "tags": [
+          "newsletter-controller"
+        ],
+        "operationId": "getNewsletter",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Newsletter"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "newsletter-controller"
+        ],
+        "operationId": "editNewsletter",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditNewsletterForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Newsletter"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "newsletter-controller"
+        ],
+        "operationId": "deleteNewsletter",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/user": {
       "get": {
         "tags": [
@@ -200,15 +292,99 @@
           }
         }
       }
+    },
+    "/api/page": {
+      "post": {
+        "tags": [
+          "page-controller"
+        ],
+        "operationId": "createPage",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePageForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/newsletter": {
+      "get": {
+        "tags": [
+          "newsletter-controller"
+        ],
+        "operationId": "getNewsletters",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Newsletter"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "newsletter-controller"
+        ],
+        "operationId": "createNewsletter",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateNewsletterForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Newsletter"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
       "EditUserForm": {
         "required": [
+          "birthday",
+          "confirmBirthday",
           "email",
           "firstName",
           "lastName",
+          "password",
           "roles",
           "username"
         ],
@@ -230,6 +406,16 @@
             "type": "string"
           },
           "email": {
+            "type": "string"
+          },
+          "birthday": {
+            "type": "string",
+            "format": "date"
+          },
+          "confirmBirthday": {
+            "type": "boolean"
+          },
+          "password": {
             "type": "string"
           }
         }
@@ -276,11 +462,114 @@
           }
         }
       },
+      "EditNewsletterForm": {
+        "required": [
+          "isPublished",
+          "publishDate"
+        ],
+        "type": "object",
+        "properties": {
+          "publishDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isPublished": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Newsletter": {
+        "required": [
+          "id",
+          "isPublished",
+          "publishDate"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "publishDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isPublished": {
+            "type": "boolean"
+          },
+          "pages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PageEntity"
+            }
+          }
+        }
+      },
+      "NewsletterEntity": {
+        "required": [
+          "isPublished",
+          "publishDate"
+        ],
+        "type": "object",
+        "properties": {
+          "newsletterId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "publishDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isPublished": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PageEntity": {
+        "required": [
+          "newsletter",
+          "title",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "pageId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/Type"
+          },
+          "newsletter": {
+            "$ref": "#/components/schemas/NewsletterEntity"
+          }
+        }
+      },
+      "Type": {
+        "type": "string",
+        "enum": [
+          "HR_FRONT",
+          "OFF_TOPIC",
+          "STAR",
+          "NEWS",
+          "JOBS",
+          "CALENDER",
+          "TRAVELS",
+          "RECOMMENDATIONS",
+          "ANNOUNCEMENTS"
+        ]
+      },
       "CreateUserForm": {
         "required": [
+          "birthday",
+          "confirmBirthday",
           "email",
           "firstName",
           "lastName",
+          "password",
           "roles",
           "username"
         ],
@@ -302,6 +591,16 @@
             "type": "string"
           },
           "email": {
+            "type": "string"
+          },
+          "birthday": {
+            "type": "string",
+            "format": "date"
+          },
+          "confirmBirthday": {
+            "type": "boolean"
+          },
+          "password": {
             "type": "string"
           }
         }
@@ -326,6 +625,62 @@
         "properties": {
           "username": {
             "type": "string"
+          }
+        }
+      },
+      "CreatePageForm": {
+        "required": [
+          "newsletterId",
+          "title",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "newsletterId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "type": {
+            "$ref": "#/components/schemas/Type"
+          }
+        }
+      },
+      "Page": {
+        "required": [
+          "id",
+          "title",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/Type"
+          }
+        }
+      },
+      "CreateNewsletterForm": {
+        "required": [
+          "isPublished",
+          "publishDate"
+        ],
+        "type": "object",
+        "properties": {
+          "publishDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isPublished": {
+            "type": "boolean"
           }
         }
       }

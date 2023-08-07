@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
-import { colorWhite } from '@app/styles/colors.ts';
+import { colorDarkBLue, colorWhite } from '@app/styles/colors.ts';
 
 export const GlobalStyle = createGlobalStyle`
 
@@ -18,5 +18,9 @@ export const GlobalStyle = createGlobalStyle`
   #root,
   html {
     height: 100%;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: ${colorDarkBLue};
   }
 `;
