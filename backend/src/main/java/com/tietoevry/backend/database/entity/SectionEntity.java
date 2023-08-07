@@ -1,44 +1,33 @@
 package com.tietoevry.backend.database.entity;
 
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity(name = "page")
+@Entity(name = "section")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PageEntity {
+public class SectionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long pageId;
-    @NotNull
+    private Long sectionId;
     private String title;
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    private Type type;
+    private String text;
+    @Lob
+    private byte[] image;
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "newsletter_id")
-    private NewsletterEntity newsletter;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "page", cascade = CascadeType.ALL)
-    private List<SectionEntity> sections;
+    @JoinColumn(name = "page_id")
+    private PageEntity page;
 }
