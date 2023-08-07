@@ -54,4 +54,14 @@ public class NewsletterService {
         NewsletterEntity newsletter = newsletterRepository.save(updatedNewsletter);
         return NewsletterMapper.toNewsletter(newsletter);
     }
+
+    public void deleteNewsletter(Long id) {
+        NewsletterEntity newsletter = newsletterRepository.findById(id)
+            .orElseThrow(
+                () -> new NewsletterNotFoundException(String.format("Newsletter with id %d does not exist.", id)));
+
+        if (!newsletter.getIsPublished()) {
+            newsletterRepository.deleteById(id);
+        }
+    }
 }

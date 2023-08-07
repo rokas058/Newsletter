@@ -3,6 +3,7 @@ package com.tietoevry.backend.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.tietoevry.backend.database.entity.Role;
 import com.tietoevry.backend.database.entity.UserEntity;
 import com.tietoevry.backend.database.repository.UserRepository;
 import com.tietoevry.backend.exceptions.EmailIsNotUniqueException;
@@ -71,6 +72,14 @@ public class UserService {
     }
 
     public void deleteUser(Long id) {
-        userRepository.deleteById(id);
+        UserEntity existingUser = userRepository.findById(id)
+            .orElseThrow(() -> new UserNotFoundException(String.format("User with id %d does not exist.", id)));
+
+        List<Role> userRoles = existingUser.getRoles();
+        boolean isAdmin = userRoles.contains(Role.ADMIN);
+
+        if (!isAdmin) {
+            userRepository.deleteById(id);
+        }
     }
 }

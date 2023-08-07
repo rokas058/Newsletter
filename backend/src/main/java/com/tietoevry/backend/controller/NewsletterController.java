@@ -8,6 +8,7 @@ import com.tietoevry.backend.model.Newsletter;
 import com.tietoevry.backend.service.NewsletterService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,5 +42,10 @@ public class NewsletterController {
     @PutMapping(path = "/{id}")
     public Newsletter editNewsletter(@PathVariable Long id, @Valid @RequestBody EditNewsletterForm editNewsletterForm) {
         return newsletterService.editNewsletter(id, editNewsletterForm);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public void deleteNewsletter(@PathVariable Long id) {
+        newsletterService.deleteNewsletter(id);
     }
 }
