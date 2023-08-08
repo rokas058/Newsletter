@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { NewsletterCard } from '@app/page/newsletters/newsletterCard/newsletter-card.tsx';
 import {
@@ -6,11 +7,14 @@ import {
   StyledRestyledContainer,
 } from '@app/page/newsletters/newsletters.styled.ts';
 import { newsLettersApiService } from '@app/api/service/newsletter-api-service.ts';
+import { NavigationService } from '@app/services/navigation-service.ts';
 
 export const NewslettersPage = () => {
   const [newsLetters, setNewsletters] = useState<Backend.Newsletter[] | null>(
     null,
   );
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,6 +42,14 @@ export const NewslettersPage = () => {
             key={newsletter.id}
             title="Title"
             publishedDate={new Date(newsletter.publishDate).toString()}
+            onClick={() =>
+              navigate(
+                `${NavigationService.HOME_PATH.replace(
+                  ':id',
+                  String(newsletter.id),
+                )}`,
+              )
+            }
           />
         ))}
       </StyledNewsletterContainer>

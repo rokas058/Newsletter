@@ -17,22 +17,3 @@ const getAllNewsLetters = async () => {
 export const newsLettersApiService = {
   getAllNewsLetters,
 };
-
-// class NewsletterApiService {
-//   private static readonly BASE_PATH = '/newsletter';
-//   private readonly backendRestService: RestService;
-//
-//   public constructor() {
-//     this.backendRestService = new RestService();
-//   }
-//
-//   public readonly getAllNewsLetters = (): Promise<Backend.Newsletter[]> =>
-//     this.backendRestService.get<Backend.Newsletter[]>(
-//       NewsletterApiService.BASE_PATH,
-//     );
-//
-// }
-//
-// const newsLetterApiService = new NewsletterApiService();
-//
-// export { newsLetterApiService };
