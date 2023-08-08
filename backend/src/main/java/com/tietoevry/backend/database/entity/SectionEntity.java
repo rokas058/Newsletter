@@ -25,7 +25,6 @@ public class SectionEntity {
     private Long sectionId;
     private String title;
     private String text;
-
     @Size(max = 1024 * 1024, message = "Image size exceeds 1MB")
     @Lob
     private byte[] image;
