@@ -7,7 +7,7 @@ CREATE TABLE section
     page_id    BIGINT                            NOT NULL,
     title      VARCHAR(255),
     text       TEXT,
-    image      BLOB,
+    image      MEDIUMBLOB,
     FOREIGN KEY (page_id) REFERENCES page (page_id)
 );
 

@@ -8,6 +8,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,6 +25,8 @@ public class SectionEntity {
     private Long sectionId;
     private String title;
     private String text;
+
+    @Size(max = 1024 * 1024, message = "Image size exceeds 1MB")
     @Lob
     private byte[] image;
     @NotNull

@@ -13,7 +13,6 @@ import com.tietoevry.backend.model.Section;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @RequiredArgsConstructor
@@ -22,12 +21,11 @@ public class SectionService {
     private final SectionRepository sectionRepository;
     private final PageRepository pageRepository;
 
-    public Section createSection(CreateSectionForm createSectionForm, MultipartFile image) throws IOException {
+    public Section createSection(CreateSectionForm createSectionForm) throws IOException {
         PageEntity page = pageRepository.findById(createSectionForm.getPageId())
             .orElseThrow();
         SectionEntity sectionToCreate = CreateSectionFormMapper.toSectionEntity(createSectionForm);
         sectionToCreate.setPage(page);
-        sectionToCreate.setImage(image.getBytes());
         SectionEntity savedSection = sectionRepository.save(sectionToCreate);
         page.getSections().add(sectionToCreate);
         pageRepository.save(page);

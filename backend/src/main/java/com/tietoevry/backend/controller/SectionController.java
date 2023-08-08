@@ -5,12 +5,10 @@ import java.io.IOException;
 import com.tietoevry.backend.model.CreateSectionForm;
 import com.tietoevry.backend.model.Section;
 import com.tietoevry.backend.service.SectionService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,9 +19,19 @@ public class SectionController {
     private final SectionService sectionService;
 
     @PostMapping(consumes = "multipart/form-data")
-    public Section createSection(@Valid @RequestBody CreateSectionForm createSectionForm,
-                                 @RequestPart(value = "image", required = false) MultipartFile image)
-        throws IOException {
-        return sectionService.createSection(createSectionForm, image);
+    public Section createSection(
+        @RequestParam(value = "title", required = false) String title,
+        @RequestParam(value = "text", required = false) String text,
+        @RequestParam(value = "image", required = false) MultipartFile imageFile,
+        @RequestParam("pageId") Long pageId
+    ) throws IOException {
+        CreateSectionForm createSectionForm = CreateSectionForm.builder()
+            .title(title)
+            .text(text)
+            .pageId(pageId)
+            .image((imageFile == null) ? null : imageFile.getBytes())
+            .build();
+
+        return sectionService.createSection(createSectionForm);
     }
 }
