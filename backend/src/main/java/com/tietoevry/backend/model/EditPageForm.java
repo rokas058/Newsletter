@@ -1,20 +1,15 @@
 package com.tietoevry.backend.model;
 
-import java.util.Date;
-
+import com.tietoevry.backend.database.entity.Type;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Value;
 
 @Builder
 @Value
-public class CreateNewsletterForm {
+public class EditPageForm {
     @NotNull
     String title;
     @NotNull
-    Date publishDate;
-    @NotNull
-    Boolean isPublished;
-
-
+    Type type;
 }
