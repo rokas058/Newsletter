@@ -15,4 +15,5 @@ export class NavigationService {
   public static readonly JOKES_PATH = '/jokes';
   public static readonly EDIT_USER_PATH = `${NavigationService.USERS_PATH}/edit/:userId`;
   public static readonly ADD_USER_PATH = `${NavigationService.USERS_PATH}/add`;
+  public static readonly NEWSLETTERS_PATH = '/newsletters';
 }
