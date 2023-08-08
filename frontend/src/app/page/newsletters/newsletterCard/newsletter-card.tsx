@@ -12,13 +12,14 @@ import { colorDarkBLue, colorYellow } from '@app/styles/colors.ts';
 interface NewsletterCardInterface {
   title: string;
   publishedDate: string;
-  onClick: () => void;
+  onClick?: () => void;
+  onDelete?: () => void;
 }
 
 export const NewsletterCard: FC<NewsletterCardInterface> = (
   props,
 ): ReactElement => {
-  const { title, publishedDate, onClick } = props;
+  const { title, publishedDate, onClick, onDelete } = props;
 
   return (
     <StyledNewsletterCard onClick={onClick}>
@@ -30,7 +31,7 @@ export const NewsletterCard: FC<NewsletterCardInterface> = (
           <FormOutlined />
         </ButtonNew>
         <ButtonNew $backgroundColor={colorYellow} $color={colorDarkBLue}>
-          <DeleteOutlined />
+          <DeleteOutlined onClick={onDelete} />
         </ButtonNew>
       </StyledIconsContainer>
     </StyledNewsletterCard>
