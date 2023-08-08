@@ -1,13 +1,27 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 
-import { StyledButton } from '@app/components/button-new/button-new-styled.ts';
+import {
+  ColorButtonProps,
+  StyledButton,
+} from '@app/components/button-new/button-new-styled.ts';
 
-interface Props {
-  handleAddNewForm: () => void;
+interface OwnProps {
+  handleOnClick: () => void;
+  children: React.ReactNode;
 }
 
-export const ButtonNew: FC<Props> = (props) => {
-  const { handleAddNewForm } = props;
+type Props = OwnProps & ColorButtonProps;
 
-  return <StyledButton onClick={() => handleAddNewForm()} />;
+export const ButtonNew: FC<Props> = (props) => {
+  const { handleOnClick, $color, $backgroundColor, children } = props;
+
+  return (
+    <StyledButton
+      $color={$color}
+      $backgroundColor={$backgroundColor}
+      onClick={handleOnClick}
+    >
+      {children}
+    </StyledButton>
+  );
 };

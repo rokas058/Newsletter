@@ -1,10 +1,20 @@
 import styled from 'styled-components';
-import { PlusCircleOutlined } from '@ant-design/icons';
 
-import { colorBlack, colorWhite } from '@app/styles/colors.ts';
+import { spacing1 } from '@app/styles/spacing.ts';
 
-export const StyledButton = styled(PlusCircleOutlined)`
-  background: ${colorWhite};
-  border-radius: 25px;
-  color: ${colorBlack};
+export interface ColorButtonProps {
+  $backgroundColor: string;
+  $color: string;
+}
+
+export const StyledButton = styled.button<ColorButtonProps>`
+  border-radius: 50px;
+  border: none;
+  padding: ${spacing1};
+  color: ${(props) => props.$color};
+  background: ${(props) => props.$backgroundColor};
+
+  & * {
+    font-size: 30px;
+  }
 `;
