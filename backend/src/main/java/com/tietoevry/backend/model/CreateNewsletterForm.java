@@ -10,6 +10,8 @@ import lombok.Value;
 @Value
 public class CreateNewsletterForm {
     @NotNull
+    String title;
+    @NotNull
     LocalDateTime publishDate;
     @NotNull
     Boolean isPublished;

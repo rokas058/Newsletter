@@ -26,6 +26,8 @@ public class NewsletterEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long newsletterId;
     @NotNull
+    private String title;
+    @NotNull
     private LocalDateTime publishDate;
     @NotNull
     private Boolean isPublished;

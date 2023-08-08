@@ -10,6 +10,7 @@ public class EditNewsletterFormMapper {
     public static NewsletterEntity toNewsletterEntity(Long id, EditNewsletterForm newsletter) {
         return NewsletterEntity.builder()
             .newsletterId(id)
+            .title(newsletter.getTitle())
             .publishDate(newsletter.getPublishDate())
             .isPublished(newsletter.getIsPublished())
             .build();

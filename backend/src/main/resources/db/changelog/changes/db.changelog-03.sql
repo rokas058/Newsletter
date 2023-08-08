@@ -4,6 +4,7 @@
 CREATE TABLE newsletter
 (
     newsletter_id BIGINT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    title         VARCHAR(255)                      NOT NULL,
     publish_date  DATETIME                          NOT NULL,
     is_published  BOOLEAN                           NOT NULL DEFAULT FALSE
 );
