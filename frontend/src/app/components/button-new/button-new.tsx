@@ -6,7 +6,7 @@ import {
 } from '@app/components/button-new/button-new-styled.ts';
 
 interface OwnProps {
-  handleOnClick: () => void;
+  handleOnClick?: () => void;
   children: React.ReactNode;
 }
 

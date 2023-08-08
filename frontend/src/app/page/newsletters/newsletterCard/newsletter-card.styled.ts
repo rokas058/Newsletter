@@ -7,7 +7,6 @@ import {
 } from '@app/styles/colors.ts';
 import { StyledFlexRow } from '@app/styles/mixins.ts';
 import { spacing0, spacing2 } from '@app/styles/spacing.ts';
-import { font20 } from '@app/styles/fonts.ts';
 
 export const StyledNewsletterCard = styled.div`
   width: 60%;
@@ -37,11 +36,3 @@ export const StyledDateCreated = styled.h5`
   padding: ${spacing0};
   border-radius: 10px;
 `;
-
-// INLINE STYLING
-export const styledIcon = {
-  fontSize: `${font20}`,
-  backgroundColor: `${colorYellow}`,
-  padding: `${spacing0}`,
-  borderRadius: '50%',
-};
