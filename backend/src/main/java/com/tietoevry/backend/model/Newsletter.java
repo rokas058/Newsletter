@@ -14,6 +14,8 @@ public class Newsletter {
     @NotNull
     Long id;
     @NotNull
+    String title;
+    @NotNull
     Date publishDate;
     @NotNull
     Boolean isPublished;

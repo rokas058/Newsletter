@@ -11,6 +11,7 @@ public class NewsletterMapper {
     public static Newsletter toNewsletter(NewsletterEntity newsletter) {
         return Newsletter.builder()
             .id(newsletter.getNewsletterId())
+            .title(newsletter.getTitle())
             .publishDate(newsletter.getPublishDate())
             .isPublished(newsletter.getIsPublished())
             .pages(newsletter.getPages())
