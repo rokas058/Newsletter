@@ -36,7 +36,6 @@ public class PageService {
         return PageMapper.toPage(savedPage);
     }
 
-
     public List<Page> getPages() {
         List<PageEntity> pages = pageRepository.findAll();
         return pages
