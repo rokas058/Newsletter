@@ -1,9 +1,10 @@
 package com.tietoevry.backend.service;
 
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.tietoevry.backend.database.entity.ImageEntity;
 import com.tietoevry.backend.database.entity.PageEntity;
 import com.tietoevry.backend.database.entity.SectionEntity;
 import com.tietoevry.backend.database.repository.PageRepository;
@@ -28,14 +29,30 @@ public class SectionService {
     private final SectionRepository sectionRepository;
     private final PageRepository pageRepository;
 
-    public Section createSection(CreateSectionForm createSectionForm) throws IOException {
+    public Section createSection(CreateSectionForm createSectionForm) {
         PageEntity page = pageRepository.findById(createSectionForm.getPageId())
-            .orElseThrow();
+            .orElseThrow(() -> new RuntimeException("Page not found with ID: " + createSectionForm.getPageId()));
         SectionEntity sectionToCreate = CreateSectionFormMapper.toSectionEntity(createSectionForm);
         sectionToCreate.setPage(page);
+
+
+        List<ImageEntity> images = new ArrayList<>();
+        for (byte[] imageData : createSectionForm.getImages()) {
+            ImageEntity imageEntity = new ImageEntity(imageData, sectionToCreate);
+            images.add(imageEntity);
+
+        }
+        sectionToCreate.setImages(images);
+
+        // Save the section first without the images
         SectionEntity savedSection = sectionRepository.save(sectionToCreate);
-        page.getSections().add(sectionToCreate);
-        pageRepository.save(page);
+
+
+        savedSection.setImages(images);
+
+        // Save the section again with the associated images
+        savedSection = sectionRepository.save(savedSection);
+
         return SectionMapper.toSection(savedSection);
     }
 

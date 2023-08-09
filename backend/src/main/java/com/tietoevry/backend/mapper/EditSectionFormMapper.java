@@ -9,7 +9,6 @@ public class EditSectionFormMapper {
             .sectionId(id)
             .title(section.getTitle())
             .text(section.getText())
-            .image(section.getImage())
             .build();
     }
 }

@@ -29,14 +29,23 @@ public class SectionController {
     public Section createSection(
         @RequestParam(value = "title", required = false) String title,
         @RequestParam(value = "text", required = false) String text,
-        @RequestParam(value = "image", required = false) MultipartFile imageFile,
+        @RequestParam(value = "image", required = false) List<MultipartFile> imageFiles,
         @RequestParam("pageId") Long pageId
     ) throws IOException {
+        List<byte[]> imageBytesList = imageFiles.stream()
+            .map(file -> {
+                try {
+                    return file.getBytes();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }).toList();
+
         CreateSectionForm createSectionForm = CreateSectionForm.builder()
             .title(title)
             .text(text)
             .pageId(pageId)
-            .image((imageFile == null) ? null : imageFile.getBytes())
+            .images(imageBytesList)
             .build();
 
         return sectionService.createSection(createSectionForm);
