@@ -1,35 +1,30 @@
-package com.tietoevry.backend.model;
+package com.tietoevry.backend.model.user;
 
 import java.time.LocalDate;
 import java.util.List;
 
 import com.tietoevry.backend.database.entity.Role;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Value;
 
 @Builder
 @Value
-public class CreateUserForm {
+public class User {
+    @NotNull
+    Long id;
     @NotNull
     String firstName;
     @NotNull
     String lastName;
-    @NotEmpty
+    @NotNull
     List<Role> roles;
     @NotNull
     String username;
     @NotNull
     String email;
     @NotNull
-    // Fixme
-    LocalDate birthday = LocalDate.parse("2018-05-05");
+    LocalDate birthday;
     @NotNull
-    //Fixme
-    boolean confirmBirthday = false;
-    @NotNull
-    //Fixme
-    String password = "1234";
-
+    boolean confirmBirthday;
 }

@@ -1,5 +1,6 @@
 package com.tietoevry.backend.database.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,6 +29,7 @@ public class SectionEntity {
     @Size(max = 1024 * 1024, message = "Image size exceeds 1MB")
     @Lob
     private byte[] image;
+    @JsonIgnore
     @NotNull
     @ManyToOne
     @JoinColumn(name = "page_id")

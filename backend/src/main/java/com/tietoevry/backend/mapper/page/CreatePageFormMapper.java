@@ -1,7 +1,7 @@
-package com.tietoevry.backend.mapper;
+package com.tietoevry.backend.mapper.page;
 
 import com.tietoevry.backend.database.entity.PageEntity;
-import com.tietoevry.backend.model.CreatePageForm;
+import com.tietoevry.backend.model.page.CreatePageForm;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
