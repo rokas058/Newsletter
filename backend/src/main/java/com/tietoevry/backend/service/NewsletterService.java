@@ -1,9 +1,12 @@
 package com.tietoevry.backend.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import com.tietoevry.backend.database.entity.NewsletterEntity;
+import com.tietoevry.backend.database.entity.PageEntity;
+import com.tietoevry.backend.database.entity.Type;
 import com.tietoevry.backend.database.repository.NewsletterRepository;
 import com.tietoevry.backend.exceptions.NewsletterNotFoundException;
 import com.tietoevry.backend.mapper.newsletter.CreateNewsletterFormMapper;
@@ -34,8 +37,28 @@ public class NewsletterService {
 
     public Newsletter createNewsletter(CreateNewsletterForm createNewsletterForm) {
         NewsletterEntity newsletterToCreate = CreateNewsletterFormMapper.toNewsletterEntity(createNewsletterForm);
+        List<PageEntity> pageEntities = CreateNewsletterPages(newsletterToCreate);
+        newsletterToCreate.setPages(pageEntities);
         NewsletterEntity createdNewsletter = newsletterRepository.save(newsletterToCreate);
         return NewsletterMapper.toNewsletter(createdNewsletter);
+    }
+
+    private List<PageEntity> CreateNewsletterPages(NewsletterEntity newsletterToCreate) {
+        List<Type> typeList = List.of(
+            Type.HR_FRONT, Type.OFF_TOPIC, Type.STAR, Type.NEWS, Type.JOBS,
+            Type.CALENDER, Type.TRAVELS, Type.RECOMMENDATIONS, Type.ANNOUNCEMENTS);
+
+        List<PageEntity> pages = new ArrayList<>();
+
+        for (Type type : typeList) {
+            PageEntity page = new PageEntity();
+            page.setType(type);  // Set the type for the page
+            page.setTitle(type.toString());  // Set the title for the page
+            page.setNewsletter(newsletterToCreate);  // Set the newsletter for the page
+            pages.add(page);  // Add the page to the list
+        }
+
+        return pages;
     }
 
     public Newsletter getNewsletter(Long id) {
