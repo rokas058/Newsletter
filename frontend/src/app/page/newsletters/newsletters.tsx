@@ -33,7 +33,7 @@ export const NewslettersPage = () => {
   const [newsLetters, setNewsletters] = useState<Backend.Newsletter[] | null>(
     null,
   );
-
+  const [isUpdate, setUpdate] = useState<boolean>(false);
   const navigate = useNavigate();
 
   // FETCHIN ALL NEWSLETTERS FROM DATABASE
@@ -87,6 +87,7 @@ export const NewslettersPage = () => {
       'publishDate',
       dayjs(oldDate, { format: 'YYYY-MM-DDTHH:mm:ss.SSSZ' }),
     );
+    setUpdate(true);
   };
 
   // POSTIN FORM DATA TO DATABASE
@@ -175,12 +176,16 @@ export const NewslettersPage = () => {
               value={date}
             />
           </StyledFormItem>
-          <StyledFormButton type="primary" htmlType="submit">
-            Create
-          </StyledFormButton>
-          <StyledFormButton type="primary" htmlType="submit">
-            Update
-          </StyledFormButton>
+
+          {isUpdate ? (
+            <StyledFormButton type="primary" htmlType="submit">
+              Update
+            </StyledFormButton>
+          ) : (
+            <StyledFormButton type="primary" htmlType="submit">
+              Create
+            </StyledFormButton>
+          )}
         </StyledForm>
       </StyledNewsletterContainer>
     </StyledRestyledContainer>
