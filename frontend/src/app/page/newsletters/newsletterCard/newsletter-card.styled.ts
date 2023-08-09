@@ -25,9 +25,12 @@ export const StyledNewsletterCard = styled.div`
   }
 `;
 
-export const StyledIconsContainer = styled(StyledFlexRow)`
+export const StyledTitleAndDateContainer = styled(StyledFlexRow)`
+  align-items: center;
   gap: ${spacing2};
-  padding: ${spacing2};
+`;
+export const StyledIconsContainer = styled(StyledFlexRow)`
+  gap: ${spacing0};
 `;
 
 export const StyledDateCreated = styled.h5`
