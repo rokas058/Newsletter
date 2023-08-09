@@ -1,23 +1,36 @@
-import { DatePicker } from 'antd';
-
 import {
+  StyledDatePickerInput,
   StyledForm,
   StyledFormButton,
   StyledFormInput,
   StyledFormItem,
 } from '@app/page/newsletters/form/add-newsletter-form.styled.ts';
+import { newsLettersApiService } from '@app/api/service/newsletter-api-service.ts';
+import { NotificationService } from '@app/services/notification-service.ts';
 
-export const AddNewsletterForm = () => {
-  const onFinish = (value: any) => {
+interface AddNewsletterFormProps {
+  updateNewsLetters: (newsletters: Backend.Newsletter[]) => void;
+}
+
+export const AddNewsletterForm = (props: AddNewsletterFormProps) => {
+  const { updateNewsLetters } = props;
+
+  const onFinish = async (value: any) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const newsletter = {
       title: value.title,
-      publishDate: value.publishDate.format('YYYY-MM-DD HH:mm:ss'),
+      publishDate: value.publishDate.format('YYYY-MM-DDTHH:mm:ss'),
       isPublished: false,
     };
 
-    // eslint-disable-next-line no-console
-    console.log(newsletter);
+    try {
+      await newsLettersApiService.postNewsLetter(newsletter);
+      const data = await newsLettersApiService.getAllNewsLetters();
+
+      updateNewsLetters(data);
+    } catch (_err) {
+      NotificationService.error('Newsletter was note created');
+    }
   };
 
   return (
@@ -47,7 +60,7 @@ export const AddNewsletterForm = () => {
         hasFeedback={true}
         rules={[{ required: true, message: 'Please enter the date' }]}
       >
-        <DatePicker format="YYYY-MM-DD" placeholder="2023-08-23" />
+        <StyledDatePickerInput format="YYYY-MM-DD" placeholder="2023-08-23" />
       </StyledFormItem>
       <StyledFormButton type="primary" htmlType="submit">
         Create

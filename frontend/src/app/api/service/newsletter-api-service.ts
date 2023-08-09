@@ -20,8 +20,15 @@ const deleteNewsLetter = async (id: number) => {
   return deletedNewsletter.data;
 };
 
+const postNewsLetter = async (newsLetter: Backend.CreateNewsletterForm) => {
+  const createNewsLetter = await axios.post(baseUrl, newsLetter);
+
+  return createNewsLetter.data;
+};
+
 export const newsLettersApiService = {
   getAllNewsLetters,
   deleteNewsLetter,
   getSingleNewsletter,
+  postNewsLetter,
 };

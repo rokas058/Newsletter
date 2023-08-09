@@ -9,7 +9,7 @@ import { StyledFlexRow } from '@app/styles/mixins.ts';
 import { spacing0, spacing2 } from '@app/styles/spacing.ts';
 
 export const StyledNewsletterCard = styled.div`
-  width: 60%;
+  width: 100%;
   height: 70px;
   background-color: ${colorWhite};
   border-radius: 10px;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button, Form, Input } from 'antd';
+import { Button, DatePicker, Form, Input } from 'antd';
 
 export const StyledForm = styled(Form)`
   width: 40%;
@@ -19,4 +19,8 @@ export const StyledFormInput = styled(Input)`
 export const StyledFormButton = styled(Button)`
   margin-top: 10px;
   width: 100px;
+`;
+
+export const StyledDatePickerInput = styled(DatePicker)`
+  width: 100%;
 `;

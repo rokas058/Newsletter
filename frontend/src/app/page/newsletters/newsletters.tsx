@@ -8,6 +8,7 @@ import {
   StyledRestyledContainer,
 } from '@app/page/newsletters/newsletters.styled.ts';
 import { newsLettersApiService } from '@app/api/service/newsletter-api-service.ts';
+import { AddNewsletterForm } from '@app/page/newsletters/form/add-newsletter-form.tsx';
 
 export const NewslettersPage = () => {
   const [newsLetters, setNewsletters] = useState<Backend.Newsletter[] | null>(
@@ -58,24 +59,27 @@ export const NewslettersPage = () => {
     <StyledRestyledContainer>
       <h1>Newsletters</h1>
       <StyledNewsletterContainer>
-        {newsLetters?.map((newsletter) => (
-          <NewsletterCard
-            key={newsletter.id}
-            title={newsletter.title}
-            publishedDate={new Date(newsletter.publishDate).toString()}
-            isPublished={newsletter.isPublished}
-            onEdit={handleEdit}
-            onDelete={(event) => handleDelete(newsletter.id, event)}
-            onNavigate={() =>
-              navigate(
-                `${NavigationService.HOME_PATH.replace(
-                  ':id',
-                  String(newsletter.id),
-                )}`,
-              )
-            }
-          />
-        ))}
+        <div>
+          {newsLetters?.map((newsletter) => (
+            <NewsletterCard
+              key={newsletter.id}
+              title={newsletter.title}
+              publishedDate={new Date(newsletter.publishDate).toString()}
+              isPublished={newsletter.isPublished}
+              onEdit={handleEdit}
+              onDelete={(event) => handleDelete(newsletter.id, event)}
+              onNavigate={() =>
+                navigate(
+                  `${NavigationService.HOME_PATH.replace(
+                    ':id',
+                    String(newsletter.id),
+                  )}`,
+                )
+              }
+            />
+          ))}
+        </div>
+        <AddNewsletterForm updateNewsLetters={setNewsletters} />
       </StyledNewsletterContainer>
     </StyledRestyledContainer>
   );
