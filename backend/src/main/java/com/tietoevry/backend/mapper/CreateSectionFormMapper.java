@@ -1,7 +1,7 @@
 package com.tietoevry.backend.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.tietoevry.backend.database.entity.ImageEntity;
 import com.tietoevry.backend.database.entity.SectionEntity;
@@ -12,28 +12,21 @@ import lombok.NoArgsConstructor;
 public class CreateSectionFormMapper {
 
     public static SectionEntity toSectionEntity(CreateSectionForm section) {
-        SectionEntity sectionEntity = SectionEntity.builder()
+        List<ImageEntity> imageEntities = new ArrayList<>();
+
+        if (section.getImages() != null) {
+            for (byte[] imageData : section.getImages()) {
+                ImageEntity imageEntity = new ImageEntity();
+                imageEntity.setImage(imageData);
+                imageEntities.add(imageEntity);
+            }
+        }
+
+        return SectionEntity.builder()
             .title(section.getTitle())
             .text(section.getText())
+            .images(imageEntities)
             .build();
-
-        List<ImageEntity> imageEntities = null;
-        if (section.getImages() != null) {
-            imageEntities = section.getImages().stream()
-                .map(imageData -> convertToImageEntity(imageData, sectionEntity))
-                .collect(Collectors.toList());
-        }
-        sectionEntity.setImages(imageEntities);
-
-        return sectionEntity;
     }
-
-
-    public static ImageEntity convertToImageEntity(byte[] imageData, SectionEntity section) {
-        ImageEntity imageEntity = new ImageEntity();
-        imageEntity.setImage(imageData);
-        imageEntity.setSection(section);
-        return imageEntity;
-    }
-
 }
+
