@@ -14,6 +14,8 @@ export const NewslettersPage = () => {
     null,
   );
 
+  console.log(newsLetters);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -59,7 +61,7 @@ export const NewslettersPage = () => {
         {newsLetters?.map((newsletter) => (
           <NewsletterCard
             key={newsletter.id}
-            title="Title"
+            title={newsletter.title}
             publishedDate={new Date(newsletter.publishDate).toString()}
             isPublished={newsletter.isPublished}
             onEdit={handleEdit}
