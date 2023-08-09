@@ -1,17 +1,15 @@
-package com.tietoevry.backend.model;
+package com.tietoevry.backend.model.section;
 
-import com.tietoevry.backend.database.entity.Type;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Value;
 
 @Builder
 @Value
-public class Page {
+public class Section {
     @NotNull
     Long id;
-    @NotNull
     String title;
-    @NotNull
-    Type type;
+    String text;
+    byte[] image;
 }

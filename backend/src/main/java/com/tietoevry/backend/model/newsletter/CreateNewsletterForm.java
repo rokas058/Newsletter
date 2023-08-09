@@ -1,6 +1,6 @@
-package com.tietoevry.backend.model;
+package com.tietoevry.backend.model.newsletter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
@@ -12,7 +12,7 @@ public class CreateNewsletterForm {
     @NotNull
     String title;
     @NotNull
-    Date publishDate;
+    LocalDate publishDate;
     @NotNull
     Boolean isPublished;
 

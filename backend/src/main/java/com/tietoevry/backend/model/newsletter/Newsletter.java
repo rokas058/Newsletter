@@ -1,6 +1,6 @@
-package com.tietoevry.backend.model;
+package com.tietoevry.backend.model.newsletter;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import com.tietoevry.backend.database.entity.PageEntity;
@@ -16,7 +16,7 @@ public class Newsletter {
     @NotNull
     String title;
     @NotNull
-    Date publishDate;
+    LocalDate publishDate;
     @NotNull
     Boolean isPublished;
     List<PageEntity> pages;

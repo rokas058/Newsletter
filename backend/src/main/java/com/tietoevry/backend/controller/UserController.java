@@ -2,9 +2,9 @@ package com.tietoevry.backend.controller;
 
 import java.util.List;
 
-import com.tietoevry.backend.model.CreateUserForm;
-import com.tietoevry.backend.model.EditUserForm;
-import com.tietoevry.backend.model.User;
+import com.tietoevry.backend.model.user.CreateUserForm;
+import com.tietoevry.backend.model.user.EditUserForm;
+import com.tietoevry.backend.model.user.User;
 import com.tietoevry.backend.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

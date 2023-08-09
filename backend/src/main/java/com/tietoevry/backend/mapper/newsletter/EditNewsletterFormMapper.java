@@ -1,7 +1,7 @@
-package com.tietoevry.backend.mapper;
+package com.tietoevry.backend.mapper.newsletter;
 
 import com.tietoevry.backend.database.entity.NewsletterEntity;
-import com.tietoevry.backend.model.EditNewsletterForm;
+import com.tietoevry.backend.model.newsletter.EditNewsletterForm;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

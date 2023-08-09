@@ -1,7 +1,7 @@
-package com.tietoevry.backend.mapper;
+package com.tietoevry.backend.mapper.user;
 
 import com.tietoevry.backend.database.entity.UserEntity;
-import com.tietoevry.backend.model.EditUserForm;
+import com.tietoevry.backend.model.user.EditUserForm;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
