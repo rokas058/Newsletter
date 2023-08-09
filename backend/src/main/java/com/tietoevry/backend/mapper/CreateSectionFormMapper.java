@@ -10,7 +10,6 @@ public class CreateSectionFormMapper {
         return SectionEntity.builder()
             .title(section.getTitle())
             .text(section.getText())
-            .image(section.getImage())
             .build();
     }
 }

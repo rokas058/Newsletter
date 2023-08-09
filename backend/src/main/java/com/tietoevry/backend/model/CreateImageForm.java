@@ -6,9 +6,9 @@ import lombok.Value;
 
 @Builder
 @Value
-public class Section {
+public class CreateImageForm {
     @NotNull
-    Long id;
-    String title;
-    String text;
+    Long sectionId;
+    @NotNull
+    byte[] image;
 }

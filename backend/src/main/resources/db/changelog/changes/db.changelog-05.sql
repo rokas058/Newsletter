@@ -10,4 +10,3 @@ CREATE TABLE section
     image      MEDIUMBLOB,
     FOREIGN KEY (page_id) REFERENCES page (page_id)
 );
-

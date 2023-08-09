@@ -27,6 +27,7 @@ public class NewsletterController {
     @PostMapping
     public Newsletter createNewsletter(@Valid @RequestBody CreateNewsletterForm createNewsletterForm) {
         return newsletterService.createNewsletter(createNewsletterForm);
+
     }
 
     @GetMapping

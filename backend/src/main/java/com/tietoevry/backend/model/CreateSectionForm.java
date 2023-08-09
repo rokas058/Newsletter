@@ -11,6 +11,5 @@ public class CreateSectionForm {
     Long pageId;
     String title;
     String text;
-    byte[] image;
 }
 
