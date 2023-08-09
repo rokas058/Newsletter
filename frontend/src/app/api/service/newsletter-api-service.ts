@@ -8,6 +8,12 @@ const getAllNewsLetters = async () => {
   return response.data;
 };
 
+const getSingleNewsletter = async (id: string | undefined) => {
+  const response = await axios.get<Backend.Newsletter>(`/api/newsletter/${id}`);
+
+  return response.data;
+};
+
 const deleteNewsLetter = async (id: number) => {
   const deletedNewsletter = await axios.delete(`/api/newsletter/${id}`);
 
@@ -17,4 +23,5 @@ const deleteNewsLetter = async (id: number) => {
 export const newsLettersApiService = {
   getAllNewsLetters,
   deleteNewsLetter,
+  getSingleNewsletter,
 };

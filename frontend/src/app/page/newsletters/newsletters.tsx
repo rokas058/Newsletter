@@ -14,8 +14,6 @@ export const NewslettersPage = () => {
     null,
   );
 
-  console.log(newsLetters);
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -42,6 +40,9 @@ export const NewslettersPage = () => {
     event.stopPropagation();
     try {
       await newsLettersApiService.deleteNewsLetter(id);
+      const data = await newsLettersApiService.getAllNewsLetters();
+
+      setNewsletters(data);
     } catch (error) {
       throw error;
     }
