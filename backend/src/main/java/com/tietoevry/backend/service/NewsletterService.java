@@ -37,13 +37,13 @@ public class NewsletterService {
 
     public Newsletter createNewsletter(CreateNewsletterForm createNewsletterForm) {
         NewsletterEntity newsletterToCreate = CreateNewsletterFormMapper.toNewsletterEntity(createNewsletterForm);
-        List<PageEntity> pageEntities = CreateNewsletterPages(newsletterToCreate);
+        List<PageEntity> pageEntities = createNewsletterPages(newsletterToCreate);
         newsletterToCreate.setPages(pageEntities);
         NewsletterEntity createdNewsletter = newsletterRepository.save(newsletterToCreate);
         return NewsletterMapper.toNewsletter(createdNewsletter);
     }
 
-    private List<PageEntity> CreateNewsletterPages(NewsletterEntity newsletterToCreate) {
+    private List<PageEntity> createNewsletterPages(NewsletterEntity newsletterToCreate) {
         List<Type> typeList = List.of(
             Type.HR_FRONT, Type.OFF_TOPIC, Type.STAR, Type.NEWS, Type.JOBS,
             Type.CALENDER, Type.TRAVELS, Type.RECOMMENDATIONS, Type.ANNOUNCEMENTS);
@@ -52,10 +52,10 @@ public class NewsletterService {
 
         for (Type type : typeList) {
             PageEntity page = new PageEntity();
-            page.setType(type);  // Set the type for the page
-            page.setTitle(type.toString());  // Set the title for the page
-            page.setNewsletter(newsletterToCreate);  // Set the newsletter for the page
-            pages.add(page);  // Add the page to the list
+            page.setType(type);
+            page.setTitle(type.toString());
+            page.setNewsletter(newsletterToCreate);
+            pages.add(page);
         }
 
         return pages;
