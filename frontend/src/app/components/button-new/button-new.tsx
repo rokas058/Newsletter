@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { ButtonHTMLAttributes, FC } from 'react';
 
 import {
   ColorButtonProps,
@@ -6,21 +6,22 @@ import {
 } from '@app/components/button-new/button-new-styled.ts';
 
 interface OwnProps {
-  handleOnClick: () => void;
+  handleOnClick?: () => void;
   children: React.ReactNode;
 }
 
-type Props = OwnProps & ColorButtonProps;
+type OmittedAttributes = keyof OwnProps | 'className';
+
+interface ButtonProps
+  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, OmittedAttributes> {}
+
+type Props = OwnProps & ColorButtonProps & ButtonProps;
 
 export const ButtonNew: FC<Props> = (props) => {
-  const { handleOnClick, $color, $backgroundColor, children } = props;
+  const { $color, $backgroundColor, children, ...rest } = props;
 
   return (
-    <StyledButton
-      $color={$color}
-      $backgroundColor={$backgroundColor}
-      onClick={handleOnClick}
-    >
+    <StyledButton $color={$color} $backgroundColor={$backgroundColor} {...rest}>
       {children}
     </StyledButton>
   );

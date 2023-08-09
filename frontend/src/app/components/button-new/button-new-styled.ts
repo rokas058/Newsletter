@@ -8,13 +8,13 @@ export interface ColorButtonProps {
 }
 
 export const StyledButton = styled.button<ColorButtonProps>`
-  border-radius: 50px;
+  border-radius: 50%;
   border: 0 solid transparent;
-  padding: ${spacing0};
   color: ${(props) => props.$color};
   background: ${(props) => props.$backgroundColor};
+  padding: ${spacing0};
 
   & * {
-    font-size: 30px;
+    font-size: 20px;
   }
 `;

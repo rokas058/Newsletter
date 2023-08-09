@@ -1,12 +1,6 @@
 import axios from 'axios';
 
 const baseUrl = '/api/newsletter';
-//
-// const config = {
-//   headers: {
-//     'Content-Type': 'application/json',
-//   },
-// };
 
 const getAllNewsLetters = async () => {
   const response = await axios.get<Backend.Newsletter[]>(baseUrl);
@@ -14,25 +8,20 @@ const getAllNewsLetters = async () => {
   return response.data;
 };
 
-export const newsLettersApiService = {
-  getAllNewsLetters,
+const getSingleNewsletter = async (id: string | undefined) => {
+  const response = await axios.get<Backend.Newsletter>(`/api/newsletter/${id}`);
+
+  return response.data;
 };
 
-// class NewsletterApiService {
-//   private static readonly BASE_PATH = '/newsletter';
-//   private readonly backendRestService: RestService;
-//
-//   public constructor() {
-//     this.backendRestService = new RestService();
-//   }
-//
-//   public readonly getAllNewsLetters = (): Promise<Backend.Newsletter[]> =>
-//     this.backendRestService.get<Backend.Newsletter[]>(
-//       NewsletterApiService.BASE_PATH,
-//     );
-//
-// }
-//
-// const newsLetterApiService = new NewsletterApiService();
-//
-// export { newsLetterApiService };
+const deleteNewsLetter = async (id: number) => {
+  const deletedNewsletter = await axios.delete(`/api/newsletter/${id}`);
+
+  return deletedNewsletter.data;
+};
+
+export const newsLettersApiService = {
+  getAllNewsLetters,
+  deleteNewsLetter,
+  getSingleNewsletter,
+};

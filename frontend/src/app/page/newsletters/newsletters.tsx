@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+import { NavigationService } from '@app/services/navigation-service.ts';
 import { NewsletterCard } from '@app/page/newsletters/newsletterCard/newsletter-card.tsx';
 import {
   StyledNewsletterContainer,
@@ -11,6 +13,8 @@ export const NewslettersPage = () => {
   const [newsLetters, setNewsletters] = useState<Backend.Newsletter[] | null>(
     null,
   );
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,6 +33,25 @@ export const NewslettersPage = () => {
     fetchData();
   }, []);
 
+  const handleDelete = async (
+    id: number,
+    event: React.MouseEvent<HTMLButtonElement>,
+  ) => {
+    event.stopPropagation();
+    try {
+      await newsLettersApiService.deleteNewsLetter(id);
+      const data = await newsLettersApiService.getAllNewsLetters();
+
+      setNewsletters(data);
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const handleEdit = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+  };
+
   return (
     <StyledRestyledContainer>
       <h1>Newsletters</h1>
@@ -38,6 +61,17 @@ export const NewslettersPage = () => {
             key={newsletter.id}
             title="Title"
             publishedDate={new Date(newsletter.publishDate).toString()}
+            isPublished={newsletter.isPublished}
+            onEdit={handleEdit}
+            onDelete={(event) => handleDelete(newsletter.id, event)}
+            onNavigate={() =>
+              navigate(
+                `${NavigationService.HOME_PATH.replace(
+                  ':id',
+                  String(newsletter.id),
+                )}`,
+              )
+            }
           />
         ))}
       </StyledNewsletterContainer>

@@ -7,7 +7,6 @@ import {
 } from '@app/styles/colors.ts';
 import { StyledFlexRow } from '@app/styles/mixins.ts';
 import { spacing0, spacing2 } from '@app/styles/spacing.ts';
-import { font20 } from '@app/styles/fonts.ts';
 
 export const StyledNewsletterCard = styled.div`
   width: 60%;
@@ -26,9 +25,12 @@ export const StyledNewsletterCard = styled.div`
   }
 `;
 
-export const StyledIconsContainer = styled(StyledFlexRow)`
+export const StyledTitleAndDateContainer = styled(StyledFlexRow)`
+  align-items: center;
   gap: ${spacing2};
-  padding: ${spacing2};
+`;
+export const StyledIconsContainer = styled(StyledFlexRow)`
+  gap: ${spacing0};
 `;
 
 export const StyledDateCreated = styled.h5`
@@ -37,11 +39,3 @@ export const StyledDateCreated = styled.h5`
   padding: ${spacing0};
   border-radius: 10px;
 `;
-
-// INLINE STYLING
-export const styledIcon = {
-  fontSize: `${font20}`,
-  backgroundColor: `${colorYellow}`,
-  padding: `${spacing0}`,
-  borderRadius: '50%',
-};
