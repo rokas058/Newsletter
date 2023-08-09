@@ -7,7 +7,7 @@ export const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
+` as Form;
 
 export const StyledFormItem = styled(Form.Item)`
   width: 300px;

@@ -1,3 +1,6 @@
+import { useForm } from 'antd/es/form/Form';
+import dayjs, { Dayjs } from 'dayjs';
+
 import {
   StyledDatePickerInput,
   StyledForm,
@@ -12,11 +15,24 @@ interface AddNewsletterFormProps {
   updateNewsLetters: (newsletters: Backend.Newsletter[]) => void;
 }
 
+interface AddNewsletterFormValues {
+  title: string;
+  publishDate: Dayjs;
+}
+
+const ADD_NEWSLETTER_FORM_INITIAL_VALUES = {
+  title: '',
+  publishDate: dayjs(),
+} satisfies AddNewsletterFormValues;
+
 export const AddNewsletterForm = (props: AddNewsletterFormProps) => {
   const { updateNewsLetters } = props;
+  const [formInstance] = useForm<AddNewsletterFormValues>();
+
+  const title = formInstance.getFieldValue('title');
+  const date = formInstance.getFieldValue('publishDate');
 
   const onFinish = async (value: any) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const newsletter = {
       title: value.title,
       publishDate: value.publishDate.format('YYYY-MM-DDTHH:mm:ss'),
@@ -39,6 +55,8 @@ export const AddNewsletterForm = (props: AddNewsletterFormProps) => {
       name="addNewsletter"
       autoComplete="off"
       layout="vertical"
+      form={formInstance}
+      initialValues={ADD_NEWSLETTER_FORM_INITIAL_VALUES}
     >
       <StyledFormItem
         label="Newsletter Title"
@@ -52,18 +70,31 @@ export const AddNewsletterForm = (props: AddNewsletterFormProps) => {
         ]}
         hasFeedback={true}
       >
-        <StyledFormInput placeholder="e.g. October Monthly Newsletter" />
+        <StyledFormInput
+          name="title"
+          placeholder="e.g. October Monthly Newsletter"
+          value={title}
+        />
       </StyledFormItem>
+
       <StyledFormItem
         name="publishDate"
         label="Newsletter Date"
         hasFeedback={true}
         rules={[{ required: true, message: 'Please enter the date' }]}
       >
-        <StyledDatePickerInput format="YYYY-MM-DD" placeholder="2023-08-23" />
+        <StyledDatePickerInput
+          name="publishDate"
+          format="YYYY-MM-DD"
+          placeholder="2023-08-23"
+          value={date}
+        />
       </StyledFormItem>
       <StyledFormButton type="primary" htmlType="submit">
         Create
+      </StyledFormButton>
+      <StyledFormButton type="primary" htmlType="submit">
+        Update
       </StyledFormButton>
     </StyledForm>
   );
