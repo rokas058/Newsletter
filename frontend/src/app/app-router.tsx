@@ -41,6 +41,15 @@ export const appRouter = createBrowserRouter(
             </RequireAuth>
           }
         />
+
+        <Route
+          path={NavigationService.HOME_PATH_WITH_ID}
+          element={
+            <RequireAuth>
+              <HomePage />
+            </RequireAuth>
+          }
+        />
         <Route element={<Protected />}>
           <Route
             path={NavigationService.NEWSLETTERS_PATH}

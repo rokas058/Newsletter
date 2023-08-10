@@ -34,7 +34,7 @@ export const HomePage = () => {
   return (
     <>
       <Container />
-      <Banner />
+      <Banner id={Number(id)} />
       <NavigationDashboard />
     </>
   );
