@@ -31,4 +31,6 @@ public class ImageService {
         sectionRepository.save(section);
         return ImageMapper.toImage(savedImage);
     }
+
+
 }

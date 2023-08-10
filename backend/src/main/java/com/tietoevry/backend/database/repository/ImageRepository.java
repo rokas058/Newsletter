@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ImageRepository extends JpaRepository<ImageEntity, Long> {
+
+
+    void deleteAllBySection_SectionId(Long sectionId);
 }

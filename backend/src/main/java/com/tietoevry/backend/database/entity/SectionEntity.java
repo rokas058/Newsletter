@@ -38,4 +38,5 @@ public class SectionEntity {
     @JsonIgnore
     @OneToMany(mappedBy = "section", cascade = CascadeType.ALL)
     private List<ImageEntity> images;
+    
 }
