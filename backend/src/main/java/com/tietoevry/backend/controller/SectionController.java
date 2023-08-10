@@ -3,9 +3,9 @@ package com.tietoevry.backend.controller;
 import java.io.IOException;
 import java.util.List;
 
-import com.tietoevry.backend.model.CreateSectionForm;
-import com.tietoevry.backend.model.EditSectionForm;
-import com.tietoevry.backend.model.Section;
+import com.tietoevry.backend.model.section.CreateSectionForm;
+import com.tietoevry.backend.model.section.EditSectionForm;
+import com.tietoevry.backend.model.section.Section;
 import com.tietoevry.backend.service.SectionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -29,14 +29,23 @@ public class SectionController {
     public Section createSection(
         @RequestParam(value = "title", required = false) String title,
         @RequestParam(value = "text", required = false) String text,
-        @RequestParam(value = "image", required = false) MultipartFile imageFile,
+        @RequestParam(value = "image", required = false) List<MultipartFile> imageFiles,
         @RequestParam("pageId") Long pageId
     ) throws IOException {
+        List<byte[]> imageBytesList = imageFiles.stream()
+            .map(file -> {
+                try {
+                    return file.getBytes();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }).toList();
+
         CreateSectionForm createSectionForm = CreateSectionForm.builder()
             .title(title)
             .text(text)
             .pageId(pageId)
-            .image((imageFile == null) ? null : imageFile.getBytes())
+            .images(imageBytesList)
             .build();
 
         return sectionService.createSection(createSectionForm);
@@ -52,18 +61,29 @@ public class SectionController {
         return sectionService.getSection(id);
     }
 
+    //fixme
     @PutMapping(path = "/{id}",
         consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Section editSection(
         @PathVariable Long id,
         @RequestParam(value = "title", required = false) String title,
         @RequestParam(value = "text", required = false) String text,
-        @RequestParam(value = "image", required = false) MultipartFile imageFile
+        @RequestParam(value = "image", required = false) List<MultipartFile> imageFiles
     ) throws IOException {
+
+        List<byte[]> imageBytesList = imageFiles.stream()
+            .map(file -> {
+                try {
+                    return file.getBytes();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }).toList();
+
         EditSectionForm editSectionForm = EditSectionForm.builder()
             .title(title)
             .text(text)
-            .image((imageFile == null) ? null : imageFile.getBytes())
+            .images(imageBytesList)
             .build();
 
         return sectionService.editSection(id, editSectionForm);

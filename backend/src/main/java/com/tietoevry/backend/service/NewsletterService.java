@@ -1,17 +1,20 @@
 package com.tietoevry.backend.service;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
 import com.tietoevry.backend.database.entity.NewsletterEntity;
+import com.tietoevry.backend.database.entity.PageEntity;
+import com.tietoevry.backend.database.entity.Type;
 import com.tietoevry.backend.database.repository.NewsletterRepository;
 import com.tietoevry.backend.exceptions.NewsletterNotFoundException;
-import com.tietoevry.backend.mapper.CreateNewsletterFormMapper;
-import com.tietoevry.backend.mapper.EditNewsletterFormMapper;
-import com.tietoevry.backend.mapper.NewsletterMapper;
-import com.tietoevry.backend.model.CreateNewsletterForm;
-import com.tietoevry.backend.model.EditNewsletterForm;
-import com.tietoevry.backend.model.Newsletter;
+import com.tietoevry.backend.mapper.newsletter.CreateNewsletterFormMapper;
+import com.tietoevry.backend.mapper.newsletter.NewsletterMapper;
+import com.tietoevry.backend.model.newsletter.CreateNewsletterForm;
+import com.tietoevry.backend.model.newsletter.EditNewsletterForm;
+import com.tietoevry.backend.model.newsletter.Newsletter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -29,13 +32,34 @@ public class NewsletterService {
         return newsletters
             .stream()
             .map(NewsletterMapper::toNewsletter)
+            .sorted(Comparator.comparing(Newsletter::getPublishDate).reversed())
             .toList();
     }
 
     public Newsletter createNewsletter(CreateNewsletterForm createNewsletterForm) {
         NewsletterEntity newsletterToCreate = CreateNewsletterFormMapper.toNewsletterEntity(createNewsletterForm);
+        List<PageEntity> pageEntities = createNewsletterPages(newsletterToCreate);
+        newsletterToCreate.setPages(pageEntities);
         NewsletterEntity createdNewsletter = newsletterRepository.save(newsletterToCreate);
         return NewsletterMapper.toNewsletter(createdNewsletter);
+    }
+
+    private List<PageEntity> createNewsletterPages(NewsletterEntity newsletterToCreate) {
+        List<Type> typeList = List.of(
+            Type.HR_FRONT, Type.OFF_TOPIC, Type.STAR, Type.NEWS, Type.JOBS,
+            Type.CALENDER, Type.TRAVELS, Type.RECOMMENDATIONS, Type.ANNOUNCEMENTS);
+
+        List<PageEntity> pages = new ArrayList<>();
+
+        for (Type type : typeList) {
+            PageEntity page = new PageEntity();
+            page.setType(type);
+            page.setTitle(type.toString());
+            page.setNewsletter(newsletterToCreate);
+            pages.add(page);
+        }
+
+        return pages;
     }
 
     public Newsletter getNewsletter(Long id) {
@@ -46,12 +70,13 @@ public class NewsletterService {
     }
 
     public Newsletter editNewsletter(Long id, EditNewsletterForm editNewsletterForm) {
-        newsletterRepository.findById(id)
+        NewsletterEntity existNewsletter = newsletterRepository.findById(id)
             .orElseThrow(
                 () -> new NewsletterNotFoundException(String.format("Newsletter with id %d does not exist.", id)));
 
-        NewsletterEntity updatedNewsletter = EditNewsletterFormMapper.toNewsletterEntity(id, editNewsletterForm);
-        NewsletterEntity newsletter = newsletterRepository.save(updatedNewsletter);
+        existNewsletter.setTitle(editNewsletterForm.getTitle());
+        existNewsletter.setPublishDate(editNewsletterForm.getPublishDate());
+        NewsletterEntity newsletter = newsletterRepository.save(existNewsletter);
         return NewsletterMapper.toNewsletter(newsletter);
     }
 
@@ -63,5 +88,30 @@ public class NewsletterService {
         if (!newsletter.getIsPublished()) {
             newsletterRepository.deleteById(id);
         }
+    }
+
+    public Newsletter isPublishedNewsletter(Long id, boolean isPublished) {
+        NewsletterEntity newsletter = newsletterRepository.findById(id)
+            .orElseThrow(
+                () -> new NewsletterNotFoundException(String.format("Newsletter with id %d does not exist.", id)));
+
+        List<NewsletterEntity> newsletters = newsletterRepository.findAll();
+
+        if (!isPublished || newsletter.getIsPublished()) {
+            return NewsletterMapper.toNewsletter(newsletter);
+        }
+
+        newsletters.stream()
+            .filter(NewsletterEntity::getIsPublished)
+            .forEach(otherNewsletter -> {
+                otherNewsletter.setIsPublished(false);
+                newsletterRepository.save(otherNewsletter);
+            });
+
+        newsletter.setIsPublished(true);
+        NewsletterEntity updatedNewsletter = newsletterRepository.save(newsletter);
+
+        return NewsletterMapper.toNewsletter(updatedNewsletter);
+
     }
 }
