@@ -1,5 +1,7 @@
 package com.tietoevry.backend.model.section;
 
+import java.util.List;
+
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Value;
@@ -11,6 +13,6 @@ public class CreateSectionForm {
     Long pageId;
     String title;
     String text;
-    byte[] image;
+    List<byte[]> images;
 }
 

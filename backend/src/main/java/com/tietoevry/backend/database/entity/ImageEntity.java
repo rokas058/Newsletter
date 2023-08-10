@@ -1,42 +1,42 @@
 package com.tietoevry.backend.database.entity;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Entity(name = "section")
-@Getter
-@Setter
+@Entity(name = "image")
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SectionEntity {
+public class ImageEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long sectionId;
-    private String title;
-    private String text;
+    private Long imageId;
     @NotNull
-    @ManyToOne
-    @JoinColumn(name = "page_id")
-    private PageEntity page;
+    @Size(max = 1024 * 1024, message = "Image size exceeds 1MB")
+    @Lob
+    private byte[] image;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "section", cascade = CascadeType.ALL)
-    private List<ImageEntity> images;
-    
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "section_id")
+    private SectionEntity section;
+
+    public ImageEntity(byte[] image, SectionEntity section) {
+        this.image = image;
+        this.section = section;
+    }
 }
