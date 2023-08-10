@@ -1,4 +1,4 @@
-package com.tietoevry.backend.model;
+package com.tietoevry.backend.model.image;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
@@ -6,10 +6,9 @@ import lombok.Value;
 
 @Builder
 @Value
-public class Image {
+public class CreateImageForm {
     @NotNull
-    Long id;
+    Long sectionId;
     @NotNull
     byte[] image;
-
 }

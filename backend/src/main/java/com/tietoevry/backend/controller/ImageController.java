@@ -2,8 +2,8 @@ package com.tietoevry.backend.controller;
 
 import java.io.IOException;
 
-import com.tietoevry.backend.model.CreateImageForm;
-import com.tietoevry.backend.model.Image;
+import com.tietoevry.backend.model.image.CreateImageForm;
+import com.tietoevry.backend.model.image.Image;
 import com.tietoevry.backend.service.ImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;

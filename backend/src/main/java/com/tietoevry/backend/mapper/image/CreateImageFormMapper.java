@@ -1,7 +1,7 @@
-package com.tietoevry.backend.mapper;
+package com.tietoevry.backend.mapper.image;
 
 import com.tietoevry.backend.database.entity.ImageEntity;
-import com.tietoevry.backend.model.CreateImageForm;
+import com.tietoevry.backend.model.image.CreateImageForm;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
