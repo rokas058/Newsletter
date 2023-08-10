@@ -7,7 +7,6 @@ interface SessionContextProps {
 
 const INITIAL_STATE: SessionContextProps = {
   username: undefined,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function,no-empty-function
   setUsername: () => {},
 };
 

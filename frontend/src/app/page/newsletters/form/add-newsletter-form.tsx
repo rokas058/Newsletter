@@ -1,31 +1,52 @@
-import { DatePicker } from 'antd';
+import { useForm } from 'antd/es/form/Form';
+import { Dayjs } from 'dayjs';
 
 import {
+  StyledDatePickerInput,
   StyledForm,
   StyledFormButton,
   StyledFormInput,
   StyledFormItem,
 } from '@app/page/newsletters/form/add-newsletter-form.styled.ts';
 
-export const AddNewsletterForm = () => {
-  const onFinish = (value: any) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const newsletter = {
-      title: value.title,
-      publishDate: value.publishDate.format('YYYY-MM-DD HH:mm:ss'),
-      isPublished: false,
-    };
+interface AddNewsletterFormProps {
+  isNewsLetterUpdated: boolean;
+  updateNewsLetter: (newsletter: Backend.EditNewsletterForm) => void;
+  postNewsletter: (value: Backend.CreateNewsletterForm) => void;
+  newsletterFormInitialValue: AddNewsletterFormValues;
+}
 
-    // eslint-disable-next-line no-console
-    console.log(newsletter);
-  };
+interface AddNewsletterFormValues {
+  title: string;
+  publishDate: Dayjs;
+}
+
+// const ADD_NEWSLETTER_FORM_INITIAL_VALUES = {
+// //   title: '',
+// //   publishDate: dayjs(),
+// // } satisfies AddNewsletterFormValues;
+
+export const AddNewsletterForm = (props: AddNewsletterFormProps) => {
+  const {
+    isNewsLetterUpdated,
+    updateNewsLetter,
+    postNewsletter,
+    newsletterFormInitialValue,
+  } = props;
+  const [formInstance] = useForm<AddNewsletterFormValues>();
 
   return (
     <StyledForm
-      onFinish={onFinish}
+      onFinish={(values) =>
+        isNewsLetterUpdated
+          ? updateNewsLetter(values as Backend.EditNewsletterForm)
+          : postNewsletter(values as Backend.CreateNewsletterForm)
+      }
       name="addNewsletter"
       autoComplete="off"
       layout="vertical"
+      form={formInstance}
+      initialValues={newsletterFormInitialValue}
     >
       <StyledFormItem
         label="Newsletter Title"
@@ -39,19 +60,34 @@ export const AddNewsletterForm = () => {
         ]}
         hasFeedback={true}
       >
-        <StyledFormInput placeholder="e.g. October Monthly Newsletter" />
+        <StyledFormInput
+          name="title"
+          placeholder="e.g. October Monthly Newsletter"
+        />
       </StyledFormItem>
+
       <StyledFormItem
         name="publishDate"
         label="Newsletter Date"
         hasFeedback={true}
         rules={[{ required: true, message: 'Please enter the date' }]}
       >
-        <DatePicker format="YYYY-MM-DD" placeholder="2023-08-23" />
+        <StyledDatePickerInput
+          name="publishDate"
+          format="YYYY-MM-DD"
+          placeholder="2023-08-23"
+        />
       </StyledFormItem>
-      <StyledFormButton type="primary" htmlType="submit">
-        Create
-      </StyledFormButton>
+
+      {isNewsLetterUpdated ? (
+        <StyledFormButton type="primary" htmlType="submit">
+          Update
+        </StyledFormButton>
+      ) : (
+        <StyledFormButton type="primary" htmlType="submit">
+          Create
+        </StyledFormButton>
+      )}
     </StyledForm>
   );
 };

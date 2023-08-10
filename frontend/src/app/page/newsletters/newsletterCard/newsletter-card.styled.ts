@@ -9,7 +9,7 @@ import { StyledFlexRow } from '@app/styles/mixins.ts';
 import { spacing0, spacing2 } from '@app/styles/spacing.ts';
 
 export const StyledNewsletterCard = styled.div`
-  width: 60%;
+  min-width: 600px;
   height: 70px;
   background-color: ${colorWhite};
   border-radius: 10px;
@@ -19,6 +19,7 @@ export const StyledNewsletterCard = styled.div`
   justify-content: space-between;
   align-items: center;
   box-shadow: 3px 4px 20px -12px rgb(0 0 0 / 64%);
+  gap: ${spacing2};
 
   &:hover {
     border: 2px solid ${colorYellow};
@@ -26,6 +27,8 @@ export const StyledNewsletterCard = styled.div`
 `;
 
 export const StyledTitleAndDateContainer = styled(StyledFlexRow)`
+  width: 100%;
+  justify-content: space-between;
   align-items: center;
   gap: ${spacing2};
 `;
