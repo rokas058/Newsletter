@@ -23,6 +23,7 @@ export const StyledHeader = styled.div`
 export const StyledHeaderContent = styled(Container)`
   display: flex;
   align-items: center;
+  flex-direction: row;
   justify-content: space-between;
   height: 100%;
 `;
@@ -30,4 +31,11 @@ export const StyledHeaderContent = styled(Container)`
 export const StyledHeaderLink = styled(Link)`
   color: ${colorWhite};
   margin-left: ${spacing2};
+`;
+
+export const StyledButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  column-gap: 20px;
 `;
