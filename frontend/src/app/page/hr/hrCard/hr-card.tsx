@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, ReactElement } from 'react';
 
 import {
   StyledHrCard,
@@ -15,14 +15,18 @@ interface HrCardInterface {
   image?: string;
 }
 
-export const HrCard: FC<HrCardInterface> = ({ title, text, image }) => (
-  <StyledHrCard>
-    <StyledHrCardContent>
-      <StyledTitleTextContainer>
-        <StyledHrCardTitle>Tittle{title}</StyledHrCardTitle>
-        <StyledHrCardText>Tekstas q{text}</StyledHrCardText>
-      </StyledTitleTextContainer>
-      <StyledImagesContainer>image</StyledImagesContainer>
-    </StyledHrCardContent>
-  </StyledHrCard>
-);
+export const HrCard: FC<HrCardInterface> = (props): ReactElement => {
+  const { title, text, image } = props;
+
+  return (
+    <StyledHrCard>
+      <StyledHrCardContent>
+        <StyledTitleTextContainer>
+          <StyledHrCardTitle>Tittle{title}</StyledHrCardTitle>
+          <StyledHrCardText>Tekstas q{text}</StyledHrCardText>
+        </StyledTitleTextContainer>
+        <StyledImagesContainer>image{image}</StyledImagesContainer>
+      </StyledHrCardContent>
+    </StyledHrCard>
+  );
+};
