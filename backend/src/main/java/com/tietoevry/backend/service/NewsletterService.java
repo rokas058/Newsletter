@@ -1,6 +1,7 @@
 package com.tietoevry.backend.service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,7 +11,6 @@ import com.tietoevry.backend.database.entity.Type;
 import com.tietoevry.backend.database.repository.NewsletterRepository;
 import com.tietoevry.backend.exceptions.NewsletterNotFoundException;
 import com.tietoevry.backend.mapper.newsletter.CreateNewsletterFormMapper;
-import com.tietoevry.backend.mapper.newsletter.EditNewsletterFormMapper;
 import com.tietoevry.backend.mapper.newsletter.NewsletterMapper;
 import com.tietoevry.backend.model.newsletter.CreateNewsletterForm;
 import com.tietoevry.backend.model.newsletter.EditNewsletterForm;
@@ -32,6 +32,7 @@ public class NewsletterService {
         return newsletters
             .stream()
             .map(NewsletterMapper::toNewsletter)
+            .sorted(Comparator.comparing(Newsletter::getPublishDate).reversed())
             .toList();
     }
 
@@ -69,12 +70,13 @@ public class NewsletterService {
     }
 
     public Newsletter editNewsletter(Long id, EditNewsletterForm editNewsletterForm) {
-        newsletterRepository.findById(id)
+        NewsletterEntity existNewsletter = newsletterRepository.findById(id)
             .orElseThrow(
                 () -> new NewsletterNotFoundException(String.format("Newsletter with id %d does not exist.", id)));
 
-        NewsletterEntity updatedNewsletter = EditNewsletterFormMapper.toNewsletterEntity(id, editNewsletterForm);
-        NewsletterEntity newsletter = newsletterRepository.save(updatedNewsletter);
+        existNewsletter.setTitle(editNewsletterForm.getTitle());
+        existNewsletter.setPublishDate(editNewsletterForm.getPublishDate());
+        NewsletterEntity newsletter = newsletterRepository.save(existNewsletter);
         return NewsletterMapper.toNewsletter(newsletter);
     }
 

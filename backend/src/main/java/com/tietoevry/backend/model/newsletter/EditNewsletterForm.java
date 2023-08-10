@@ -13,6 +13,4 @@ public class EditNewsletterForm {
     String title;
     @NotNull
     LocalDate publishDate;
-    @NotNull
-    Boolean isPublished;
 }
