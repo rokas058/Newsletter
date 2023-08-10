@@ -51,8 +51,8 @@ export const Header = () => {
           )}
           <Button onClick={handleLogout}>Logout</Button>
           <ButtonHome
-            onClick={() => {
-              navigate(-1);
+            handleOnClick={() => {
+              navigate(NavigationService.HOME_PATH);
             }}
           >
             HOME

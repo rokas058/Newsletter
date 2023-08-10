@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { ButtonHTMLAttributes, FC } from 'react';
 
 import { StyledHomeButton } from '@app/components/button-home/button-home-styled.ts';
 
@@ -7,10 +7,22 @@ interface OwnProps {
   children: React.ReactNode;
 }
 
-type Props = OwnProps;
+type OmittedAttributes = keyof OwnProps | 'className';
+
+interface ButtonProps
+  extends Omit<
+    ButtonHTMLAttributes<HTMLButtonElement>,
+    'type' | OmittedAttributes
+  > {}
+
+type Props = OwnProps & ButtonProps;
 
 export const ButtonHome: FC<Props> = (props) => {
-  const { children, ...rest } = props;
+  const { handleOnClick, children, ...rest } = props;
 
-  return <StyledHomeButton {...rest}>{children}</StyledHomeButton>;
+  return (
+    <StyledHomeButton onClick={handleOnClick} {...rest}>
+      {children}
+    </StyledHomeButton>
+  );
 };

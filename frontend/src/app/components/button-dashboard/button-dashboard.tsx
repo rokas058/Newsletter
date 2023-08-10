@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { ButtonHTMLAttributes, FC } from 'react';
 
 import { StyledDashboardButton } from '@app/components/button-dashboard/button-dashboard-styled.ts';
 
@@ -7,10 +7,22 @@ interface OwnProps {
   children: React.ReactNode;
 }
 
-type Props = OwnProps;
+type OmittedAttributes = keyof OwnProps | 'className';
+
+interface ButtonProps
+  extends Omit<
+    ButtonHTMLAttributes<HTMLButtonElement>,
+    'type' | OmittedAttributes
+  > {}
+
+type Props = OwnProps & ButtonProps;
 
 export const ButtonDashboard: FC<Props> = (props) => {
-  const { children, ...rest } = props;
+  const { handleOnClick, children, ...rest } = props;
 
-  return <StyledDashboardButton {...rest}>{children}</StyledDashboardButton>;
+  return (
+    <StyledDashboardButton onClick={handleOnClick} {...rest}>
+      {children}
+    </StyledDashboardButton>
+  );
 };
