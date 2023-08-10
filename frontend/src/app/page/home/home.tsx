@@ -12,12 +12,9 @@ export const HomePage = () => {
     undefined,
   );
 
-  console.log(newsletter);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const response = await newsLetterApiService.getAllNewsLetters();
         const data = await newsLettersApiService.getSingleNewsletter(id);
 
         if (data !== null) {
@@ -34,7 +31,11 @@ export const HomePage = () => {
   return (
     <>
       <Container />
-      <Banner id={Number(id)} />
+      <Banner
+        id={Number(id)}
+        isPublished={newsletter?.isPublished === true}
+        setNewsLetter={setNewsletter}
+      />
       <NavigationDashboard />
     </>
   );
