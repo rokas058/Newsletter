@@ -35,12 +35,11 @@ public class PageEntity {
     @NotNull
     @Enumerated(EnumType.STRING)
     private Type type;
+    @JsonIgnore
     @NotNull
     @ManyToOne
     @JoinColumn(name = "newsletter_id")
     private NewsletterEntity newsletter;
-
-    @JsonIgnore
     @OneToMany(mappedBy = "page", cascade = CascadeType.ALL)
     private List<SectionEntity> sections;
 }

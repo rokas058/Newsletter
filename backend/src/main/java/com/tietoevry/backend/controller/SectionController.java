@@ -3,9 +3,9 @@ package com.tietoevry.backend.controller;
 import java.io.IOException;
 import java.util.List;
 
-import com.tietoevry.backend.model.CreateSectionForm;
-import com.tietoevry.backend.model.EditSectionForm;
-import com.tietoevry.backend.model.Section;
+import com.tietoevry.backend.model.section.CreateSectionForm;
+import com.tietoevry.backend.model.section.EditSectionForm;
+import com.tietoevry.backend.model.section.Section;
 import com.tietoevry.backend.service.SectionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;

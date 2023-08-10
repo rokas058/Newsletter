@@ -1,4 +1,4 @@
-package com.tietoevry.backend.model;
+package com.tietoevry.backend.model.user;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -11,7 +11,7 @@ import lombok.Value;
 
 @Builder
 @Value
-public class EditUserForm {
+public class CreateUserForm {
     @NotNull
     String firstName;
     @NotNull
@@ -23,7 +23,7 @@ public class EditUserForm {
     @NotNull
     String email;
     @NotNull
-    //Fixme
+    // Fixme
     LocalDate birthday = LocalDate.parse("2018-05-05");
     @NotNull
     //Fixme
@@ -31,4 +31,5 @@ public class EditUserForm {
     @NotNull
     //Fixme
     String password = "1234";
+
 }

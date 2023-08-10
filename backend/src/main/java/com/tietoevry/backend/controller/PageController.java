@@ -2,9 +2,9 @@ package com.tietoevry.backend.controller;
 
 import java.util.List;
 
-import com.tietoevry.backend.model.CreatePageForm;
-import com.tietoevry.backend.model.EditPageForm;
-import com.tietoevry.backend.model.Page;
+import com.tietoevry.backend.model.page.CreatePageForm;
+import com.tietoevry.backend.model.page.EditPageForm;
+import com.tietoevry.backend.model.page.Page;
 import com.tietoevry.backend.service.PageService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

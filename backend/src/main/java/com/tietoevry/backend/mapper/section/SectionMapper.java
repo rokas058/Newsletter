@@ -1,7 +1,7 @@
-package com.tietoevry.backend.mapper;
+package com.tietoevry.backend.mapper.section;
 
 import com.tietoevry.backend.database.entity.SectionEntity;
-import com.tietoevry.backend.model.Section;
+import com.tietoevry.backend.model.section.Section;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)

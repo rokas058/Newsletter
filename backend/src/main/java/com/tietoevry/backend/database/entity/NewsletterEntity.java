@@ -1,6 +1,6 @@
 package com.tietoevry.backend.database.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -28,7 +28,7 @@ public class NewsletterEntity {
     @NotNull
     private String title;
     @NotNull
-    private Date publishDate;
+    private LocalDate publishDate;
     @NotNull
     private Boolean isPublished;
     @JsonIgnore

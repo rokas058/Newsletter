@@ -2,9 +2,9 @@ package com.tietoevry.backend.controller;
 
 import java.util.List;
 
-import com.tietoevry.backend.model.CreateNewsletterForm;
-import com.tietoevry.backend.model.EditNewsletterForm;
-import com.tietoevry.backend.model.Newsletter;
+import com.tietoevry.backend.model.newsletter.CreateNewsletterForm;
+import com.tietoevry.backend.model.newsletter.EditNewsletterForm;
+import com.tietoevry.backend.model.newsletter.Newsletter;
 import com.tietoevry.backend.service.NewsletterService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -48,5 +49,11 @@ public class NewsletterController {
     @DeleteMapping(path = "/{id}")
     public void deleteNewsletter(@PathVariable Long id) {
         newsletterService.deleteNewsletter(id);
+    }
+
+    @PutMapping(path = "publish/{id}")
+    public Newsletter publishNewsletter(@PathVariable Long id,
+                                        @RequestParam(value = "isPublished") boolean isPublished) {
+        return newsletterService.isPublishedNewsletter(id, isPublished);
     }
 }

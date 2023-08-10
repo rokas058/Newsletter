@@ -1,4 +1,6 @@
-package com.tietoevry.backend.model;
+package com.tietoevry.backend.model.section;
+
+import java.util.List;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
@@ -6,9 +8,11 @@ import lombok.Value;
 
 @Builder
 @Value
-public class Section {
+public class CreateSectionForm {
     @NotNull
-    Long id;
+    Long pageId;
     String title;
     String text;
+    List<byte[]> images;
 }
+

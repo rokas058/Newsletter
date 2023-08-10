@@ -10,7 +10,7 @@ export const StyledRestyledContainer = styled(StyledContainer)`
 export const StyledNewsletterContainer = styled.div`
   width: 100%;
   height: 700px;
-  background-color: ${colorViolet}30;
+  background-color: ${colorViolet};
   border-radius: 10px;
   padding: ${spacing4};
   overflow: scroll;
