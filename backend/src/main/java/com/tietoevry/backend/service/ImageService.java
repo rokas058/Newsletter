@@ -32,5 +32,4 @@ public class ImageService {
         return ImageMapper.toImage(savedImage);
     }
 
-
 }
