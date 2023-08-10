@@ -171,8 +171,11 @@
                 "type": "object",
                 "properties": {
                   "image": {
-                    "type": "string",
-                    "format": "binary"
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
                   }
                 }
               }
@@ -399,6 +402,45 @@
         }
       }
     },
+    "/api/newsletter/publish/{id}": {
+      "put": {
+        "tags": [
+          "newsletter-controller"
+        ],
+        "operationId": "publishNewsletter",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "isPublished",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Newsletter"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/user": {
       "get": {
         "tags": [
@@ -559,8 +601,11 @@
                 "type": "object",
                 "properties": {
                   "image": {
-                    "type": "string",
-                    "format": "binary"
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
                   }
                 }
               }
@@ -683,6 +728,55 @@
         }
       }
     },
+    "/api/image": {
+      "post": {
+        "tags": [
+          "image-controller"
+        ],
+        "operationId": "createImage",
+        "parameters": [
+          {
+            "name": "sectionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "image"
+                ],
+                "type": "object",
+                "properties": {
+                  "image": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Image"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/page/newsletter/{id}": {
       "get": {
         "tags": [
@@ -772,6 +866,8 @@
       },
       "User": {
         "required": [
+          "birthday",
+          "confirmBirthday",
           "email",
           "firstName",
           "id",
@@ -802,6 +898,13 @@
           },
           "email": {
             "type": "string"
+          },
+          "birthday": {
+            "type": "string",
+            "format": "date"
+          },
+          "confirmBirthday": {
+            "type": "boolean"
           }
         }
       },
@@ -820,13 +923,6 @@
           },
           "text": {
             "type": "string"
-          },
-          "image": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "format": "byte"
-            }
           }
         }
       },
@@ -876,12 +972,63 @@
           },
           "type": {
             "$ref": "#/components/schemas/Type"
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SectionEntity"
+            }
+          }
+        }
+      },
+      "PageEntity": {
+        "required": [
+          "title",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "pageId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/Type"
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SectionEntity"
+            }
+          }
+        }
+      },
+      "SectionEntity": {
+        "required": [
+          "page"
+        ],
+        "type": "object",
+        "properties": {
+          "sectionId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "title": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageEntity"
           }
         }
       },
       "EditNewsletterForm": {
         "required": [
-          "isPublished",
           "publishDate",
           "title"
         ],
@@ -892,10 +1039,7 @@
           },
           "publishDate": {
             "type": "string",
-            "format": "date-time"
-          },
-          "isPublished": {
-            "type": "boolean"
+            "format": "date"
           }
         }
       },
@@ -917,7 +1061,7 @@
           },
           "publishDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date"
           },
           "isPublished": {
             "type": "boolean"
@@ -927,53 +1071,6 @@
             "items": {
               "$ref": "#/components/schemas/PageEntity"
             }
-          }
-        }
-      },
-      "NewsletterEntity": {
-        "required": [
-          "isPublished",
-          "publishDate",
-          "title"
-        ],
-        "type": "object",
-        "properties": {
-          "newsletterId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "title": {
-            "type": "string"
-          },
-          "publishDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "isPublished": {
-            "type": "boolean"
-          }
-        }
-      },
-      "PageEntity": {
-        "required": [
-          "newsletter",
-          "title",
-          "type"
-        ],
-        "type": "object",
-        "properties": {
-          "pageId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "title": {
-            "type": "string"
-          },
-          "type": {
-            "$ref": "#/components/schemas/Type"
-          },
-          "newsletter": {
-            "$ref": "#/components/schemas/NewsletterEntity"
           }
         }
       },
@@ -1076,10 +1173,30 @@
           },
           "publishDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date"
           },
           "isPublished": {
             "type": "boolean"
+          }
+        }
+      },
+      "Image": {
+        "required": [
+          "id",
+          "image"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "image": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "byte"
+            }
           }
         }
       }

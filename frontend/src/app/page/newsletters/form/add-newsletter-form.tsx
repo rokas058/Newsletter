@@ -1,5 +1,5 @@
 import { useForm } from 'antd/es/form/Form';
-import dayjs, { Dayjs } from 'dayjs';
+import { Dayjs } from 'dayjs';
 
 import {
   StyledDatePickerInput,
@@ -8,11 +8,12 @@ import {
   StyledFormInput,
   StyledFormItem,
 } from '@app/page/newsletters/form/add-newsletter-form.styled.ts';
-import { newsLettersApiService } from '@app/api/service/newsletter-api-service.ts';
-import { NotificationService } from '@app/services/notification-service.ts';
 
 interface AddNewsletterFormProps {
-  updateNewsLetters: (newsletters: Backend.Newsletter[]) => void;
+  isNewsLetterUpdated: boolean;
+  updateNewsLetter: (newsletter: Backend.EditNewsletterForm) => void;
+  postNewsletter: (value: Backend.CreateNewsletterForm) => void;
+  newsletterFormInitialValue: AddNewsletterFormValues;
 }
 
 interface AddNewsletterFormValues {
@@ -20,43 +21,32 @@ interface AddNewsletterFormValues {
   publishDate: Dayjs;
 }
 
-const ADD_NEWSLETTER_FORM_INITIAL_VALUES = {
-  title: '',
-  publishDate: dayjs(),
-} satisfies AddNewsletterFormValues;
+// const ADD_NEWSLETTER_FORM_INITIAL_VALUES = {
+// //   title: '',
+// //   publishDate: dayjs(),
+// // } satisfies AddNewsletterFormValues;
 
 export const AddNewsletterForm = (props: AddNewsletterFormProps) => {
-  const { updateNewsLetters } = props;
+  const {
+    isNewsLetterUpdated,
+    updateNewsLetter,
+    postNewsletter,
+    newsletterFormInitialValue,
+  } = props;
   const [formInstance] = useForm<AddNewsletterFormValues>();
-
-  const title = formInstance.getFieldValue('title');
-  const date = formInstance.getFieldValue('publishDate');
-
-  const onFinish = async (value: any) => {
-    const newsletter = {
-      title: value.title,
-      publishDate: value.publishDate.format('YYYY-MM-DDTHH:mm:ss'),
-      isPublished: false,
-    };
-
-    try {
-      await newsLettersApiService.postNewsLetter(newsletter);
-      const data = await newsLettersApiService.getAllNewsLetters();
-
-      updateNewsLetters(data);
-    } catch (_err) {
-      NotificationService.error('Newsletter was note created');
-    }
-  };
 
   return (
     <StyledForm
-      onFinish={onFinish}
+      onFinish={(values) =>
+        isNewsLetterUpdated
+          ? updateNewsLetter(values as Backend.EditNewsletterForm)
+          : postNewsletter(values as Backend.CreateNewsletterForm)
+      }
       name="addNewsletter"
       autoComplete="off"
       layout="vertical"
       form={formInstance}
-      initialValues={ADD_NEWSLETTER_FORM_INITIAL_VALUES}
+      initialValues={newsletterFormInitialValue}
     >
       <StyledFormItem
         label="Newsletter Title"
@@ -73,7 +63,6 @@ export const AddNewsletterForm = (props: AddNewsletterFormProps) => {
         <StyledFormInput
           name="title"
           placeholder="e.g. October Monthly Newsletter"
-          value={title}
         />
       </StyledFormItem>
 
@@ -87,15 +76,18 @@ export const AddNewsletterForm = (props: AddNewsletterFormProps) => {
           name="publishDate"
           format="YYYY-MM-DD"
           placeholder="2023-08-23"
-          value={date}
         />
       </StyledFormItem>
-      <StyledFormButton type="primary" htmlType="submit">
-        Create
-      </StyledFormButton>
-      <StyledFormButton type="primary" htmlType="submit">
-        Update
-      </StyledFormButton>
+
+      {isNewsLetterUpdated ? (
+        <StyledFormButton type="primary" htmlType="submit">
+          Update
+        </StyledFormButton>
+      ) : (
+        <StyledFormButton type="primary" htmlType="submit">
+          Create
+        </StyledFormButton>
+      )}
     </StyledForm>
   );
 };
