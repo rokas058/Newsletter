@@ -26,6 +26,7 @@ import { TravelPage } from '@app/page/travel';
 import { OffTopicPage } from '@app/page/off-topic';
 import { JokesPage } from '@app/page/jokes';
 import { NewslettersPage } from '@app/page/newsletters/newsletters.tsx';
+import { Protected } from '@app/components/route-protected';
 
 export const appRouter = createBrowserRouter(
   createRoutesFromElements(
@@ -40,14 +41,16 @@ export const appRouter = createBrowserRouter(
             </RequireAuth>
           }
         />
-        <Route
-          path={NavigationService.NEWSLETTERS_PATH}
-          element={
-            <RequireAuth>
-              <NewslettersPage />
-            </RequireAuth>
-          }
-        />
+        <Route element={<Protected />}>
+          <Route
+            path={NavigationService.NEWSLETTERS_PATH}
+            element={
+              <RequireAuth>
+                <NewslettersPage />
+              </RequireAuth>
+            }
+          />
+        </Route>
         <Route
           path={NavigationService.NEWBIES_PATH}
           element={
@@ -120,14 +123,16 @@ export const appRouter = createBrowserRouter(
             </RequireAuth>
           }
         />
-        <Route
-          path={NavigationService.USERS_PATH}
-          element={
-            <RequireAuth>
-              <UsersPage />
-            </RequireAuth>
-          }
-        />
+        <Route element={<Protected />}>
+          <Route
+            path={NavigationService.USERS_PATH}
+            element={
+              <RequireAuth>
+                <UsersPage />
+              </RequireAuth>
+            }
+          />
+        </Route>
         <Route
           path={NavigationService.ADD_USER_PATH}
           element={
