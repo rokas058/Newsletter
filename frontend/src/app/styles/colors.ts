@@ -17,3 +17,5 @@ export const colorYellow = '#E9EC6B';
 export const colorVibrantGreen = '#26D07C';
 
 export const colorBlack = '#000000';
+
+export const colorDashboardBackground = '#FDFAF8';
