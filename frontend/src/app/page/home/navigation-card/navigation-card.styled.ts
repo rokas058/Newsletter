@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
-import { colorCoolGrey, colorViolet, colorYellow } from '@app/styles/colors.ts';
+import {
+  colorPrimary,
+  colorVibrantGreen,
+  colorViolet,
+} from '@app/styles/colors.ts';
 
 export const StyledNavigationCard = styled.div`
   width: 100%;
@@ -13,7 +17,7 @@ export const StyledNavigationCard = styled.div`
   justify-content: center;
 
   &:hover {
-    border: 5px solid ${colorYellow};
+    border: 5px solid ${colorVibrantGreen};
   }
 `;
 
@@ -36,7 +40,7 @@ export const StyledIconImage = styled.img`
 `;
 
 export const StyledSectionTitle = styled.h1`
-  color: ${colorCoolGrey};
+  color: ${colorPrimary};
   text-transform: uppercase;
   text-align: center;
   margin: 0;

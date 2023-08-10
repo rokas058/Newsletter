@@ -1,10 +1,8 @@
-import {
-  StyledPageTitle,
-  StyledPageTitleContainer,
-} from '@app/page/newbies/newbies.styled.ts';
+import { StyledPageTitleContainer } from '@app/page/newbies/newbies.styled.ts';
+import { HrCard } from '@app/page/hr/hrCard/hr-card.tsx';
 
 export const HrPage = () => (
   <StyledPageTitleContainer>
-    <StyledPageTitle>HR FRONTAS</StyledPageTitle>
+    <HrCard />
   </StyledPageTitleContainer>
 );
