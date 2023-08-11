@@ -50,7 +50,13 @@ export const usersColumns = (
     render: (_, user) => (
       <>
         <StyledEditIcon onClick={() => tableActions.onEdit(user.id)} />
-        <StyledDeleteIcon onClick={() => tableActions.onDelete(user.id)} />
+        {user.roles[0] === 'USER' && (
+          <StyledDeleteIcon
+            onClick={() => {
+              tableActions.onDelete(user.id);
+            }}
+          />
+        )}
       </>
     ),
   },
