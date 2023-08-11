@@ -3,9 +3,11 @@ import { Dispatch, FC, SetStateAction } from 'react';
 import { CheckOutlined } from '@ant-design/icons';
 
 import {
+  StyledBannerImage,
   StyledBannerSection,
   StyledPublishButton,
 } from '@app/page/home/banner/banner.styled.ts';
+import bannerImage from '@app/assets/banner-image/banner.png';
 import { colorVibrantGreen, colorWhite } from '@app/styles/colors.ts';
 import { newsLettersApiService } from '@app/api/service/newsletter-api-service.ts';
 import { NotificationService } from '@app/services/notification-service.ts';
@@ -41,6 +43,7 @@ export const Banner: FC<BannerProps> = (props) => {
 
   return (
     <StyledBannerSection>
+      <StyledBannerImage src={bannerImage} alt="banner-image" />
       <StyledPublishButton
         $backgroundColor={colorVibrantGreen}
         $color={colorWhite}
