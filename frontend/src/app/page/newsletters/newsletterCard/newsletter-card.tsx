@@ -8,7 +8,11 @@ import {
   StyledNewsletterCard,
   StyledTitleAndDateContainer,
 } from '@app/page/newsletters/newsletterCard/newsletter-card.styled.ts';
-import { colorDarkBLue, colorYellow } from '@app/styles/colors.ts';
+import {
+  colorDarkBLue,
+  colorWarmGrey,
+  colorYellow,
+} from '@app/styles/colors.ts';
 
 interface NewsletterCardInterface {
   title: string;
@@ -41,15 +45,14 @@ export const NewsletterCard: FC<NewsletterCardInterface> = (
           <FormOutlined />
         </ButtonNew>
 
-        {!isPublished && (
-          <ButtonNew
-            $backgroundColor={colorYellow}
-            $color={colorDarkBLue}
-            onClick={onDelete}
-          >
-            <DeleteOutlined />
-          </ButtonNew>
-        )}
+        <ButtonNew
+          $backgroundColor={isPublished ? `${colorWarmGrey}20` : colorYellow}
+          $color={colorDarkBLue}
+          onClick={onDelete}
+          style={{ opacity: isPublished ? 0.4 : 1 }}
+        >
+          <DeleteOutlined />
+        </ButtonNew>
       </StyledIconsContainer>
     </StyledNewsletterCard>
   );

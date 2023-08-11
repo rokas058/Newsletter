@@ -35,10 +35,29 @@ const updateNewsletter = async (
   return editNewsletter.data;
 };
 
+// PAKEISTI VELIAU IS BACKO
+interface PublishStatusProps {
+  isPublished: boolean;
+}
+
+const publishNewsletter = async (
+  id: number,
+  publishStatus: PublishStatusProps,
+) => {
+  const response = await axios.put(`${baseUrl}/publish/${id}`, publishStatus, {
+    params: {
+      isPublished: publishStatus.isPublished,
+    },
+  });
+
+  return response.data;
+};
+
 export const newsLettersApiService = {
   getAllNewsLetters,
   deleteNewsLetter,
   getSingleNewsletter,
   postNewsLetter,
   updateNewsletter,
+  publishNewsletter,
 };

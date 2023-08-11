@@ -156,7 +156,7 @@ export const NewslettersPage = () => {
               onDelete={(event) => handleDelete(newsletter.id, event)}
               onNavigate={() =>
                 navigate(
-                  `${NavigationService.HOME_PATH.replace(
+                  `${NavigationService.HOME_PATH_WITH_ID.replace(
                     ':id',
                     String(newsletter.id),
                   )}`,
