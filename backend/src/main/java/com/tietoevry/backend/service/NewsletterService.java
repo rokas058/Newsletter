@@ -1,9 +1,9 @@
 package com.tietoevry.backend.service;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.tietoevry.backend.database.entity.NewsletterEntity;
 import com.tietoevry.backend.database.entity.PageEntity;
@@ -41,6 +41,7 @@ public class NewsletterService {
         List<PageEntity> pageEntities = createNewsletterPages(newsletterToCreate);
         newsletterToCreate.setPages(pageEntities);
         NewsletterEntity createdNewsletter = newsletterRepository.save(newsletterToCreate);
+
         return NewsletterMapper.toNewsletter(createdNewsletter);
     }
 
@@ -49,17 +50,15 @@ public class NewsletterService {
             Type.HR_FRONT, Type.OFF_TOPIC, Type.STAR, Type.NEWS, Type.JOBS,
             Type.CALENDER, Type.TRAVELS, Type.RECOMMENDATIONS, Type.ANNOUNCEMENTS);
 
-        List<PageEntity> pages = new ArrayList<>();
-
-        for (Type type : typeList) {
-            PageEntity page = new PageEntity();
-            page.setType(type);
-            page.setTitle(type.toString());
-            page.setNewsletter(newsletterToCreate);
-            pages.add(page);
-        }
-
-        return pages;
+        return typeList.stream()
+            .map(type -> {
+                PageEntity page = new PageEntity();
+                page.setType(type);
+                page.setTitle(type.toString());
+                page.setNewsletter(newsletterToCreate);
+                return page;
+            })
+            .collect(Collectors.toList());
     }
 
     public Newsletter getNewsletter(Long id) {
@@ -90,15 +89,15 @@ public class NewsletterService {
         }
     }
 
-    public Newsletter isPublishedNewsletter(Long id, boolean isPublished) {
+    public Newsletter isPublishedNewsletter(Long id) {
         NewsletterEntity newsletter = newsletterRepository.findById(id)
             .orElseThrow(
                 () -> new NewsletterNotFoundException(String.format("Newsletter with id %d does not exist.", id)));
 
         List<NewsletterEntity> newsletters = newsletterRepository.findAll();
 
-        if (!isPublished || newsletter.getIsPublished()) {
-            return NewsletterMapper.toNewsletter(newsletter);
+        if (newsletter.getIsPublished()) {
+            throw new IllegalStateException("Newsletter is already published");
         }
 
         newsletters.stream()

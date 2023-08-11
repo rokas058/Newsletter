@@ -13,6 +13,7 @@ import com.tietoevry.backend.model.image.Image;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @RequiredArgsConstructor
@@ -21,7 +22,12 @@ public class ImageService {
     private final ImageRepository imageRepository;
     private final SectionRepository sectionRepository;
 
-    public Image createImage(CreateImageForm createImageForm) throws IOException {
+    public Image createImage(Long sectionId, MultipartFile imageFile) throws IOException {
+        CreateImageForm createImageForm = CreateImageForm.builder()
+            .sectionId(sectionId)
+            .image(imageFile.getBytes())
+            .build();
+
         SectionEntity section = sectionRepository.findById(createImageForm.getSectionId())
             .orElseThrow();
         ImageEntity imageToCreate = CreateImageFormMapper.toImageEntity(createImageForm);

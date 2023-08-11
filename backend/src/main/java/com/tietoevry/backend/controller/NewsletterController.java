@@ -8,6 +8,7 @@ import com.tietoevry.backend.model.newsletter.Newsletter;
 import com.tietoevry.backend.service.NewsletterService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,12 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-//@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasRole('ADMIN')")
 @RequestMapping("/api/newsletter")
 public class NewsletterController {
     private final NewsletterService newsletterService;
@@ -28,7 +28,6 @@ public class NewsletterController {
     @PostMapping
     public Newsletter createNewsletter(@Valid @RequestBody CreateNewsletterForm createNewsletterForm) {
         return newsletterService.createNewsletter(createNewsletterForm);
-
     }
 
     @GetMapping
@@ -52,8 +51,7 @@ public class NewsletterController {
     }
 
     @PutMapping(path = "publish/{id}")
-    public Newsletter publishNewsletter(@PathVariable Long id,
-                                        @RequestParam(value = "isPublished") boolean isPublished) {
-        return newsletterService.isPublishedNewsletter(id, isPublished);
+    public Newsletter publishNewsletter(@PathVariable Long id) {
+        return newsletterService.isPublishedNewsletter(id);
     }
 }
