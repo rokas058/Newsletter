@@ -46,17 +46,33 @@ export const Header = () => {
                 navigate(NavigationService.NEWSLETTERS_PATH);
               }}
             >
-              DASHBOARD
+              Newsletters
             </ButtonDashboard>
           )}
           <Button onClick={handleLogout}>Logout</Button>
-          <ButtonHome
-            handleOnClick={() => {
-              navigate(NavigationService.HOME_PATH);
-            }}
-          >
-            HOME
-          </ButtonHome>
+          {username === 'admin' ? (
+            <ButtonHome
+              handleOnClick={() => {
+                if (
+                  window.location.pathname ===
+                  NavigationService.NEWSLETTERS_PATH
+                ) {
+                  navigate(NavigationService.NEWSLETTERS_PATH);
+                }
+                navigate(-1);
+              }}
+            >
+              Back
+            </ButtonHome>
+          ) : (
+            <ButtonHome
+              handleOnClick={() => {
+                navigate(NavigationService.HOME_PATH);
+              }}
+            >
+              HOME
+            </ButtonHome>
+          )}
         </StyledButtonContainer>
       </StyledHeaderContent>
     </StyledHeader>

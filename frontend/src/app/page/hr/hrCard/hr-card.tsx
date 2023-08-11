@@ -22,10 +22,10 @@ export const HrCard: FC<HrCardInterface> = (props): ReactElement => {
     <StyledHrCard>
       <StyledHrCardContent>
         <StyledTitleTextContainer>
-          <StyledHrCardTitle>Tittle{title}</StyledHrCardTitle>
-          <StyledHrCardText>Tekstas q{text}</StyledHrCardText>
+          <StyledHrCardTitle>{title}</StyledHrCardTitle>
+          <StyledHrCardText>{text}</StyledHrCardText>
         </StyledTitleTextContainer>
-        <StyledImagesContainer>image{image}</StyledImagesContainer>
+        <StyledImagesContainer src={image} />
       </StyledHrCardContent>
     </StyledHrCard>
   );
