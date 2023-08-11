@@ -32,6 +32,7 @@ export const Header = () => {
       <StyledHeaderContent>
         <StyledLinksAndGreeting>
           <StyledGreeting>Hello, {username}</StyledGreeting>
+
           {username === 'admin' && (
             <StyledHeaderLink to={NavigationService.USERS_PATH}>
               Users
