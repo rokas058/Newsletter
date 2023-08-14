@@ -15,6 +15,7 @@ public class NewsletterMapper {
             .publishDate(newsletter.getPublishDate())
             .isPublished(newsletter.getIsPublished())
             .pages(newsletter.getPages())
+            .recommendations(newsletter.getRecommendation())
             .build();
     }
 

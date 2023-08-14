@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.tietoevry.backend.database.entity.PageEntity;
+import com.tietoevry.backend.database.entity.RecommendationEntity;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Value;
@@ -20,4 +21,5 @@ public class Newsletter {
     @NotNull
     Boolean isPublished;
     List<PageEntity> pages;
+    List<RecommendationEntity> recommendations;
 }
