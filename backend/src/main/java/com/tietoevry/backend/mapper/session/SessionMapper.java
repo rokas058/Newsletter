@@ -15,6 +15,11 @@ public class SessionMapper {
                 Optional.ofNullable(currentUser)
                     .map(CustomUserDetails::getUsername)
                     .orElse(null))
+            .roles(
+                Optional.ofNullable(currentUser)
+                    .map(CustomUserDetails::getRoles)
+                    .orElse(null)
+            )
             .build();
     }
 }
