@@ -15,4 +15,5 @@ export const StyledNewsletterContainer = styled.div`
   border-radius: 10px;
   padding: ${spacing4};
   overflow: scroll;
+  position: relative;
 `;
