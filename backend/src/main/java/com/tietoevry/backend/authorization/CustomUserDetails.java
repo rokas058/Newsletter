@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.tietoevry.backend.database.entity.Role;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @AllArgsConstructor
 public class CustomUserDetails implements UserDetails, CredentialsContainer {
     private final String username;
+    @Getter
     private final List<Role> roles;
     private String password;
 
@@ -57,4 +59,5 @@ public class CustomUserDetails implements UserDetails, CredentialsContainer {
     public void eraseCredentials() {
         password = null;
     }
+
 }
