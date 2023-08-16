@@ -35,6 +35,6 @@ public class RecommendationEntity {
     @JoinColumn(name = "newsletter_id")
     private NewsletterEntity newsletter;
     @NotNull
-    private Long apiId;
+    private String apiId;
 
 }

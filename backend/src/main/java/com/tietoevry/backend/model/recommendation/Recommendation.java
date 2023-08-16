@@ -15,5 +15,5 @@ public class Recommendation {
     @NotNull
     MediaType mediaType;
     @NotNull
-    Long apiId;
+    String apiId;
 }
