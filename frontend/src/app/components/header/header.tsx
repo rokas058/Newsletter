@@ -23,7 +23,7 @@ export const Header = () => {
     navigate(NavigationService.LOGOUT_PATH);
   };
 
-  if (!username) {
+  if (window.location.pathname === '/login') {
     return null;
   }
 
