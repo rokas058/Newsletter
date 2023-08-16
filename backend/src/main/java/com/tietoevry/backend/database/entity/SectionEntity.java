@@ -35,6 +35,7 @@ public class SectionEntity {
     @ManyToOne
     @JoinColumn(name = "page_id")
     private PageEntity page;
+    @JsonIgnore
     @OneToMany(mappedBy = "section", cascade = CascadeType.ALL)
     private List<ImageEntity> images;
 
