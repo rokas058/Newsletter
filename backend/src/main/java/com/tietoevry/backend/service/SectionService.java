@@ -40,10 +40,13 @@ public class SectionService {
         SectionEntity sectionToCreate = CreateSectionFormMapper.toSectionEntity(createSectionForm);
         sectionToCreate.setPage(page);
 
-        List<ImageEntity> images = createSectionForm.getImages().stream()
-            .map(imageData -> new ImageEntity(imageData, sectionToCreate))
-            .collect(Collectors.toList());
-        sectionToCreate.setImages(images);
+        if (createSectionForm.getImages() != null) {
+            List<ImageEntity> images = createSectionForm.getImages().stream()
+                .map(imageData -> new ImageEntity(imageData, sectionToCreate))
+                .collect(Collectors.toList());
+            sectionToCreate.setImages(images);
+        }
+
 
         SectionEntity savedSection = sectionRepository.save(sectionToCreate);
 
@@ -75,10 +78,12 @@ public class SectionService {
         SectionEntity updateSection = EditSectionFormMapper.toSectionEntity(id, editSectionForm);
         updateSection.setPage(getSection.getPage());
 
-        List<ImageEntity> images = editSectionForm.getImages().stream()
-            .map(imageData -> new ImageEntity(imageData, updateSection))
-            .collect(Collectors.toList());
-        updateSection.setImages(images);
+        if (editSectionForm.getImages() != null) {
+            List<ImageEntity> images = editSectionForm.getImages().stream()
+                .map(imageData -> new ImageEntity(imageData, updateSection))
+                .collect(Collectors.toList());
+            updateSection.setImages(images);
+        }
 
         SectionEntity section = sectionRepository.save(updateSection);
         return SectionMapper.toSection(section);
@@ -87,4 +92,5 @@ public class SectionService {
     public void deleteSection(Long id) {
         sectionRepository.deleteById(id);
     }
+
 }

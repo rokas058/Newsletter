@@ -34,14 +34,17 @@ public class SectionController {
         @RequestParam(value = "image", required = false) List<MultipartFile> imageFiles,
         @RequestParam("pageId") Long pageId
     ) throws IOException {
-        List<byte[]> imageBytesList = imageFiles.stream()
-            .map(file -> {
-                try {
-                    return file.getBytes();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }).toList();
+        List<byte[]> imageBytesList = null;
+        if (imageFiles != null) {
+            imageBytesList = imageFiles.stream()
+                .map(file -> {
+                    try {
+                        return file.getBytes();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }).toList();
+        }
 
         CreateSectionForm createSectionForm = CreateSectionForm.builder()
             .title(title)
@@ -72,15 +75,17 @@ public class SectionController {
         @RequestParam(value = "text", required = false) String text,
         @RequestParam(value = "image", required = false) List<MultipartFile> imageFiles
     ) throws IOException {
-
-        List<byte[]> imageBytesList = imageFiles.stream()
-            .map(file -> {
-                try {
-                    return file.getBytes();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }).toList();
+        List<byte[]> imageBytesList = null;
+        if (imageFiles != null) {
+            imageBytesList = imageFiles.stream()
+                .map(file -> {
+                    try {
+                        return file.getBytes();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }).toList();
+        }
 
         EditSectionForm editSectionForm = EditSectionForm.builder()
             .title(title)

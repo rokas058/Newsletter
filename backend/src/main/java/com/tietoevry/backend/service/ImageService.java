@@ -1,6 +1,8 @@
 package com.tietoevry.backend.service;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.tietoevry.backend.database.entity.ImageEntity;
 import com.tietoevry.backend.database.entity.SectionEntity;
@@ -38,4 +40,11 @@ public class ImageService {
         return ImageMapper.toImage(savedImage);
     }
 
+    public List<Image> getImages(Long id) {
+        List<ImageEntity> imageEntities = imageRepository.findAllBySection_SectionId(id);
+        
+        return imageEntities.stream()
+            .map(ImageMapper::toImage)
+            .collect(Collectors.toList());
+    }
 }
