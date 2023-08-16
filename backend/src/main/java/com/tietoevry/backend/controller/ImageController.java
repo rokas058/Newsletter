@@ -1,12 +1,15 @@
 package com.tietoevry.backend.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import com.tietoevry.backend.model.image.Image;
 import com.tietoevry.backend.service.ImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +29,11 @@ public class ImageController {
         @RequestParam MultipartFile imageFile
     ) throws IOException {
         return imageService.createImage(sectionId, imageFile);
+    }
+
+    @GetMapping(path = "/{sectionId}")
+    public List<Image> getImages(@PathVariable Long sectionId) {
+        return imageService.getImages(sectionId);
     }
 
 }
