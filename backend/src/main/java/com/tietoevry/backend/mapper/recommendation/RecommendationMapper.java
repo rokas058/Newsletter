@@ -12,6 +12,7 @@ public class RecommendationMapper {
             .id(recommendation.getRecommendationsId())
             .title(recommendation.getTitle())
             .mediaType(recommendation.getMediaType())
+            .apiId(recommendation.getApiId())
             .build();
     }
 }

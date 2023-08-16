@@ -14,4 +14,6 @@ public class Recommendation {
     String title;
     @NotNull
     MediaType mediaType;
+    @NotNull
+    Long apiId;
 }
