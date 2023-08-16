@@ -7,7 +7,9 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 // eslint-disable-next-line import/no-default-export
 export default defineConfig({
   plugins: [
-    react(),
+    react({
+      plugins: [['@swc/plugin-styled-components', { displayName: true }]],
+    }),
     // checker({
     //   typescript: true,
     //   stylelint: { lintCommand: 'stylelint ./src/**/*.{ts,tsx}' },
