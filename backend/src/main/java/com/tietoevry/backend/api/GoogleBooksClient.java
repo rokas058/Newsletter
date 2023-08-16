@@ -30,5 +30,4 @@ public class GoogleBooksClient {
         return restTemplate.getForObject(url, String.class);
     }
 
-
 }
