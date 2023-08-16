@@ -30,13 +30,15 @@ public class SectionEntity {
     private Long sectionId;
     private String title;
     private String text;
+
+    @OneToMany(mappedBy = "section", cascade = CascadeType.ALL)
+    private List<ImageEntity> images;
+
     @JsonIgnore
     @NotNull
     @ManyToOne
     @JoinColumn(name = "page_id")
     private PageEntity page;
-    @JsonIgnore
-    @OneToMany(mappedBy = "section", cascade = CascadeType.ALL)
-    private List<ImageEntity> images;
+
 
 }
