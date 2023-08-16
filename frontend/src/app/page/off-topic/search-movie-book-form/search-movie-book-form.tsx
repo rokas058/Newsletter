@@ -8,17 +8,13 @@ import {
   StyledRadioGroup,
 } from '@app/page/off-topic/search-movie-book-form/search-movie-book-form.styled.ts';
 
-interface FormValuesProps {
-  title: string;
-  checkbox: string;
-}
-
 export const SearchBookMovieForm = () => {
   const [titleValue, setTitle] = useState<string>('');
   const [checkboxValue, setCheckboxValue] = useState<string>('');
 
   const handleSubmit = () => {
     const formValues = {
+      // newsLetterId: id,
       title: titleValue,
       checkbox: checkboxValue,
     };
@@ -48,10 +44,10 @@ export const SearchBookMovieForm = () => {
           value={checkboxValue}
           onChange={(event) => setCheckboxValue(event.target.value)}
         >
-          <Radio value="Book" name="book">
+          <Radio value="BOOK" name="book">
             Book
           </Radio>
-          <Radio value="Movie" name="movie">
+          <Radio value="FILM" name="movie">
             Movie
           </Radio>
         </StyledRadioGroup>

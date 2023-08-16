@@ -1,3 +1,6 @@
+import { useParams } from 'react-router-dom';
+import { FC } from 'react';
+
 import {
   StyledDashboardContainer,
   StyledFlexColumnContainer,
@@ -17,62 +20,76 @@ import jokeSectionImage from '@app/assets/icons/anekdotai.png';
 // Routes
 import { NavigationService } from '@app/services/navigation-service.ts';
 
-export const NavigationDashboard = () => (
-  <StyledDashboardContainer>
-    <StyledFlexColumnContainer>
-      <StyledFlexRowContainer>
-        <NavigationCard
-          title="Hr frontas"
-          iconImage={hrFrontImage}
-          navigationURL={NavigationService.HR_PATH}
-        />
-        <NavigationCard
-          title="Vadovų Skyriaus Naujienos"
-          iconImage={headDepartmentImage}
-          navigationURL={NavigationService.NEWS_PATH}
-        />
-        <NavigationCard
-          title="Apžvalgystės"
-          iconImage={travelStoriesImage}
-          navigationURL={NavigationService.TRAVEL_PATH}
-        />
-      </StyledFlexRowContainer>
+interface NavigationDashboardProps {
+  newsLetter: Backend.Newsletter | undefined;
+}
 
-      <StyledFlexRowContainer>
-        <NavigationCard
-          title="Naujokai"
-          iconImage={newTeamMembersImage}
-          navigationURL={NavigationService.NEWBIES_PATH}
-        />
-        <NavigationCard
-          title="Ukraina"
-          iconImage={ukraineImage}
-          navigationURL={NavigationService.UKRAINA_PATH}
-        />
-        <NavigationCard
-          title="Atviros pozicijos"
-          iconImage={vacancyImage}
-          navigationURL={NavigationService.VACANCIES_PATH}
-        />
-      </StyledFlexRowContainer>
+export const NavigationDashboard: FC<NavigationDashboardProps> = (props) => {
+  const { id } = useParams();
 
-      <StyledFlexRowContainer>
-        <NavigationCard
-          title="Off topic"
-          iconImage={offTopicImage}
-          navigationURL={NavigationService.OFFTOPIC_PATH}
-        />
-        <NavigationCard
-          title="Kalendorius"
-          iconImage={calendarImage}
-          navigationURL={NavigationService.CALENDAR_PATH}
-        />
-        <NavigationCard
-          title="Mediniai bajeriai"
-          iconImage={jokeSectionImage}
-          navigationURL={NavigationService.JOKES_PATH}
-        />
-      </StyledFlexRowContainer>
-    </StyledFlexColumnContainer>
-  </StyledDashboardContainer>
-);
+  const { newsLetter } = props;
+
+  console.log(newsLetter);
+  console.log(id);
+  console.log(NavigationService.HOME_PATH_OFFTOPIC.replace(':id', String(id)));
+
+  return (
+    <StyledDashboardContainer>
+      <StyledFlexColumnContainer>
+        <StyledFlexRowContainer>
+          <NavigationCard
+            title="Hr frontas"
+            iconImage={hrFrontImage}
+            navigationURL={NavigationService.HR_PATH}
+          />
+          <NavigationCard
+            title="Vadovų Skyriaus Naujienos"
+            iconImage={headDepartmentImage}
+            navigationURL={NavigationService.NEWS_PATH}
+          />
+          <NavigationCard
+            title="Apžvalgystės"
+            iconImage={travelStoriesImage}
+            navigationURL={NavigationService.TRAVEL_PATH}
+          />
+        </StyledFlexRowContainer>
+
+        <StyledFlexRowContainer>
+          <NavigationCard
+            title="Naujokai"
+            iconImage={newTeamMembersImage}
+            navigationURL={NavigationService.NEWBIES_PATH}
+          />
+          <NavigationCard
+            title="Ukraina"
+            iconImage={ukraineImage}
+            navigationURL={NavigationService.UKRAINA_PATH}
+          />
+          <NavigationCard
+            title="Atviros pozicijos"
+            iconImage={vacancyImage}
+            navigationURL={NavigationService.VACANCIES_PATH}
+          />
+        </StyledFlexRowContainer>
+
+        <StyledFlexRowContainer>
+          <NavigationCard
+            title="Off topic"
+            iconImage={offTopicImage}
+            navigationURL={`/home/${id}/hr`}
+          />
+          <NavigationCard
+            title="Kalendorius"
+            iconImage={calendarImage}
+            navigationURL={NavigationService.CALENDAR_PATH}
+          />
+          <NavigationCard
+            title="Mediniai bajeriai"
+            iconImage={jokeSectionImage}
+            navigationURL={NavigationService.JOKES_PATH}
+          />
+        </StyledFlexRowContainer>
+      </StyledFlexColumnContainer>
+    </StyledDashboardContainer>
+  );
+};
