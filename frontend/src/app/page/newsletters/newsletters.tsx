@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'antd/es/form/Form';
 import dayjs, { Dayjs } from 'dayjs';
 
+import { DeletePopUp } from '@app/components/delete-pop-up/delete-pop-up.tsx';
 import {
   StyledDatePickerInput,
   StyledForm,
@@ -36,6 +37,7 @@ export const NewslettersPage = () => {
 
   const [isUpdate, setUpdate] = useState<boolean>(false);
   const [newsLetterId, setNewsLetterId] = useState<number | null>(null);
+  const [showPopUp, setShowPopUp] = useState<boolean>(false);
   const navigate = useNavigate();
 
   // FETCHING ALL NEWSLETTERS FROM DATABASE
@@ -57,18 +59,27 @@ export const NewslettersPage = () => {
   }, []);
 
   // DELETE FUNCTIONALITY
-  const handleDelete = async (
-    id: number,
+
+  const handlePopUpShow = (
     event: React.MouseEvent<HTMLButtonElement>,
+    id: number,
   ) => {
     event.stopPropagation();
-    try {
+    setShowPopUp(true);
+    setNewsLetterId(id);
+  };
+
+  const handlePopUpClose = () => {
+    setShowPopUp(false);
+  };
+
+  const handleDelete = async (id: number | null) => {
+    if (id !== null) {
       await newsLettersApiService.deleteNewsLetter(id);
       const data = await newsLettersApiService.getAllNewsLetters();
 
       setNewsletters(data);
-    } catch (error) {
-      throw error;
+      setShowPopUp(false);
     }
   };
 
@@ -138,6 +149,14 @@ export const NewslettersPage = () => {
     <StyledRestyledContainer>
       <h1>Newsletters</h1>
       <StyledNewsletterContainer>
+        {showPopUp && (
+          <DeletePopUp
+            message="Are you sure you want to delete this newsletter?"
+            alertType="warning"
+            onCancel={handlePopUpClose}
+            onDelete={() => handleDelete(newsLetterId)}
+          />
+        )}
         <div>
           {newsLetters?.map((newsletter) => (
             <NewsletterCard
@@ -153,7 +172,6 @@ export const NewslettersPage = () => {
                   newsletter.publishDate,
                 )
               }
-              onDelete={(event) => handleDelete(newsletter.id, event)}
               onNavigate={() =>
                 navigate(
                   `${NavigationService.HOME_PATH_WITH_ID.replace(
@@ -162,6 +180,8 @@ export const NewslettersPage = () => {
                   )}`,
                 )
               }
+              // onDelete={(event) => handleDelete(newsletter.id, event)}
+              onDelete={(event) => handlePopUpShow(event, newsletter.id)}
             />
           ))}
         </div>
