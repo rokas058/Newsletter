@@ -34,5 +34,7 @@ public class RecommendationEntity {
     @ManyToOne
     @JoinColumn(name = "newsletter_id")
     private NewsletterEntity newsletter;
+    @NotNull
+    private Long apiId;
 
 }

@@ -24,6 +24,7 @@ public class RecommendationService {
             .orElseThrow();
         RecommendationEntity recommendation = CreateRecommendationMapper.toRecommendationEntity(createRecommendation);
         recommendation.setNewsletter(newsletter);
+        recommendation.setApiId(1L);
         RecommendationEntity savedRecommendation = recommendationsRepository.save(recommendation);
         return RecommendationMapper.toRecommendation(savedRecommendation);
 
