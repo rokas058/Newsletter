@@ -9,10 +9,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class NewsletterMapper {
-
-    public static Newsletter toNewsletter(NewsletterEntity newsletter) {//,
-        //List<Page> pages,
-        //List<Recommendation> recommendations) {
+    public static Newsletter toNewsletter(NewsletterEntity newsletter) {
         return Newsletter.builder()
             .id(newsletter.getNewsletterId())
             .title(newsletter.getTitle())
