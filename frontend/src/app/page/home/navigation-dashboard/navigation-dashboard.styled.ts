@@ -7,7 +7,7 @@ export const StyledDashboardContainer = styled.div`
   background: ${colorDashboardBackground};
   width: 100%;
   min-height: 100%;
-  padding-top: ${spacing2};
+  padding: ${spacing2} 0;
 `;
 
 export const StyledFlexRowContainer = styled.div`

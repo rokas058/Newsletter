@@ -5,6 +5,7 @@ import { Header } from '@app/components/header';
 import { Footer } from '@app/components/footer/footer.tsx';
 import { NavigationService } from '@app/services/navigation-service.ts';
 import { FooterLogin } from '@app/components/footer/footer-login.tsx';
+import { StyledFooterWrapper } from '@app/components/footer/footer.styled.ts';
 
 const App: React.FC = () => {
   const location = useLocation();
@@ -14,8 +15,10 @@ const App: React.FC = () => {
   return (
     <>
       <Header />
-      <Outlet />
-      {loginPage ? <FooterLogin /> : <Footer />}
+      <StyledFooterWrapper>
+        <Outlet />
+        {loginPage ? <FooterLogin /> : <Footer />}
+      </StyledFooterWrapper>
     </>
   );
 };
