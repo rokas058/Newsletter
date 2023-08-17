@@ -2,7 +2,6 @@ package com.tietoevry.backend.service;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.tietoevry.backend.database.entity.NewsletterEntity;
@@ -62,9 +61,8 @@ public class NewsletterService {
     }
 
     public Newsletter getNewsletter(Long id) {
-        Optional<NewsletterEntity> newsletter = newsletterRepository.findById(id);
-
-        return newsletter.map(NewsletterMapper::toNewsletter)
+        return newsletterRepository.findById(id)
+            .map(NewsletterMapper::toNewsletter)
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found by id " + id));
     }
 

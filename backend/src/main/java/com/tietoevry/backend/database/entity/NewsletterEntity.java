@@ -36,5 +36,5 @@ public class NewsletterEntity {
     private List<PageEntity> pages;
     @JsonIgnore
     @OneToMany(mappedBy = "newsletter", cascade = CascadeType.ALL)
-    private List<RecommendationEntity> recommendation;
+    private List<RecommendationEntity> recommendations;
 }

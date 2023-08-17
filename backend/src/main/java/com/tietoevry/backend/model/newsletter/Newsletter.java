@@ -3,8 +3,8 @@ package com.tietoevry.backend.model.newsletter;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.tietoevry.backend.database.entity.PageEntity;
-import com.tietoevry.backend.database.entity.RecommendationEntity;
+import com.tietoevry.backend.model.page.Page;
+import com.tietoevry.backend.model.recommendation.Recommendation;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Value;
@@ -20,6 +20,7 @@ public class Newsletter {
     LocalDate publishDate;
     @NotNull
     Boolean isPublished;
-    List<PageEntity> pages;
-    List<RecommendationEntity> recommendations;
+    List<Page> pages;
+    List<Recommendation> recommendations;
+
 }
