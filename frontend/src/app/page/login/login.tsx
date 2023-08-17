@@ -12,6 +12,7 @@ export const LoginPage = () => {
   const handleFinish = async (loginData: Backend.LoginData) => {
     await login(loginData);
     setUsername(loginData.username);
+    localStorage.clear();
   };
 
   return (

@@ -14,8 +14,8 @@ import { colorDarkBLue, colorYellow } from '@app/styles/colors.ts';
 import { ButtonNew } from '@app/components/button-new/button-new.tsx';
 
 interface HrCardInterface {
-  title: string;
-  text: string;
+  title?: string;
+  text?: string;
   image?: string;
   onEdit?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   onDelete?: (event: React.MouseEvent<HTMLButtonElement>) => void;

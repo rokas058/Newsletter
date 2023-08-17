@@ -618,6 +618,36 @@
         }
       }
     },
+    "/api/recommendations": {
+      "post": {
+        "tags": [
+          "recommendation-controller"
+        ],
+        "operationId": "createRecommendation",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRecommendationForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/page": {
       "get": {
         "tags": [
@@ -769,6 +799,66 @@
         }
       }
     },
+    "/volume": {
+      "get": {
+        "tags": [
+          "book-controller"
+        ],
+        "operationId": "getBook",
+        "parameters": [
+          {
+            "name": "title",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Volume"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/volume/{volumeId}": {
+      "get": {
+        "tags": [
+          "book-controller"
+        ],
+        "operationId": "getVolumeById",
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Volume"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/movie": {
       "get": {
         "tags": [
@@ -791,7 +881,105 @@
             "content": {
               "*/*": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/OmdbMovie"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movie/{movieId}": {
+      "get": {
+        "tags": [
+          "movie-controller"
+        ],
+        "operationId": "getMovieById",
+        "parameters": [
+          {
+            "name": "movieId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/OmdbMovie"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/recommendations/films/{newslleterId}": {
+      "get": {
+        "tags": [
+          "recommendation-controller"
+        ],
+        "operationId": "movies",
+        "parameters": [
+          {
+            "name": "newslleterId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OmdbMovie"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/recommendations/books/{newslleterId}": {
+      "get": {
+        "tags": [
+          "recommendation-controller"
+        ],
+        "operationId": "books",
+        "parameters": [
+          {
+            "name": "newslleterId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Volume"
+                  }
                 }
               }
             }
@@ -829,6 +1017,64 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/image/{sectionId}": {
+      "get": {
+        "tags": [
+          "image-controller"
+        ],
+        "operationId": "getImages",
+        "parameters": [
+          {
+            "name": "sectionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Image"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/recommendations/{entityId}": {
+      "delete": {
+        "tags": [
+          "recommendation-controller"
+        ],
+        "operationId": "deleteRecommendation",
+        "parameters": [
+          {
+            "name": "entityId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -930,6 +1176,26 @@
           }
         }
       },
+      "Image": {
+        "required": [
+          "id",
+          "image"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "image": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "byte"
+            }
+          }
+        }
+      },
       "Section": {
         "required": [
           "id"
@@ -945,6 +1211,12 @@
           },
           "text": {
             "type": "string"
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Image"
+            }
           }
         }
       },
@@ -998,23 +1270,8 @@
           "sections": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/SectionEntity"
+              "$ref": "#/components/schemas/Section"
             }
-          }
-        }
-      },
-      "SectionEntity": {
-        "type": "object",
-        "properties": {
-          "sectionId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "title": {
-            "type": "string"
-          },
-          "text": {
-            "type": "string"
           }
         }
       },
@@ -1033,6 +1290,13 @@
             "format": "date"
           }
         }
+      },
+      "MediaType": {
+        "type": "string",
+        "enum": [
+          "FILM",
+          "BOOK"
+        ]
       },
       "Newsletter": {
         "required": [
@@ -1060,33 +1324,38 @@
           "pages": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/PageEntity"
+              "$ref": "#/components/schemas/Page"
+            }
+          },
+          "recommendations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Recommendation"
             }
           }
         }
       },
-      "PageEntity": {
+      "Recommendation": {
         "required": [
-          "title",
-          "type"
+          "apiId",
+          "id",
+          "mediaType",
+          "title"
         ],
         "type": "object",
         "properties": {
-          "pageId": {
+          "id": {
             "type": "integer",
             "format": "int64"
           },
           "title": {
             "type": "string"
           },
-          "type": {
-            "$ref": "#/components/schemas/Type"
+          "mediaType": {
+            "$ref": "#/components/schemas/MediaType"
           },
-          "sections": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SectionEntity"
-            }
+          "apiId": {
+            "type": "string"
           }
         }
       },
@@ -1153,6 +1422,32 @@
         "properties": {
           "username": {
             "type": "string"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Role"
+            }
+          }
+        }
+      },
+      "CreateRecommendationForm": {
+        "required": [
+          "mediaType",
+          "newsletterId",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "newsletterId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "mediaType": {
+            "$ref": "#/components/schemas/MediaType"
           }
         }
       },
@@ -1196,23 +1491,87 @@
           }
         }
       },
-      "Image": {
-        "required": [
-          "id",
-          "image"
-        ],
+      "ImageLinks": {
+        "type": "object",
+        "properties": {
+          "thumbnail": {
+            "type": "string"
+          }
+        }
+      },
+      "Volume": {
         "type": "object",
         "properties": {
           "id": {
+            "type": "string"
+          },
+          "entityId": {
             "type": "integer",
             "format": "int64"
           },
-          "image": {
+          "selfLink": {
+            "type": "string"
+          },
+          "volumeInfo": {
+            "$ref": "#/components/schemas/VolumeInfo"
+          }
+        }
+      },
+      "VolumeInfo": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "authors": {
             "type": "array",
             "items": {
-              "type": "string",
-              "format": "byte"
+              "type": "string"
             }
+          },
+          "description": {
+            "type": "string"
+          },
+          "averageRating": {
+            "type": "number",
+            "format": "double"
+          },
+          "imageLinks": {
+            "$ref": "#/components/schemas/ImageLinks"
+          },
+          "canonicalVolumeLink": {
+            "type": "string"
+          }
+        }
+      },
+      "OmdbMovie": {
+        "type": "object",
+        "properties": {
+          "entityId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "link": {
+            "type": "string"
+          },
+          "imdbID": {
+            "type": "string"
+          },
+          "Title": {
+            "type": "string"
+          },
+          "Director": {
+            "type": "string"
+          },
+          "Plot": {
+            "type": "string"
+          },
+          "imdbRating": {
+            "type": "number",
+            "format": "double"
+          },
+          "Poster": {
+            "type": "string"
           }
         }
       }

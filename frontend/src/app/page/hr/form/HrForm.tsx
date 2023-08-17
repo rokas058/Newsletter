@@ -8,16 +8,14 @@ import {
   StyledFormItem,
 } from '@app/page/hr/form/HrForm.styled.ts';
 
-export const HrForm = () => {
-  const normFile = (e: any) => {
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e?.fileList;
-  };
-  const onFinish = (values: any) => {
-    console.log('Received values of form: ', values);
-  };
+interface HrFormInterface {
+  onFinish?: any;
+  setImageState: (uint8Array: any) => void;
+  form: any;
+}
+
+export const HrForm = (props: HrFormInterface) => {
+  const { setImageState, onFinish, form } = props;
 
   return (
     <HrFormStyled
@@ -25,6 +23,7 @@ export const HrForm = () => {
       onFinish={onFinish}
       layout="vertical"
       size="middle"
+      form={form}
     >
       <StyledFormItem name="title">
         <Input placeholder="Title" />
@@ -33,12 +32,26 @@ export const HrForm = () => {
         <TextArea placeholder="Your text" />
       </StyledFormItem>
       <StyledFormItem>
-        <StyledFormItem
-          name="dragger"
-          valuePropName="fileList"
-          getValueFromEvent={normFile}
-        >
-          <Upload.Dragger beforeUpload={() => false} name="files" action="">
+        <StyledFormItem name="image">
+          <Upload.Dragger
+            beforeUpload={(fileList) => {
+              const reader = new FileReader();
+
+              reader.onload = (e) => {
+                if (e.target?.result) {
+                  const result = new Uint8Array(
+                    e.target.result as ArrayBufferLike,
+                  );
+
+                  setImageState(result);
+                }
+              };
+              reader.readAsArrayBuffer(fileList);
+
+              // Prevent upload
+              return false;
+            }}
+          >
             <p className="ant-upload-drag-icon">
               <InboxOutlined />
             </p>
@@ -54,7 +67,7 @@ export const HrForm = () => {
       <StyledButtonContainer>
         <Space>
           <Button type="primary" htmlType="submit">
-            Submit
+            Create card
           </Button>
           <Button htmlType="reset">Reset</Button>
         </Space>

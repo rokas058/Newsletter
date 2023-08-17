@@ -42,8 +42,8 @@ export const StyledImagesContainer = styled.img`
   flex: 30%;
   justify-content: flex-end;
   background-color: ${colorViolet};
-  width: 300px;
-  height: 60px;
+  width: auto;
+  height: 200px;
 `;
 
 export const StyledHrCardTitle = styled.h4`

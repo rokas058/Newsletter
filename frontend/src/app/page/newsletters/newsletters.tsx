@@ -172,14 +172,19 @@ export const NewslettersPage = () => {
                   newsletter.publishDate,
                 )
               }
-              onNavigate={() =>
+              onNavigate={() => {
                 navigate(
                   `${NavigationService.HOME_PATH_WITH_ID.replace(
                     ':id',
                     String(newsletter.id),
                   )}`,
-                )
-              }
+                );
+                sessionStorage.setItem('newsletter', String(newsletter.id));
+                sessionStorage.setItem(
+                  'pages',
+                  JSON.stringify(newsletter.pages),
+                );
+              }}
               // onDelete={(event) => handleDelete(newsletter.id, event)}
               onDelete={(event) => handlePopUpShow(event, newsletter.id)}
             />
