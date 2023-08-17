@@ -1,5 +1,5 @@
 import React, { FC, ReactElement } from 'react';
-import { DeleteOutlined, FormOutlined } from '@ant-design/icons';
+import { CheckOutlined, DeleteOutlined, FormOutlined } from '@ant-design/icons';
 
 import { ButtonNew } from '@app/components/button-new/button-new.tsx';
 import {
@@ -10,6 +10,7 @@ import {
 } from '@app/page/newsletters/newsletterCard/newsletter-card.styled.ts';
 import {
   colorDarkBLue,
+  colorVibrantGreen,
   colorWarmGrey,
   colorYellow,
 } from '@app/styles/colors.ts';
@@ -31,6 +32,12 @@ export const NewsletterCard: FC<NewsletterCardInterface> = (
 
   return (
     <StyledNewsletterCard onClick={onNavigate}>
+      {isPublished && (
+        <ButtonNew $backgroundColor={colorVibrantGreen} $color={colorDarkBLue}>
+          <CheckOutlined />
+        </ButtonNew>
+      )}
+
       <StyledTitleAndDateContainer>
         <h4>{title}</h4>
         <StyledDateCreated>{publishedDate}</StyledDateCreated>
