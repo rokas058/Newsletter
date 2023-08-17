@@ -1,5 +1,7 @@
 package com.tietoevry.backend.mapper.recommendation;
 
+import java.util.List;
+
 import com.tietoevry.backend.database.entity.RecommendationEntity;
 import com.tietoevry.backend.model.recommendation.Recommendation;
 import lombok.NoArgsConstructor;
@@ -14,5 +16,15 @@ public class RecommendationMapper {
             .mediaType(recommendation.getMediaType())
             .apiId(recommendation.getApiId())
             .build();
+    }
+
+    public static List<Recommendation> toRecommendations(List<RecommendationEntity> recommendationEntities) {
+        if (recommendationEntities == null) {
+            return null;
+        }
+
+        return recommendationEntities.stream()
+            .map(RecommendationMapper::toRecommendation)
+            .toList();
     }
 }

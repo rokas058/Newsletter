@@ -2,8 +2,8 @@ package com.tietoevry.backend.model.page;
 
 import java.util.List;
 
-import com.tietoevry.backend.database.entity.SectionEntity;
 import com.tietoevry.backend.database.entity.Type;
+import com.tietoevry.backend.model.section.Section;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Value;
@@ -17,5 +17,5 @@ public class Page {
     String title;
     @NotNull
     Type type;
-    List<SectionEntity> sections;
+    List<Section> sections;
 }
