@@ -10,8 +10,10 @@ export const StyledFooter = styled.div`
   color: ${colorWhite};
   padding: ${spacing2};
   background-image: url('${logoWhite}');
-  background-repeat: repeat;
-  background-size: contain;
+  background-repeat: repeat-x;
+  background-size: auto 30px;
+  box-sizing: border-box;
+  background-position-y: center;
 `;
 
 export const StyledFooterWrapper = styled.div`

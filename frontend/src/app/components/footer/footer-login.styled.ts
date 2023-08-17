@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { colorPrimary, colorWhite } from '@app/styles/colors.ts';
-import { spacing12, spacing2 } from '@app/styles/spacing.ts';
+import { spacing2 } from '@app/styles/spacing.ts';
 import logoWhite from '@app/components/footer/logo/logoWhite.png';
 
 export const StyledFooterLogin = styled.div`
@@ -10,9 +10,10 @@ export const StyledFooterLogin = styled.div`
   color: ${colorWhite};
   padding: ${spacing2};
   background-image: url('${logoWhite}');
-  background-repeat: repeat;
-  background-size: contain;
-  margin-top: ${spacing12};
+  background-repeat: repeat-x;
+  background-size: auto 30px;
+  box-sizing: border-box;
+  background-position-y: center;
   position: fixed;
   bottom: 0;
   left: 0;
