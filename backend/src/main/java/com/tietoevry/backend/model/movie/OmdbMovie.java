@@ -11,7 +11,7 @@ import lombok.extern.jackson.Jacksonized;
 public class OmdbMovie {
     @JsonProperty("imdbID")
     private String id;
-
+    private Long entityId;
     @JsonProperty("Title")
     private String title;
 

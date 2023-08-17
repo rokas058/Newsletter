@@ -34,6 +34,7 @@ public class OmdbApiService {
                 .block();
 
             validateMovieData(movie);
+            setMoiveLink(movie);
             return movie;
         } catch (WebClientResponseException e) {
             throw new ExternalServiceException("External service error while fetching by name");
@@ -52,7 +53,7 @@ public class OmdbApiService {
                 .block();
 
             validateMovieData(movie);
-
+            setMoiveLink(movie);
             return movie;
         } catch (WebClientResponseException.NotFound e) {
             throw new MovieNotFoundException("Movie ID " + movieId + " not found");
