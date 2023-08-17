@@ -36,7 +36,7 @@ export const HomePage = () => {
         isPublished={newsletter?.isPublished === true}
         setNewsLetter={setNewsletter}
       />
-      <NavigationDashboard newsLetter={newsletter} />
+      <NavigationDashboard />
     </>
   );
 };

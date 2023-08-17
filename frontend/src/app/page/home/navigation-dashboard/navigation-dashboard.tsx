@@ -1,5 +1,4 @@
 import { useParams } from 'react-router-dom';
-import { FC } from 'react';
 
 import {
   StyledDashboardContainer,
@@ -20,18 +19,8 @@ import jokeSectionImage from '@app/assets/icons/anekdotai.png';
 // Routes
 import { NavigationService } from '@app/services/navigation-service.ts';
 
-interface NavigationDashboardProps {
-  newsLetter: Backend.Newsletter | undefined;
-}
-
-export const NavigationDashboard: FC<NavigationDashboardProps> = (props) => {
+export const NavigationDashboard = () => {
   const { id } = useParams();
-
-  const { newsLetter } = props;
-
-  console.log(newsLetter);
-  console.log(id);
-  console.log(NavigationService.HOME_PATH_OFFTOPIC.replace(':id', String(id)));
 
   return (
     <StyledDashboardContainer>
@@ -40,17 +29,23 @@ export const NavigationDashboard: FC<NavigationDashboardProps> = (props) => {
           <NavigationCard
             title="Hr frontas"
             iconImage={hrFrontImage}
-            navigationURL={NavigationService.HR_PATH}
+            navigationURL={NavigationService.HR_PATH.replace(':id', String(id))}
           />
           <NavigationCard
             title="Vadovų Skyriaus Naujienos"
             iconImage={headDepartmentImage}
-            navigationURL={NavigationService.NEWS_PATH}
+            navigationURL={NavigationService.NEWS_PATH.replace(
+              ':id',
+              String(id),
+            )}
           />
           <NavigationCard
             title="Apžvalgystės"
             iconImage={travelStoriesImage}
-            navigationURL={NavigationService.TRAVEL_PATH}
+            navigationURL={NavigationService.TRAVEL_PATH.replace(
+              ':id',
+              String(id),
+            )}
           />
         </StyledFlexRowContainer>
 
@@ -58,17 +53,26 @@ export const NavigationDashboard: FC<NavigationDashboardProps> = (props) => {
           <NavigationCard
             title="Naujokai"
             iconImage={newTeamMembersImage}
-            navigationURL={NavigationService.NEWBIES_PATH}
+            navigationURL={NavigationService.NEWBIES_PATH.replace(
+              ':id',
+              String(id),
+            )}
           />
           <NavigationCard
             title="Ukraina"
             iconImage={ukraineImage}
-            navigationURL={NavigationService.UKRAINA_PATH}
+            navigationURL={NavigationService.UKRAINA_PATH.replace(
+              ':id',
+              String(id),
+            )}
           />
           <NavigationCard
             title="Atviros pozicijos"
             iconImage={vacancyImage}
-            navigationURL={NavigationService.VACANCIES_PATH}
+            navigationURL={NavigationService.VACANCIES_PATH.replace(
+              ':id',
+              String(id),
+            )}
           />
         </StyledFlexRowContainer>
 
@@ -76,17 +80,26 @@ export const NavigationDashboard: FC<NavigationDashboardProps> = (props) => {
           <NavigationCard
             title="Off topic"
             iconImage={offTopicImage}
-            navigationURL={`/home/${id}/hr`}
+            navigationURL={NavigationService.OFFTOPIC_PATH.replace(
+              ':id',
+              String(id),
+            )}
           />
           <NavigationCard
             title="Kalendorius"
             iconImage={calendarImage}
-            navigationURL={NavigationService.CALENDAR_PATH}
+            navigationURL={NavigationService.CALENDAR_PATH.replace(
+              ':id',
+              String(id),
+            )}
           />
           <NavigationCard
             title="Mediniai bajeriai"
             iconImage={jokeSectionImage}
-            navigationURL={NavigationService.JOKES_PATH}
+            navigationURL={NavigationService.JOKES_PATH.replace(
+              ':id',
+              String(id),
+            )}
           />
         </StyledFlexRowContainer>
       </StyledFlexColumnContainer>
