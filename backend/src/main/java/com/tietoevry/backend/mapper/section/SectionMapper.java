@@ -11,6 +11,7 @@ public class SectionMapper {
             .id(section.getSectionId())
             .title(section.getTitle())
             .text(section.getText())
+            .images(section.getImages())
             .build();
     }
 }

@@ -1,6 +1,9 @@
 package com.tietoevry.backend.controller;
 
-import com.tietoevry.backend.api.GoogleBooksClient;
+import java.util.Optional;
+
+import com.tietoevry.backend.model.book.Volume;
+import com.tietoevry.backend.service.GoogleBooksApiService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -10,15 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class BookController {
 
-    private final GoogleBooksClient googleBooksClient;
+    private final GoogleBooksApiService googleBooksApiService;
 
-    @GetMapping("/book")
-    public String getBook(@RequestParam String title) {
-        return googleBooksClient.findBookByTitle(title);
+    @GetMapping("/volume")
+    public Optional<Volume> getBook(@RequestParam String title) {
+        return googleBooksApiService.findBookByTitle(title);
     }
 
-    @GetMapping("/book/{bookId}")
-    public String getBookById(@RequestParam String bookId) {
-        return googleBooksClient.getBookById(bookId);
+    @GetMapping("/volume/{volumeId}")
+    public Volume getVolumeById(@RequestParam String bookId) {
+        return googleBooksApiService.getBookById(bookId);
     }
 }
