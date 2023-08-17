@@ -1,5 +1,5 @@
 import { Button } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useSessionContext } from '@app/app-context';
 import { NavigationService } from '@app/services/navigation-service.ts';
@@ -18,12 +18,13 @@ import {
 export const Header = () => {
   const { username } = useSessionContext();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = () => {
     navigate(NavigationService.LOGOUT_PATH);
   };
 
-  if (window.location.pathname === '/login') {
+  if (location.pathname === NavigationService.LOGIN_PATH) {
     return null;
   }
 
@@ -54,10 +55,7 @@ export const Header = () => {
           {username === 'admin' ? (
             <ButtonHome
               handleOnClick={() => {
-                if (
-                  window.location.pathname ===
-                  NavigationService.NEWSLETTERS_PATH
-                ) {
+                if (location.pathname === NavigationService.NEWSLETTERS_PATH) {
                   navigate(NavigationService.NEWSLETTERS_PATH);
                 }
                 navigate(-1);

@@ -417,14 +417,6 @@
               "type": "integer",
               "format": "int64"
             }
-          },
-          {
-            "name": "isPublished",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "boolean"
-            }
           }
         ],
         "responses": {
@@ -750,11 +742,11 @@
             "multipart/form-data": {
               "schema": {
                 "required": [
-                  "image"
+                  "imageFile"
                 ],
                 "type": "object",
                 "properties": {
-                  "image": {
+                  "imageFile": {
                     "type": "string",
                     "format": "binary"
                   }
@@ -770,6 +762,36 @@
               "*/*": {
                 "schema": {
                   "$ref": "#/components/schemas/Image"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movie": {
+      "get": {
+        "tags": [
+          "movie-controller"
+        ],
+        "operationId": "getMovie",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
                 }
               }
             }
@@ -981,35 +1003,7 @@
           }
         }
       },
-      "PageEntity": {
-        "required": [
-          "title",
-          "type"
-        ],
-        "type": "object",
-        "properties": {
-          "pageId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "title": {
-            "type": "string"
-          },
-          "type": {
-            "$ref": "#/components/schemas/Type"
-          },
-          "sections": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SectionEntity"
-            }
-          }
-        }
-      },
       "SectionEntity": {
-        "required": [
-          "page"
-        ],
         "type": "object",
         "properties": {
           "sectionId": {
@@ -1021,9 +1015,6 @@
           },
           "text": {
             "type": "string"
-          },
-          "page": {
-            "$ref": "#/components/schemas/PageEntity"
           }
         }
       },
@@ -1070,6 +1061,31 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PageEntity"
+            }
+          }
+        }
+      },
+      "PageEntity": {
+        "required": [
+          "title",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "pageId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/Type"
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SectionEntity"
             }
           }
         }

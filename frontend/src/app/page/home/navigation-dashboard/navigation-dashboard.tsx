@@ -1,3 +1,5 @@
+import { useParams } from 'react-router-dom';
+
 import {
   StyledDashboardContainer,
   StyledFlexColumnContainer,
@@ -17,62 +19,90 @@ import jokeSectionImage from '@app/assets/icons/anekdotai.png';
 // Routes
 import { NavigationService } from '@app/services/navigation-service.ts';
 
-export const NavigationDashboard = () => (
-  <StyledDashboardContainer>
-    <StyledFlexColumnContainer>
-      <StyledFlexRowContainer>
-        <NavigationCard
-          title="Hr frontas"
-          iconImage={hrFrontImage}
-          navigationURL={NavigationService.HR_PATH}
-        />
-        <NavigationCard
-          title="Vadovų Skyriaus Naujienos"
-          iconImage={headDepartmentImage}
-          navigationURL={NavigationService.NEWS_PATH}
-        />
-        <NavigationCard
-          title="Apžvalgystės"
-          iconImage={travelStoriesImage}
-          navigationURL={NavigationService.TRAVEL_PATH}
-        />
-      </StyledFlexRowContainer>
+export const NavigationDashboard = () => {
+  const { id } = useParams();
 
-      <StyledFlexRowContainer>
-        <NavigationCard
-          title="Naujokai"
-          iconImage={newTeamMembersImage}
-          navigationURL={NavigationService.NEWBIES_PATH}
-        />
-        <NavigationCard
-          title="Ukraina"
-          iconImage={ukraineImage}
-          navigationURL={NavigationService.UKRAINA_PATH}
-        />
-        <NavigationCard
-          title="Atviros pozicijos"
-          iconImage={vacancyImage}
-          navigationURL={NavigationService.VACANCIES_PATH}
-        />
-      </StyledFlexRowContainer>
+  return (
+    <StyledDashboardContainer>
+      <StyledFlexColumnContainer>
+        <StyledFlexRowContainer>
+          <NavigationCard
+            title="Hr frontas"
+            iconImage={hrFrontImage}
+            navigationURL={NavigationService.HR_PATH.replace(':id', String(id))}
+          />
+          <NavigationCard
+            title="Vadovų Skyriaus Naujienos"
+            iconImage={headDepartmentImage}
+            navigationURL={NavigationService.NEWS_PATH.replace(
+              ':id',
+              String(id),
+            )}
+          />
+          <NavigationCard
+            title="Apžvalgystės"
+            iconImage={travelStoriesImage}
+            navigationURL={NavigationService.TRAVEL_PATH.replace(
+              ':id',
+              String(id),
+            )}
+          />
+        </StyledFlexRowContainer>
 
-      <StyledFlexRowContainer>
-        <NavigationCard
-          title="Off topic"
-          iconImage={offTopicImage}
-          navigationURL={NavigationService.OFFTOPIC_PATH}
-        />
-        <NavigationCard
-          title="Kalendorius"
-          iconImage={calendarImage}
-          navigationURL={NavigationService.CALENDAR_PATH}
-        />
-        <NavigationCard
-          title="Mediniai bajeriai"
-          iconImage={jokeSectionImage}
-          navigationURL={NavigationService.JOKES_PATH}
-        />
-      </StyledFlexRowContainer>
-    </StyledFlexColumnContainer>
-  </StyledDashboardContainer>
-);
+        <StyledFlexRowContainer>
+          <NavigationCard
+            title="Naujokai"
+            iconImage={newTeamMembersImage}
+            navigationURL={NavigationService.NEWBIES_PATH.replace(
+              ':id',
+              String(id),
+            )}
+          />
+          <NavigationCard
+            title="Ukraina"
+            iconImage={ukraineImage}
+            navigationURL={NavigationService.UKRAINA_PATH.replace(
+              ':id',
+              String(id),
+            )}
+          />
+          <NavigationCard
+            title="Atviros pozicijos"
+            iconImage={vacancyImage}
+            navigationURL={NavigationService.VACANCIES_PATH.replace(
+              ':id',
+              String(id),
+            )}
+          />
+        </StyledFlexRowContainer>
+
+        <StyledFlexRowContainer>
+          <NavigationCard
+            title="Off topic"
+            iconImage={offTopicImage}
+            navigationURL={NavigationService.OFFTOPIC_PATH.replace(
+              ':id',
+              String(id),
+            )}
+          />
+          <NavigationCard
+            title="Kalendorius"
+            iconImage={calendarImage}
+            navigationURL={NavigationService.CALENDAR_PATH.replace(
+              ':id',
+              String(id),
+            )}
+          />
+          <NavigationCard
+            title="Mediniai bajeriai"
+            iconImage={jokeSectionImage}
+            navigationURL={NavigationService.JOKES_PATH.replace(
+              ':id',
+              String(id),
+            )}
+          />
+        </StyledFlexRowContainer>
+      </StyledFlexColumnContainer>
+    </StyledDashboardContainer>
+  );
+};

@@ -13,8 +13,4 @@ export const StyledFooter = styled.div`
   background-repeat: repeat;
   background-size: contain;
   margin-top: ${spacing12};
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
 `;
