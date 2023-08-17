@@ -10,7 +10,7 @@ import { spacing2 } from '@app/styles/spacing.ts';
 
 export const StyledBannerSection = styled.div`
   width: 100%;
-  height: 500px;
+  height: 600px;
   background-color: ${colorViolet};
   position: relative;
 `;
@@ -18,7 +18,7 @@ export const StyledBannerSection = styled.div`
 export const StyledBannerImage = styled.img`
   height: 100%;
   width: 100%;
-  object-fit: contain;
+  object-fit: fill;
 `;
 export const StyledPublishButton = styled(ButtonNew)<{
   $notPublished: boolean;
