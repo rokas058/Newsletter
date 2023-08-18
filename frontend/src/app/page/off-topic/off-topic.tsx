@@ -1,6 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
+import { PageTitle } from '@app/components/page-title/page-title.tsx';
+import { NotificationService } from '@app/services/notification-service.ts';
 import { recommendationsApiService } from '@app/api/service/recommendations-api-service.ts';
 import {
   StyledFormContainer,
@@ -13,8 +15,8 @@ import { SearchBookMovieForm } from '@app/page/off-topic/search-movie-book-form/
 
 export const OffTopicPage = () => {
   const { id } = useParams();
-  const [allBooks, setAllBooks] = useState([]);
-  const [allMovies, setAllMovies] = useState([]);
+  const [allBooks, setAllBooks] = useState<Backend.Volume[]>([]);
+  const [allMovies, setAllMovies] = useState<Backend.OmdbMovie[]>([]);
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -36,22 +38,40 @@ export const OffTopicPage = () => {
     fetchMovies();
   }, [id]);
 
+  const handleDelete = async (entityNumber: number) => {
+    try {
+      await recommendationsApiService.deleteRecommendation(entityNumber);
+      const movieData = await recommendationsApiService.getAllMovies(id);
+      const bookData = await recommendationsApiService.getAllBooks(id);
+
+      setAllMovies(movieData);
+      setAllBooks(bookData);
+    } catch (_err) {
+      NotificationService.error('Recommendation was not deleted');
+    }
+  };
+
   return (
     <StyledOffTopicContainer>
+      <PageTitle>OFF-TOPIC</PageTitle>
       <StyledHeading>Books Recommendations</StyledHeading>
 
       <StyledFormContainer>
-        <SearchBookMovieForm setMovies={setAllMovies} setBooks={setAllBooks} />
+        <SearchBookMovieForm
+          setMovies={setAllMovies}
+          setBooks={setAllBooks}
+          allBooks={allBooks}
+        />
         <StyledMoviesBooksContainer>
-          {allBooks?.map((book: any) => (
+          {allBooks?.map((book: Backend.Volume) => (
             <MovieBookCard
               key={book.entityId}
-              author={book.volumeInfo.authors[0]}
-              title={book.volumeInfo.title}
-              image={book.volumeInfo.imageLinks.thumbnail}
-              rating={book.volumeInfo.averageRating}
-              // description={book.volumeInfo.description}
-              link={book.volumeInfo.canonicalVolumeLink}
+              author={book?.volumeInfo?.authors?.[0]}
+              title={book?.volumeInfo?.title}
+              image={book?.volumeInfo?.imageLinks?.thumbnail}
+              rating={book?.volumeInfo?.averageRating}
+              link={book?.volumeInfo?.canonicalVolumeLink}
+              onDelete={() => handleDelete(book.entityId!)}
             />
           ))}
         </StyledMoviesBooksContainer>
@@ -59,15 +79,15 @@ export const OffTopicPage = () => {
 
       <StyledHeading>Movies Recommendations</StyledHeading>
       <StyledMoviesBooksContainer>
-        {allMovies?.map((movie: any) => (
+        {allMovies?.map((movie: Backend.OmdbMovie) => (
           <MovieBookCard
             key={movie.entityId}
             author={movie.Director}
             title={movie.Title}
             image={movie.Poster}
             rating={movie.imdbRating}
-            // description={movie.Plot}
             link={movie.link}
+            onDelete={() => handleDelete(movie.entityId!)}
           />
         ))}
       </StyledMoviesBooksContainer>

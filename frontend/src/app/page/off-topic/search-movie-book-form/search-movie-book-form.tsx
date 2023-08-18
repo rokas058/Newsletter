@@ -14,6 +14,7 @@ import { NotificationService } from '@app/services/notification-service.ts';
 interface SearchBookMovieFormProps {
   setBooks: (books: any) => void;
   setMovies: (movies: any) => void;
+  allBooks: Backend.Volume[];
 }
 
 export const SearchBookMovieForm: FC<SearchBookMovieFormProps> = (props) => {
@@ -21,7 +22,7 @@ export const SearchBookMovieForm: FC<SearchBookMovieFormProps> = (props) => {
   const [checkboxValue, setCheckboxValue] = useState<string>('');
   const { id } = useParams();
 
-  const { setBooks, setMovies } = props;
+  const { setBooks, setMovies, allBooks } = props;
   const handleSubmit = async () => {
     const formValues = {
       newsletterId: Number(id),
@@ -29,14 +30,24 @@ export const SearchBookMovieForm: FC<SearchBookMovieFormProps> = (props) => {
       mediaType: checkboxValue,
     };
 
+    const isBookTitleAlreadyExists = allBooks.find(
+      (book: any) =>
+        book.volumeInfo.title.replace(/\s/g, '').toUpperCase() ===
+        formValues.title.replace(/\s/g, '').toUpperCase(),
+    );
+
+    if (isBookTitleAlreadyExists) {
+      return;
+    }
+
     try {
       await recommendationsApiService.postRecommendation(formValues);
 
       const movies = await recommendationsApiService.getAllMovies(id);
       const books = await recommendationsApiService.getAllBooks(id);
 
-      setBooks(books);
       setMovies(movies);
+      setBooks(books);
     } catch (_err) {
       NotificationService.error('Recommendation was not created');
     }

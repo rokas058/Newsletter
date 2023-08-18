@@ -8,14 +8,22 @@ interface RecommendationProps {
   mediaType: string;
 }
 
-const getAllBooks = async (newsLetterId: string | undefined) => {
-  const response = await axios.get(`${baseUrl}/books/${newsLetterId}`);
+const getAllBooks = async (
+  newsLetterId: string | undefined,
+): Promise<Backend.Volume[]> => {
+  const response = await axios.get<Backend.Volume[]>(
+    `${baseUrl}/books/${newsLetterId}`,
+  );
 
   return response.data;
 };
 
-const getAllMovies = async (newsLetterId: string | undefined) => {
-  const response = await axios.get(`${baseUrl}/films/${newsLetterId}`);
+const getAllMovies = async (
+  newsLetterId: string | undefined,
+): Promise<Backend.OmdbMovie[]> => {
+  const response = await axios.get<Backend.OmdbMovie[]>(
+    `${baseUrl}/films/${newsLetterId}`,
+  );
 
   return response.data;
 };

@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Form, Modal } from 'antd';
 
+import { PageTitle } from '@app/components/page-title/page-title.tsx';
 import { HrForm } from '@app/page/hr/form/HrForm.tsx';
-import { StyledHrContainer, StyledHrHeader } from '@app/page/hr/hr.styled.ts';
+import { StyledHrContainer } from '@app/page/hr/hr.styled.ts';
 import { useGetPage } from '@app/page/hr/hooks/use-get-page.ts';
 import { HrCard } from '@app/page/hr/hrCard/hr-card.tsx';
 import { useDeleteSection } from '@app/page/hr/hooks/use-delete-section.ts';
@@ -49,7 +50,7 @@ export const HrPage = () => {
 
   return (
     <>
-      <StyledHrHeader>HR FRONTAS</StyledHrHeader>
+      <PageTitle>HR FRONTAS</PageTitle>
       <StyledHrContainer>
         {page?.sections?.map((section) => (
           <HrCard

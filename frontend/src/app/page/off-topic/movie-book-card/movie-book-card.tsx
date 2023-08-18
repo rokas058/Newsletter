@@ -16,26 +16,30 @@ import {
 import { colorBlack, colorYellow } from '@app/styles/colors.ts';
 
 interface MovieBookCardProps {
-  author: string;
-  title: string;
-  image: string;
-  rating: number;
+  author?: string;
+  title?: string;
+  image?: string;
+  rating?: number;
   description?: string;
-  link: string;
+  link?: string;
+  onDelete?: () => void;
 }
 
 export const MovieBookCard: FC<MovieBookCardProps> = (props) => {
-  const { author, title, image, rating, description, link } = props;
+  const { author, title, image, rating, description, link, onDelete } = props;
 
   return (
-    // <StyledNavLink to={link}>
     <StyledMoviesBookCard>
       <StyledButtonContainer>
-        <ButtonNew $backgroundColor={colorYellow} $color={colorBlack}>
+        <ButtonNew
+          $backgroundColor={colorYellow}
+          $color={colorBlack}
+          onClick={onDelete}
+        >
           <DeleteOutlined />
         </ButtonNew>
       </StyledButtonContainer>
-      <StyledNavLink to={link}>
+      <StyledNavLink to={link!}>
         <StyledImage src={image} />
       </StyledNavLink>
 
@@ -48,6 +52,5 @@ export const MovieBookCard: FC<MovieBookCardProps> = (props) => {
         <StyledDescription>{description}</StyledDescription>
       </StyledContent>
     </StyledMoviesBookCard>
-    // </StyledNavLink>
   );
 };
