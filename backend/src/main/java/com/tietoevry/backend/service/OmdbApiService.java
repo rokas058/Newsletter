@@ -1,68 +1,44 @@
 package com.tietoevry.backend.service;
 
-import com.tietoevry.backend.exceptions.ExternalServiceException;
 import com.tietoevry.backend.exceptions.MovieNotFoundException;
 import com.tietoevry.backend.model.movie.OmdbMovie;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.reactive.function.client.WebClientResponseException;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 public class OmdbApiService {
-    private WebClient webClient;
     @Value("${omdb.url}")
     private String apiUrl;
     @Value("${omdb.api.key}")
     private String apiKey;
 
-    @PostConstruct
-    public void init() {
-        this.webClient = WebClient.builder().baseUrl(apiUrl).build();
-    }
-
     public OmdbMovie searchMovieByName(String name) {
-        try {
-            OmdbMovie movie = webClient.get()
-                .uri(uriBuilder -> uriBuilder
-                    .queryParam("apikey", apiKey)
-                    .queryParam("t", name)
-                    .build())
-                .retrieve()
-                .bodyToMono(OmdbMovie.class)
-                .block();
+        RestTemplate restTemplate = new RestTemplate();
+        String url = apiUrl + "?apikey=" + apiKey + "&t=" + name;
+        OmdbMovie movie = restTemplate.exchange(url, HttpMethod.GET, null, OmdbMovie.class).getBody();
 
-            validateMovieData(movie);
-            setMoiveLink(movie);
-            return movie;
-        } catch (WebClientResponseException e) {
-            throw new ExternalServiceException("External service error while fetching by name");
+        if (movie != null) {
+            setMovieLink(movie);
         }
+        return movie;
     }
 
     public OmdbMovie getMovieById(String movieId) {
-        try {
-            OmdbMovie movie = webClient.get()
-                .uri(uriBuilder -> uriBuilder
-                    .queryParam("apikey", apiKey)
-                    .queryParam("i", movieId)
-                    .build())
-                .retrieve()
-                .bodyToMono(OmdbMovie.class)
-                .block();
+        RestTemplate restTemplate = new RestTemplate();
+        String url = apiUrl + "?apikey=" + apiKey + "&i=" + movieId;
 
-            validateMovieData(movie);
-            setMoiveLink(movie);
-            return movie;
-        } catch (WebClientResponseException.NotFound e) {
-            throw new MovieNotFoundException("Movie ID " + movieId + " not found");
-        } catch (WebClientResponseException e) {
-            throw new ExternalServiceException("External service error while fetching by ID");
+        OmdbMovie movie = restTemplate.exchange(url, HttpMethod.GET, null, OmdbMovie.class).getBody();
+
+        if (movie != null) {
+            setMovieLink(movie);
         }
+
+        return movie;
     }
 
-    public void setMoiveLink(OmdbMovie movie) {
+    public void setMovieLink(OmdbMovie movie) {
         movie.setLink("https://www.imdb.com/title/" + movie.getId());
     }
 

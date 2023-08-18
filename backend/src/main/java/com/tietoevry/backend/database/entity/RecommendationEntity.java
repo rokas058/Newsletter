@@ -1,6 +1,5 @@
 package com.tietoevry.backend.database.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -29,7 +28,6 @@ public class RecommendationEntity {
     @NotNull
     @Enumerated(EnumType.STRING)
     private MediaType mediaType;
-    @JsonIgnore
     @NotNull
     @ManyToOne
     @JoinColumn(name = "newsletter_id")

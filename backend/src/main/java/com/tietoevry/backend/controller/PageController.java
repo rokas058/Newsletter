@@ -20,11 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@PreAuthorize("hasRole('ADMIN')")
 @RequestMapping("/api/page")
 public class PageController {
     private final PageService pageService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public Page createPage(@Valid @RequestBody CreatePageForm createPageForm) {
         return pageService.createPage(createPageForm);
@@ -35,21 +35,18 @@ public class PageController {
         return pageService.getPages();
     }
 
-    @GetMapping(path = "/newsletter/{id}")
-    public List<Page> getPagesByNewsletterId(Long id) {
-        return pageService.getPagesByNewsletterId(id);
-    }
-
     @GetMapping(path = "/{id}")
     public Page getPage(@PathVariable Long id) {
         return pageService.getPage(id);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(path = "/{id}")
     public Page editPage(@PathVariable Long id, @Valid @RequestBody EditPageForm editPageForm) {
         return pageService.editPage(id, editPageForm);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping(path = "/{id}")
     public void deletePage(@PathVariable Long id) {
         pageService.deletePage(id);

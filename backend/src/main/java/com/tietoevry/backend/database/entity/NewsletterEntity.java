@@ -3,7 +3,6 @@ package com.tietoevry.backend.database.entity;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,10 +30,8 @@ public class NewsletterEntity {
     private LocalDate publishDate;
     @NotNull
     private Boolean isPublished;
-    @JsonIgnore
     @OneToMany(mappedBy = "newsletter", cascade = CascadeType.ALL)
     private List<PageEntity> pages;
-    @JsonIgnore
     @OneToMany(mappedBy = "newsletter", cascade = CascadeType.ALL)
     private List<RecommendationEntity> recommendations;
 }

@@ -11,9 +11,11 @@ import com.tietoevry.backend.database.repository.NewsletterRepository;
 import com.tietoevry.backend.exceptions.NewsletterNotFoundException;
 import com.tietoevry.backend.mapper.newsletter.CreateNewsletterFormMapper;
 import com.tietoevry.backend.mapper.newsletter.NewsletterMapper;
+import com.tietoevry.backend.mapper.page.PageMapper;
 import com.tietoevry.backend.model.newsletter.CreateNewsletterForm;
 import com.tietoevry.backend.model.newsletter.EditNewsletterForm;
 import com.tietoevry.backend.model.newsletter.Newsletter;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -41,7 +43,7 @@ public class NewsletterService {
         newsletterToCreate.setPages(pageEntities);
         NewsletterEntity createdNewsletter = newsletterRepository.save(newsletterToCreate);
 
-        
+
         return NewsletterMapper.toNewsletter(createdNewsletter);
     }
 
@@ -51,13 +53,7 @@ public class NewsletterService {
             Type.CALENDER, Type.TRAVELS, Type.RECOMMENDATIONS, Type.ANNOUNCEMENTS);
 
         return typeList.stream()
-            .map(type -> {
-                PageEntity page = new PageEntity();
-                page.setType(type);
-                page.setTitle(type.toString());
-                page.setNewsletter(newsletterToCreate);
-                return page;
-            })
+            .map(type -> PageMapper.toCreatPage(type, type.toString(), newsletterToCreate))
             .collect(Collectors.toList());
     }
 
@@ -88,6 +84,7 @@ public class NewsletterService {
         }
     }
 
+    @Transactional
     public Newsletter isPublishedNewsletter(Long id) {
         NewsletterEntity newsletter = newsletterRepository.findById(id)
             .orElseThrow(

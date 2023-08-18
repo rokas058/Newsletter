@@ -1,5 +1,6 @@
 package com.tietoevry.backend.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -23,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
@@ -33,7 +35,15 @@ public class SectionService {
     private final PageRepository pageRepository;
     private final ImageRepository imageRepository;
 
-    public Section createSection(CreateSectionForm createSectionForm) {
+    public Section createSection(String title, String text, Long pageId, List<MultipartFile> imageList) {
+        List<byte[]> imageBytesList = imageToBytes(imageList);
+        CreateSectionForm createSectionForm = CreateSectionForm.builder()
+            .title(title)
+            .text(text)
+            .pageId(pageId)
+            .images(imageBytesList)
+            .build();
+
         PageEntity page = pageRepository.findById(createSectionForm.getPageId())
             .orElseThrow(() -> new PageNotFoundException("Page not found with ID: " + createSectionForm.getPageId()));
 
@@ -69,7 +79,14 @@ public class SectionService {
     }
 
     @Transactional
-    public Section editSection(Long id, EditSectionForm editSectionForm) {
+    public Section editSection(String title, String text, Long id, List<MultipartFile> imageList) {
+        List<byte[]> imageBytesList = imageToBytes(imageList);
+
+        EditSectionForm editSectionForm = EditSectionForm.builder()
+            .title(title)
+            .text(text)
+            .images(imageBytesList)
+            .build();
         SectionEntity getSection = sectionRepository.findById(id)
             .orElseThrow(
                 () -> new SectionNotFoundException(String.format("Section with id %d does not exist.", id)));
@@ -91,6 +108,21 @@ public class SectionService {
 
     public void deleteSection(Long id) {
         sectionRepository.deleteById(id);
+    }
+
+    private List<byte[]> imageToBytes(List<MultipartFile> imageFiles) {
+        List<byte[]> imageBytesList = null;
+        if (imageFiles != null) {
+            imageBytesList = imageFiles.stream()
+                .map(file -> {
+                    try {
+                        return file.getBytes();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }).toList();
+        }
+        return imageBytesList;
     }
 
 }

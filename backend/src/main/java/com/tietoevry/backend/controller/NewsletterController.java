@@ -20,11 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@PreAuthorize("hasRole('ADMIN')")
 @RequestMapping("/api/newsletter")
 public class NewsletterController {
     private final NewsletterService newsletterService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public Newsletter createNewsletter(@Valid @RequestBody CreateNewsletterForm createNewsletterForm) {
         return newsletterService.createNewsletter(createNewsletterForm);
@@ -40,16 +40,19 @@ public class NewsletterController {
         return newsletterService.getNewsletter(id);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(path = "/{id}")
     public Newsletter editNewsletter(@PathVariable Long id, @Valid @RequestBody EditNewsletterForm editNewsletterForm) {
         return newsletterService.editNewsletter(id, editNewsletterForm);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping(path = "/{id}")
     public void deleteNewsletter(@PathVariable Long id) {
         newsletterService.deleteNewsletter(id);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(path = "publish/{id}")
     public Newsletter publishNewsletter(@PathVariable Long id) {
         return newsletterService.isPublishedNewsletter(id);

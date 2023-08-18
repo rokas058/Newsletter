@@ -1,10 +1,7 @@
 package com.tietoevry.backend.controller;
 
-import java.io.IOException;
 import java.util.List;
 
-import com.tietoevry.backend.model.section.CreateSectionForm;
-import com.tietoevry.backend.model.section.EditSectionForm;
 import com.tietoevry.backend.model.section.Section;
 import com.tietoevry.backend.service.SectionService;
 import lombok.RequiredArgsConstructor;
@@ -22,38 +19,19 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequiredArgsConstructor
-@PreAuthorize("hasRole('ADMIN')")
 @RequestMapping("/api/section")
 public class SectionController {
     private final SectionService sectionService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Section createSection(
         @RequestParam(value = "title", required = false) String title,
         @RequestParam(value = "text", required = false) String text,
         @RequestParam(value = "image", required = false) List<MultipartFile> imageFiles,
         @RequestParam("pageId") Long pageId
-    ) throws IOException {
-        List<byte[]> imageBytesList = null;
-        if (imageFiles != null) {
-            imageBytesList = imageFiles.stream()
-                .map(file -> {
-                    try {
-                        return file.getBytes();
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                }).toList();
-        }
-
-        CreateSectionForm createSectionForm = CreateSectionForm.builder()
-            .title(title)
-            .text(text)
-            .pageId(pageId)
-            .images(imageBytesList)
-            .build();
-
-        return sectionService.createSection(createSectionForm);
+    ) {
+        return sectionService.createSection(title, text, pageId, imageFiles);
     }
 
     @GetMapping
@@ -66,7 +44,7 @@ public class SectionController {
         return sectionService.getSection(id);
     }
 
-    //fixme
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(path = "/{id}",
         consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Section editSection(
@@ -74,30 +52,14 @@ public class SectionController {
         @RequestParam(value = "title", required = false) String title,
         @RequestParam(value = "text", required = false) String text,
         @RequestParam(value = "image", required = false) List<MultipartFile> imageFiles
-    ) throws IOException {
-        List<byte[]> imageBytesList = null;
-        if (imageFiles != null) {
-            imageBytesList = imageFiles.stream()
-                .map(file -> {
-                    try {
-                        return file.getBytes();
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                }).toList();
-        }
-
-        EditSectionForm editSectionForm = EditSectionForm.builder()
-            .title(title)
-            .text(text)
-            .images(imageBytesList)
-            .build();
-
-        return sectionService.editSection(id, editSectionForm);
+    ) {
+        return sectionService.editSection(title, text, id, imageFiles);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping(path = "/{id}")
     public void deleteSection(@PathVariable Long id) {
         sectionService.deleteSection(id);
     }
+
 }

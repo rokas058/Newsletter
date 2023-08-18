@@ -2,7 +2,9 @@ package com.tietoevry.backend.mapper.page;
 
 import java.util.List;
 
+import com.tietoevry.backend.database.entity.NewsletterEntity;
 import com.tietoevry.backend.database.entity.PageEntity;
+import com.tietoevry.backend.database.entity.Type;
 import com.tietoevry.backend.mapper.section.SectionMapper;
 import com.tietoevry.backend.model.page.Page;
 import lombok.NoArgsConstructor;
@@ -16,6 +18,14 @@ public class PageMapper {
             .title(page.getTitle())
             .type(page.getType())
             .sections(SectionMapper.toSections(page.getSections()))
+            .build();
+    }
+
+    public static PageEntity toCreatPage(Type type, String title, NewsletterEntity newsletter) {
+        return PageEntity.builder()
+            .type(type)
+            .title(title)
+            .newsletter(newsletter)
             .build();
     }
 

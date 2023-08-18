@@ -11,5 +11,6 @@ public interface ImageRepository extends JpaRepository<ImageEntity, Long> {
 
     void deleteAllBySection_SectionId(Long sectionId);
 
+    // TODO nereikalingas
     List<ImageEntity> findAllBySection_SectionId(Long sectionId);
 }

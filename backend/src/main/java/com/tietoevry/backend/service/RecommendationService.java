@@ -9,9 +9,11 @@ import com.tietoevry.backend.database.entity.RecommendationEntity;
 import com.tietoevry.backend.database.repository.NewsletterRepository;
 import com.tietoevry.backend.database.repository.RecommendationRepository;
 import com.tietoevry.backend.mapper.recommendation.CreateRecommendationMapper;
+import com.tietoevry.backend.mapper.recommendation.RecommendationMapper;
 import com.tietoevry.backend.model.book.Volume;
 import com.tietoevry.backend.model.movie.OmdbMovie;
 import com.tietoevry.backend.model.recommendation.CreateRecommendationForm;
+import com.tietoevry.backend.model.recommendation.Recommendation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -25,7 +27,7 @@ public class RecommendationService {
     private final OmdbApiService movieService;
     private final GoogleBooksApiService bookService;
 
-    public OmdbMovie createRecommendationByMovie(CreateRecommendationForm createRecommendation) {
+    public Recommendation createRecommendationByMovie(CreateRecommendationForm createRecommendation) {
         NewsletterEntity newsletter = newsletterRepository.findById(createRecommendation.getNewsletterId())
             .orElseThrow();
         OmdbMovie movie = movieService.searchMovieByName(createRecommendation.getTitle());
@@ -35,14 +37,13 @@ public class RecommendationService {
         recommendation.setApiId(movie.getId());
         recommendation.setNewsletter(newsletter);
         RecommendationEntity recommendationEntity = recommendationsRepository.save(recommendation);
-        movie.setEntityId(recommendationEntity.getRecommendationsId());
-        return movie;
+        return RecommendationMapper.toRecommendation(recommendationEntity);
     }
 
-    public Volume createRecommendationByBook(CreateRecommendationForm createRecommendation) {
+    public Recommendation createRecommendationByBook(CreateRecommendationForm createRecommendation) {
         NewsletterEntity newsletter = newsletterRepository.findById(createRecommendation.getNewsletterId())
             .orElseThrow();
-        Optional<Volume> optionalBook = bookService.findBookByTitle(createRecommendation.getTitle());
+        Optional<Volume> optionalBook = bookService.getBookByTitle(createRecommendation.getTitle());
         if (optionalBook.isPresent()) {
             Volume book = optionalBook.get();
             RecommendationEntity recommendation =
@@ -51,8 +52,7 @@ public class RecommendationService {
             recommendation.setApiId(book.getId());
             recommendation.setNewsletter(newsletter);
             RecommendationEntity recommendationEntity = recommendationsRepository.save(recommendation);
-            book.setEntityId(recommendationEntity.getRecommendationsId());
-            return book;
+            return RecommendationMapper.toRecommendation(recommendationEntity);
         }
         return null;
     }

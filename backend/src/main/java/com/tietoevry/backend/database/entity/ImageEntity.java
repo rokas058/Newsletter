@@ -1,6 +1,5 @@
 package com.tietoevry.backend.database.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,7 +28,6 @@ public class ImageEntity {
     @Lob
     private byte[] image;
 
-    @JsonIgnore
     @NotNull
     @ManyToOne
     @JoinColumn(name = "section_id")
