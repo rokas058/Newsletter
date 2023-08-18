@@ -6,7 +6,8 @@ import { colorMarron, colorPeach, colorYellow } from '@app/styles/colors.ts';
 import { spacing0, spacing2, spacing4 } from '@app/styles/spacing.ts';
 
 export const StyledMoviesBookCard = styled.div`
-  max-width: 250px;
+  width: 250px;
+  min-width: 250px;
   height: 100%;
   background-color: ${colorPeach}70;
   box-shadow: 10px 10px 20px -14px rgb(0 0 0 / 65%);
@@ -17,6 +18,11 @@ export const StyledMoviesBookCard = styled.div`
   justify-content: space-between;
   padding: ${spacing4} 0;
   position: relative;
+
+  &:hover {
+    border: 3px solid ${colorYellow};
+    cursor: pointer;
+  }
 `;
 
 export const StyledHeading = styled.h1`
@@ -24,20 +30,17 @@ export const StyledHeading = styled.h1`
 `;
 
 export const StyledNavLink = styled(NavLink)`
-  max-width: 60%;
+  width: 70%;
   min-height: 70%;
+  text-decoration: none;
 `;
 
 export const StyledImage = styled.img`
-  max-width: 100%;
+  width: 100%;
   height: 100%;
   border-radius: 10px;
   box-shadow: 10px 10px 20px -14px rgb(0 0 0 / 65%);
   object-fit: cover;
-
-  &:hover {
-    border: 3px solid ${colorYellow};
-  }
 `;
 
 export const StyledContent = styled.div`
@@ -45,6 +48,7 @@ export const StyledContent = styled.div`
   flex-direction: column;
   align-items: center;
   gap: ${spacing0};
+  padding: ${spacing0};
 `;
 
 export const StyledAuthor = styled.h6`
@@ -53,6 +57,7 @@ export const StyledAuthor = styled.h6`
 export const StyledTitle = styled.h5`
   margin: 0;
   text-transform: uppercase;
+  text-align: center;
 `;
 
 export const StyledRate = styled(Rate)`

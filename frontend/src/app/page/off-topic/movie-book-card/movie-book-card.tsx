@@ -20,7 +20,7 @@ interface MovieBookCardProps {
   title: string;
   image: string;
   rating: number;
-  description: string;
+  description?: string;
   link: string;
 }
 
@@ -28,6 +28,7 @@ export const MovieBookCard: FC<MovieBookCardProps> = (props) => {
   const { author, title, image, rating, description, link } = props;
 
   return (
+    // <StyledNavLink to={link}>
     <StyledMoviesBookCard>
       <StyledButtonContainer>
         <ButtonNew $backgroundColor={colorYellow} $color={colorBlack}>
@@ -37,14 +38,16 @@ export const MovieBookCard: FC<MovieBookCardProps> = (props) => {
       <StyledNavLink to={link}>
         <StyledImage src={image} />
       </StyledNavLink>
+
       <StyledContent>
         <StyledAuthor>{author}</StyledAuthor>
         <StyledTitle>{title}</StyledTitle>
         <div>
-          <StyledRate value={rating} />
+          <StyledRate value={rating} disabled={true} />
         </div>
         <StyledDescription>{description}</StyledDescription>
       </StyledContent>
     </StyledMoviesBookCard>
+    // </StyledNavLink>
   );
 };

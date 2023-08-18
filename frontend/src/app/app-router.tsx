@@ -118,7 +118,7 @@ export const appRouter = createBrowserRouter(
           }
         />
         <Route
-          path={NavigationService.HOME_PATH_OFFTOPIC}
+          path={NavigationService.OFFTOPIC_PATH}
           element={
             <RequireAuth>
               <OffTopicPage />

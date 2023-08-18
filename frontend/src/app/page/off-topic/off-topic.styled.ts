@@ -21,5 +21,5 @@ export const StyledMoviesBooksContainer = styled.div`
   display: flex;
   gap: ${spacing4};
   background-color: ${colorViolet}40;
-  overflow: scroll;
+  overflow-x: scroll;
 `;

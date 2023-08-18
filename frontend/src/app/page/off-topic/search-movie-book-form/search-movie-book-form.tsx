@@ -1,25 +1,45 @@
+import { FC, useState } from 'react';
 import { Button, Form, Radio } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import {
   StyledBookMovieFrom,
   StyledInput,
   StyledRadioGroup,
 } from '@app/page/off-topic/search-movie-book-form/search-movie-book-form.styled.ts';
+import { recommendationsApiService } from '@app/api/service/recommendations-api-service.ts';
+import { NotificationService } from '@app/services/notification-service.ts';
 
-export const SearchBookMovieForm = () => {
+interface SearchBookMovieFormProps {
+  setBooks: (books: any) => void;
+  setMovies: (movies: any) => void;
+}
+
+export const SearchBookMovieForm: FC<SearchBookMovieFormProps> = (props) => {
   const [titleValue, setTitle] = useState<string>('');
   const [checkboxValue, setCheckboxValue] = useState<string>('');
+  const { id } = useParams();
 
-  const handleSubmit = () => {
+  const { setBooks, setMovies } = props;
+  const handleSubmit = async () => {
     const formValues = {
-      // newsLetterId: id,
+      newsletterId: Number(id),
       title: titleValue,
-      checkbox: checkboxValue,
+      mediaType: checkboxValue,
     };
 
-    console.log(formValues);
+    try {
+      await recommendationsApiService.postRecommendation(formValues);
+
+      const movies = await recommendationsApiService.getAllMovies(id);
+      const books = await recommendationsApiService.getAllBooks(id);
+
+      setBooks(books);
+      setMovies(movies);
+    } catch (_err) {
+      NotificationService.error('Recommendation was not created');
+    }
   };
 
   return (
