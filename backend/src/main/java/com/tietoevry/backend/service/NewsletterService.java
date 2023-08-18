@@ -41,6 +41,7 @@ public class NewsletterService {
         newsletterToCreate.setPages(pageEntities);
         NewsletterEntity createdNewsletter = newsletterRepository.save(newsletterToCreate);
 
+        
         return NewsletterMapper.toNewsletter(createdNewsletter);
     }
 
