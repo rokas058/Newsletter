@@ -16,7 +16,7 @@ import { ButtonNew } from '@app/components/button-new/button-new.tsx';
 interface HrCardInterface {
   title?: string;
   text?: string;
-  image?: string;
+  image?: string | undefined;
   onEdit?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   onDelete?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }

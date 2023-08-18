@@ -34,19 +34,17 @@ export const HrForm = (props: HrFormInterface) => {
       <StyledFormItem>
         <StyledFormItem name="image">
           <Upload.Dragger
-            beforeUpload={(fileList) => {
+            beforeUpload={(file) => {
               const reader = new FileReader();
 
               reader.onload = (e) => {
-                if (e.target?.result) {
-                  const result = new Uint8Array(
-                    e.target.result as ArrayBufferLike,
-                  );
+                if (e.target?.result instanceof ArrayBuffer) {
+                  const result = new Uint8Array(e.target.result);
 
                   setImageState(result);
                 }
               };
-              reader.readAsArrayBuffer(fileList);
+              reader.readAsArrayBuffer(file);
 
               // Prevent upload
               return false;

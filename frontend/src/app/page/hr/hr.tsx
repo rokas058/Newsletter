@@ -36,8 +36,9 @@ export const HrPage = () => {
 
   const handleOnFinish = async (values: any) => {
     await addSection(values);
-    await getPage(pageId);
     form.resetFields();
+    setUploadedImage([]);
+    await getPage(pageId);
   };
 
   useEffect(() => {
@@ -56,8 +57,9 @@ export const HrPage = () => {
             title={section.title}
             text={section.text}
             image={
-              section.images &&
-              'data:image/png;base64,' + section.images[0].image
+              section.images?.length === 0
+                ? ''
+                : 'data:image/png;base64,' + section.images?.[0]?.image
             }
             onDelete={() => {
               handleOnDelete(section.id);
