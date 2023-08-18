@@ -11,5 +11,4 @@ export const StyledHrContainer = styled.div`
   justify-content: center;
   max-width: 100%;
   flex-direction: column;
-  height: 100vh;
 `;

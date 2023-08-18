@@ -1,25 +1,17 @@
 import styled from 'styled-components';
 
-import {
-  colorPrimary,
-  colorViolet,
-  colorWhite,
-  colorYellow,
-} from '@app/styles/colors.ts';
+import { colorPrimary, colorViolet, colorWhite } from '@app/styles/colors.ts';
 import { spacing0, spacing2, spacing4 } from '@app/styles/spacing.ts';
 
 export const StyledHrCard = styled.div`
   align-items: center;
   border: 1px solid ${colorViolet};
+  border-radius: 15px;
   display: flex;
-  width: 80%;
+  width: 60%;
   padding: ${spacing0} ${spacing2} ${spacing4} ${spacing2};
   background-color: ${colorWhite};
   margin: ${spacing0} 0;
-
-  &:hover {
-    border: 4px solid ${colorYellow};
-  }
 `;
 
 export const StyledHrCardContent = styled.div`
@@ -32,7 +24,7 @@ export const StyledHrCardContent = styled.div`
 export const StyledTitleTextContainer = styled.div`
   flex: 70%;
   flex-grow: 1;
-  padding-right: 200px;
+  padding: 50px;
   width: 300px;
 `;
 
@@ -41,9 +33,10 @@ export const StyledImagesContainer = styled.img`
   display: flex;
   flex: 30%;
   justify-content: flex-end;
-  background-color: ${colorViolet};
-  width: auto;
-  height: 200px;
+  background-color: ${colorWhite};
+  max-width: 442px;
+  max-height: 442px;
+  padding: 20px;
 `;
 
 export const StyledHrCardTitle = styled.h4`

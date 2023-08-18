@@ -17,4 +17,8 @@ export const StyledButton = styled.button<ColorButtonProps>`
   & * {
     font-size: 20px;
   }
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
