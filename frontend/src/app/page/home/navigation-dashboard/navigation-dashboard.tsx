@@ -26,7 +26,7 @@ export const NavigationDashboard = () => {
       <SocialMediaIcons />
       <StyledColorContainer>
         <StyledDashboardContainer>
-          <StyledFlexRowContainer $height="300px">
+          <StyledFlexRowContainer $height="320px">
             <NavigationCard
               width="100%"
               imageSrc={hrImage}

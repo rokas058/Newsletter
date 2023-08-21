@@ -1,10 +1,4 @@
-import {
-  StyledPageTitle,
-  StyledPageTitleContainer,
-} from '@app/page/newbies/newbies.styled.ts';
+import { PageLayout } from '@app/components/page-layout/page-layout.tsx';
+import { HrForm } from '@app/page/hr/form/HrForm.tsx';
 
-export const NewsPage = () => (
-  <StyledPageTitleContainer>
-    <StyledPageTitle>VADOVŲ SKYRIAUS NAUJIENOS</StyledPageTitle>
-  </StyledPageTitleContainer>
-);
+export const NewsPage = () => <PageLayout childrenForm={<HrForm />} />;

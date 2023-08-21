@@ -7,15 +7,17 @@ import {
   StyledButtonContainer,
   StyledFormItem,
 } from '@app/page/hr/form/HrForm.styled.ts';
+import { StyledLabel } from '@app/page/hr/hr.styled.ts';
 
 interface HrFormInterface {
   onFinish?: any;
-  setImageState: (uint8Array: any) => void;
-  form: any;
+  setImageState?: (uint8Array: any) => void;
+  form?: any;
+  topicTitle?: string;
 }
 
 export const HrForm = (props: HrFormInterface) => {
-  const { setImageState, onFinish, form } = props;
+  const { setImageState, onFinish, form, topicTitle } = props;
 
   return (
     <HrFormStyled
@@ -25,11 +27,14 @@ export const HrForm = (props: HrFormInterface) => {
       size="middle"
       form={form}
     >
+      <h2>Create {topicTitle} Card</h2>
       <StyledFormItem name="title">
-        <Input placeholder="Title" />
+        <StyledLabel>Title</StyledLabel>
+        <Input placeholder="Enter title..." />
       </StyledFormItem>
       <StyledFormItem name="text">
-        <TextArea placeholder="Your text" />
+        <StyledLabel>Description</StyledLabel>
+        <TextArea placeholder="Enter your text..." />
       </StyledFormItem>
       <StyledFormItem>
         <StyledFormItem name="image">
@@ -41,7 +46,7 @@ export const HrForm = (props: HrFormInterface) => {
                 if (e.target?.result instanceof ArrayBuffer) {
                   const result = new Uint8Array(e.target.result);
 
-                  setImageState(result);
+                  setImageState!(result);
                 }
               };
               reader.readAsArrayBuffer(file);
@@ -65,7 +70,7 @@ export const HrForm = (props: HrFormInterface) => {
       <StyledButtonContainer>
         <Space>
           <Button type="primary" htmlType="submit">
-            Create card
+            Create Card
           </Button>
           <Button htmlType="reset">Reset</Button>
         </Space>

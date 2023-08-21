@@ -4,7 +4,7 @@ export const colorRed = '#ff0000';
 export const colorViolet = '#B1B5CE';
 export const colorViolet40 = '#B1B5CE40';
 export const colorPeach = '#EACBBB';
-
+export const colorPeach40 = '#EACBBB40';
 export const colorDarkBLue = '#071D49';
 
 export const colorMarron = '#633231';

@@ -33,7 +33,7 @@ export const StyledContentContainer = styled.div`
   width: 90%;
   padding: ${spacing2};
 `;
-export const StyledHeading = styled.h3`
+export const StyledHeading = styled.h4`
   margin-top: ${spacing0};
   text-transform: uppercase;
 `;

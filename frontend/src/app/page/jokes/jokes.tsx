@@ -1,10 +1,6 @@
-import {
-  StyledPageTitle,
-  StyledPageTitleContainer,
-} from '@app/page/newbies/newbies.styled.ts';
+import { PageLayout } from '@app/components/page-layout/page-layout.tsx';
+import { HrForm } from '@app/page/hr/form/HrForm.tsx';
 
 export const JokesPage = () => (
-  <StyledPageTitleContainer>
-    <StyledPageTitle>MEDINIAI BAJERIAI</StyledPageTitle>
-  </StyledPageTitleContainer>
+  <PageLayout childrenForm={<HrForm topicTitle="Wooden Jokes" />} />
 );

@@ -7,7 +7,7 @@ export const StyledColorContainer = styled.div`
   background-color: ${colorViolet40};
 `;
 export const StyledDashboardContainer = styled.div`
-  width: 70%;
+  width: 80%;
   height: 100%;
   display: flex;
   flex-direction: column;

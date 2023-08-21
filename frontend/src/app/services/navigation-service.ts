@@ -17,4 +17,5 @@ export class NavigationService {
   public static readonly EDIT_USER_PATH = `${NavigationService.USERS_PATH}/edit/:userId`;
   public static readonly ADD_USER_PATH = `${NavigationService.USERS_PATH}/add`;
   public static readonly NEWSLETTERS_PATH = '/newsletters';
+  public static readonly CAREER_PAGE: 'https://www.tietoevry.com/en/careers/search-our-jobs/?country=Lithuania&city=&area=&role=&organization=&q=';
 }
