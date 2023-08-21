@@ -2,14 +2,14 @@ package com.tietoevry.backend.mapper.event;
 
 import com.tietoevry.backend.database.entity.EventEntity;
 import com.tietoevry.backend.database.entity.EventType;
-import com.tietoevry.backend.model.event.CreateEventForm;
+import com.tietoevry.backend.model.event.EventForm;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class CreateEventFormMapper {
+public class EventFormMapper {
 
-    public static EventEntity toEventEntity(CreateEventForm event, EventType eventType) {
+    public static EventEntity toEventEntity(EventForm event, EventType eventType) {
         return EventEntity.builder()
             .title(event.getTitle())
             .startDate(event.getStartDate())

@@ -27,7 +27,7 @@ public class CreateUserForm {
     LocalDate birthday = LocalDate.parse("2018-05-05");
     @NotNull
     //Fixme
-    boolean confirmBirthday = false;
+    boolean confirmBirthday = true;
     @NotNull
     //Fixme
     String password = "1234";
