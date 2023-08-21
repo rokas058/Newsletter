@@ -1,30 +1,35 @@
-import React from 'react';
+import { FC, ReactElement } from 'react';
 
 import {
-  StyledIconImage,
-  StyledImageContainer,
+  StyledContentContainer,
+  StyledHeading,
   StyledNavigationCard,
-  StyledNavLink,
-  StyledSectionTitle,
-} from '@app/page/home/navigation-card/navigation-card.styled.ts';
+  StyledNavImage,
+  StyledSpan,
+} from './navigation-card.styled.ts';
 
 interface NavigationCardProps {
-  title: string;
-  iconImage: string;
-  navigationURL: string;
+  imageSrc: string;
+  imageSrcName: string;
+  heading: string;
+  description?: string;
+  navigationUrl: string;
+  width: string;
 }
 
-export const NavigationCard: React.FC<NavigationCardProps> = (props) => {
-  const { title, iconImage, navigationURL } = props;
+export const NavigationCard: FC<NavigationCardProps> = (
+  props,
+): ReactElement => {
+  const { imageSrc, imageSrcName, heading, description, navigationUrl, width } =
+    props;
 
   return (
-    <StyledNavigationCard>
-      <StyledNavLink to={navigationURL}>
-        <StyledImageContainer>
-          <StyledIconImage src={iconImage} alt="hr-front-section" />
-        </StyledImageContainer>
-        <StyledSectionTitle>{title}</StyledSectionTitle>
-      </StyledNavLink>
+    <StyledNavigationCard to={navigationUrl} $width={width}>
+      <StyledNavImage src={imageSrc} alt={imageSrcName} />
+      <StyledContentContainer>
+        <StyledHeading>{heading}</StyledHeading>
+        <StyledSpan>{description}</StyledSpan>
+      </StyledContentContainer>
     </StyledNavigationCard>
   );
 };

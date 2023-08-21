@@ -7,7 +7,7 @@ import {
   StyledBannerSection,
   StyledPublishButton,
 } from '@app/page/home/banner/banner.styled.ts';
-import bannerImage from '@app/assets/banner-image/banner1.png';
+import bannerImage from '@app/assets/banner-image/banner.png';
 import { colorVibrantGreen, colorWhite } from '@app/styles/colors.ts';
 import { newsLettersApiService } from '@app/api/service/newsletter-api-service.ts';
 import { NotificationService } from '@app/services/notification-service.ts';

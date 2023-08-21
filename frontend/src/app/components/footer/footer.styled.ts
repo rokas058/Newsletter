@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { spacing2 } from '@app/styles/spacing.ts';
 import { colorPrimary, colorWhite } from '@app/styles/colors.ts';
-import logoWhite from '@app/components/footer/logo/logoWhite.png';
+import logoWhite from '@app/assets/logo/logoWhite.png';
 
 export const StyledFooter = styled.div`
   height: 48px;

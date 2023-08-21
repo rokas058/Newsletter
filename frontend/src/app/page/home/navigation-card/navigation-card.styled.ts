@@ -1,47 +1,42 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
-import {
-  colorPrimary,
-  colorVibrantGreen,
-  colorViolet,
-} from '@app/styles/colors.ts';
+import { spacing0, spacing2 } from '@app/styles/spacing.ts';
+import { colorBlack, colorWhite, colorYellow } from '@app/styles/colors.ts';
+import { font12 } from '@app/styles/fonts.ts';
 
-export const StyledNavigationCard = styled.div`
-  width: 100%;
-  height: 300px;
-  background-color: ${colorViolet};
+export const StyledNavigationCard = styled(NavLink)<{ $width: string }>`
+  width: ${(props) => props.$width};
+  height: 100%;
+  border-radius: ${spacing2};
+  padding: 20px;
+  box-shadow: 5px 6px 16px -5px rgb(0 0 0 / 75%);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  justify-content: start;
+  position: relative;
+  background-color: ${colorWhite};
+  text-decoration: none;
+  color: ${colorBlack};
 
   &:hover {
-    border: 5px solid ${colorVibrantGreen};
+    outline: 5px solid ${colorYellow};
   }
 `;
-
-export const StyledNavLink = styled(NavLink)`
-  text-decoration: none;
-  display: grid;
-  place-items: center;
+export const StyledNavImage = styled.img`
   width: 100%;
-  height: 100%;
+  height: 60%;
+  object-fit: cover;
+  border-radius: ${spacing2};
 `;
-
-export const StyledImageContainer = styled.div`
-  & * {
-    color: ${colorViolet};
-  }
+export const StyledContentContainer = styled.div`
+  width: 90%;
+  padding: ${spacing2};
 `;
-export const StyledIconImage = styled.img`
-  width: 150px;
-  height: 150px;
-`;
-
-export const StyledSectionTitle = styled.h1`
-  color: ${colorPrimary};
+export const StyledHeading = styled.h3`
+  margin-top: ${spacing0};
   text-transform: uppercase;
-  text-align: center;
-  margin: 0;
+`;
+export const StyledSpan = styled.span`
+  font-size: ${font12};
 `;

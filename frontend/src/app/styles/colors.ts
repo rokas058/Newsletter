@@ -2,6 +2,7 @@ export const colorPrimary = '#280071';
 export const colorWhite = '#fff';
 export const colorRed = '#ff0000';
 export const colorViolet = '#B1B5CE';
+export const colorViolet40 = '#B1B5CE40';
 export const colorPeach = '#EACBBB';
 
 export const colorDarkBLue = '#071D49';
