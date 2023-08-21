@@ -37,12 +37,8 @@ public class SectionService {
 
     public Section createSection(String title, String text, Long pageId, List<MultipartFile> imageList) {
         List<byte[]> imageBytesList = imageToBytes(imageList);
-        CreateSectionForm createSectionForm = CreateSectionForm.builder()
-            .title(title)
-            .text(text)
-            .pageId(pageId)
-            .images(imageBytesList)
-            .build();
+        CreateSectionForm createSectionForm =
+            CreateSectionFormMapper.toCreateSectionForm(title, text, pageId, imageBytesList);
 
         PageEntity page = pageRepository.findById(createSectionForm.getPageId())
             .orElseThrow(() -> new PageNotFoundException("Page not found with ID: " + createSectionForm.getPageId()));
@@ -82,11 +78,8 @@ public class SectionService {
     public Section editSection(String title, String text, Long id, List<MultipartFile> imageList) {
         List<byte[]> imageBytesList = imageToBytes(imageList);
 
-        EditSectionForm editSectionForm = EditSectionForm.builder()
-            .title(title)
-            .text(text)
-            .images(imageBytesList)
-            .build();
+        EditSectionForm editSectionForm = EditSectionFormMapper.toEditSectionForm(title, text, imageBytesList);
+
         SectionEntity getSection = sectionRepository.findById(id)
             .orElseThrow(
                 () -> new SectionNotFoundException(String.format("Section with id %d does not exist.", id)));

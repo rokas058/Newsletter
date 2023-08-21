@@ -28,5 +28,16 @@ public class CreateSectionFormMapper {
             .images(imageEntities)
             .build();
     }
+
+    public static CreateSectionForm toCreateSectionForm(String title, String text, Long pageId,
+                                                        List<byte[]> imageBytesList) {
+        return CreateSectionForm.builder()
+            .title(title)
+            .text(text)
+            .pageId(pageId)
+            .images(imageBytesList)
+            .build();
+    }
+
 }
 
