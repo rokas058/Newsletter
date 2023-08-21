@@ -24,7 +24,7 @@ export const NavigationCard: FC<NavigationCardProps> = (
     props;
 
   return (
-    <StyledNavigationCard to={navigationUrl} $width={width}>
+    <StyledNavigationCard to={navigationUrl} target="_blank" $width={width}>
       <StyledNavImage src={imageSrc} alt={imageSrcName} />
       <StyledContentContainer>
         <StyledHeading>{heading}</StyledHeading>

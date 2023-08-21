@@ -94,10 +94,7 @@ export const NavigationDashboard = () => {
               heading="atviros pozicijos"
               description="Rekomenduok kolegą ir pelnyk amžiną šlovę!
 (Ir bonusą iki 2500 Eur bruto!)"
-              navigationUrl={NavigationService.VACANCIES_PATH.replace(
-                ':id',
-                String(id),
-              )}
+              navigationUrl={NavigationService.CAREER_PAGE}
             />
           </StyledFlexRowContainer>
           <StyledFlexRowContainer $height="250px">
