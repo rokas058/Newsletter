@@ -6,7 +6,7 @@ import { NotificationService } from '@app/services/notification-service.ts';
 
 export const useLogin = () => {
   const [loading, setLoading] = useState<boolean>(false);
-  const { setUsername } = useSessionContext();
+  const { setUsername, setRoles } = useSessionContext();
 
   const login = async (loginData: Backend.LoginData) => {
     setLoading(true);
@@ -15,6 +15,7 @@ export const useLogin = () => {
         await authenticationApiService.authenticate(loginData);
 
       setUsername(authenticationResponse.username);
+      setRoles(authenticationResponse.roles);
     } catch (error) {
       NotificationService.error('Could not login');
     } finally {
