@@ -7,7 +7,9 @@ import java.util.stream.Collectors;
 import com.tietoevry.backend.database.entity.NewsletterEntity;
 import com.tietoevry.backend.database.entity.PageEntity;
 import com.tietoevry.backend.database.entity.Type;
+import com.tietoevry.backend.database.entity.UserEntity;
 import com.tietoevry.backend.database.repository.NewsletterRepository;
+import com.tietoevry.backend.database.repository.UserRepository;
 import com.tietoevry.backend.exceptions.NewsletterNotFoundException;
 import com.tietoevry.backend.mapper.newsletter.CreateNewsletterFormMapper;
 import com.tietoevry.backend.mapper.newsletter.NewsletterMapper;
@@ -15,6 +17,7 @@ import com.tietoevry.backend.mapper.page.PageMapper;
 import com.tietoevry.backend.model.newsletter.CreateNewsletterForm;
 import com.tietoevry.backend.model.newsletter.EditNewsletterForm;
 import com.tietoevry.backend.model.newsletter.Newsletter;
+import jakarta.mail.MessagingException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +30,10 @@ import org.springframework.web.server.ResponseStatusException;
 @Slf4j
 public class NewsletterService {
     private final NewsletterRepository newsletterRepository;
+
+    private final EmailService emailService;
+
+    private final UserRepository userRepository;
 
     public List<Newsletter> getNewsletters() {
         List<NewsletterEntity> newsletters = newsletterRepository.findAll();
@@ -105,8 +112,22 @@ public class NewsletterService {
 
         newsletter.setIsPublished(true);
         NewsletterEntity updatedNewsletter = newsletterRepository.save(newsletter);
-
+        //sendEmailToUsers();
         return NewsletterMapper.toNewsletter(updatedNewsletter);
 
+    }
+
+    private void sendEmailToUsers() {
+        List<UserEntity> users = userRepository.findAll();
+
+        users.forEach(user -> {
+            try {
+                emailService.sendEmail(user.getEmail());
+                log.info("Email sent to user: {}", user.getEmail());
+            } catch (MessagingException e) {
+                log.error("Error sending email to user: {}", user.getEmail(), e);
+                // Handle the exception or take appropriate action
+            }
+        });
     }
 }
