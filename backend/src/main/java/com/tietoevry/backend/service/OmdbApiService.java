@@ -1,6 +1,5 @@
 package com.tietoevry.backend.service;
 
-import com.tietoevry.backend.exceptions.MovieNotFoundException;
 import com.tietoevry.backend.model.movie.OmdbMovie;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
@@ -42,10 +41,5 @@ public class OmdbApiService {
         movie.setLink("https://www.imdb.com/title/" + movie.getId());
     }
 
-    private void validateMovieData(OmdbMovie movie) {
-        if (movie == null || movie.getId() == null) {
-            throw new MovieNotFoundException("The movie data is incomplete or the ID is null.");
-        }
-    }
 }
 

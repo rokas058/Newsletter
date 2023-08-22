@@ -44,14 +44,6 @@ public class PageService {
             .toList();
     }
 
-    public List<Page> getPagesByNewsletterId(Long newsletterId) {
-        List<PageEntity> pages = pageRepository.findByNewsletter_NewsletterId(newsletterId);
-        return pages
-            .stream()
-            .map(PageMapper::toPage)
-            .toList();
-    }
-
     public Page getPage(Long id) {
         Optional<PageEntity> page = pageRepository.findById(id);
 

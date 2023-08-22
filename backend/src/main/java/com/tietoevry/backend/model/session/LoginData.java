@@ -1,4 +1,4 @@
-package com.tietoevry.backend.model;
+package com.tietoevry.backend.model.session;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;

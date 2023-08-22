@@ -1,6 +1,6 @@
 package com.tietoevry.backend.controller;
 
-import com.tietoevry.backend.model.LoginData;
+import com.tietoevry.backend.model.session.LoginData;
 import com.tietoevry.backend.model.session.Session;
 import com.tietoevry.backend.service.SessionService;
 import jakarta.servlet.http.HttpServletRequest;

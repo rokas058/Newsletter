@@ -26,6 +26,4 @@ public class EditUserForm {
     LocalDate birthday;
     @NotNull
     boolean confirmBirthday;
-    @NotNull
-    String password;
 }
