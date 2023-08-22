@@ -10,16 +10,18 @@ import { spacing2 } from '@app/styles/spacing.ts';
 
 export const StyledBannerSection = styled.div`
   width: 100%;
-  height: 600px;
+  height: 500px;
   background-color: ${colorViolet}40;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 5px 6px 16px -5px rgb(0 0 0 / 75%);
 `;
 
 export const StyledBannerImage = styled.img`
   width: 100%;
+  height: 100%;
 `;
 export const StyledPublishButton = styled(ButtonNew)<{
   $notPublished: boolean;

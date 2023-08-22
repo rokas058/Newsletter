@@ -30,7 +30,6 @@ export const LoginPage = () => {
           (letter) => letter.isPublished === true,
         );
 
-        console.log(filterPublished);
         navigate(
           generatePath(NavigationService.HOME_PATH_WITH_ID, {
             id: String(filterPublished[0].id),

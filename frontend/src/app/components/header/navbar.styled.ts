@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import {
   colorDarkBLue,
+  colorPrimary,
   colorViolet,
   colorWhite,
   colorYellow,
@@ -11,8 +12,8 @@ import { spacing4 } from '@app/styles/spacing.ts';
 
 export const StyledNavbarContainer = styled.div`
   width: 100%;
-  height: 70px;
-  background-color: ${colorDarkBLue};
+  height: 80px;
+  background-color: ${colorPrimary};
   display: flex;
   justify-content: space-between;
   align-items: center;

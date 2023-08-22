@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
 import { colorPeach } from '@app/styles/colors.ts';
-import { spacing12 } from '@app/styles/spacing.ts';
 
 export const StyledTravelPageContainer = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
-  padding-top: ${spacing12};
+  position: relative;
+  top: -320px;
 `;
 export const StyledTravelCardsContainer = styled.div`
   width: 100%;
@@ -18,10 +18,10 @@ export const StyledTravelCardsContainer = styled.div`
 `;
 export const StyledFormContainer = styled.div`
   width: 50%;
-  height: inherit;
   background-color: ${colorPeach};
+  z-index: -1;
 `;
 
 export const StyledWave = styled.img`
-  position: absolute;
+  position: sticky;
 `;
