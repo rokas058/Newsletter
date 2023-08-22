@@ -14,6 +14,8 @@ export const StyledTravelCardsContainer = styled.div`
   height: inherit;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   z-index: 1;
 `;
 export const StyledFormContainer = styled.div`
