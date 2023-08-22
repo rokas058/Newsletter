@@ -17,8 +17,9 @@ import {
 
 export const Navbar = () => {
   const location = useLocation();
-  const [publishedNewsletter, setPublishedNewsletter] =
-    useState<Backend.Newsletter[]>();
+  const [publishedNewsletter, setPublishedNewsletter] = useState<
+    Backend.Newsletter[] | undefined
+  >();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,10 +58,14 @@ export const Navbar = () => {
               <StyledIconText>Newsletters</StyledIconText>
             </StyledIcon>
             <StyledIcon
-              to={NavigationService.HOME_PATH_WITH_ID.replace(
-                ':id',
-                String(publishedNewsletter![0].id),
-              )}
+              to={
+                publishedNewsletter === undefined
+                  ? NavigationService.LOGIN_PATH
+                  : NavigationService.HOME_PATH_WITH_ID.replace(
+                      ':id',
+                      String(publishedNewsletter[0].id),
+                    )
+              }
             >
               <HomeOutlined />
               <StyledIconText>Home</StyledIconText>

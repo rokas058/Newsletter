@@ -37,7 +37,11 @@ export const Banner: FC<BannerProps> = (props) => {
       setNewsLetter(updatedNewsLetter);
       NotificationService.success('Newsletter successfully published!');
     } catch (_err) {
-      NotificationService.error('Newsletter was not published');
+      const errorMessage = isPublished
+        ? 'This newsletter already published'
+        : 'Something went wrong';
+
+      NotificationService.error(errorMessage);
     }
   };
 

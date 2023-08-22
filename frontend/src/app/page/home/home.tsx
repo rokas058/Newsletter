@@ -15,6 +15,7 @@ export const HomePage = () => {
     null,
   );
 
+  console.log(newsletter);
   console.log(newsLetters);
 
   useEffect(() => {
