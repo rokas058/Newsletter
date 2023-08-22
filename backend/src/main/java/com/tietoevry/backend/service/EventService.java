@@ -1,7 +1,10 @@
 package com.tietoevry.backend.service;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.Year;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -64,7 +67,7 @@ public class EventService {
             .filter(UserEntity::isConfirmBirthday)
             .toList();
 
-        int dateNow = Integer.parseInt(dateNow());
+        int dateNow = Integer.parseInt(yearNow());
 
         return usersConfirm.stream()
             .map(user -> EventMapper.toEvent(
@@ -75,22 +78,43 @@ public class EventService {
     }
 
     private List<Event> getAllHolidays() {
-        String yearValue = dateNow();
+        String yearValue = yearNow();
         List<String> titles =
-            List.of("Naujieji metai", "Lietuvos Valstybės atkūrimo diena", "Nepriklausomybės atkūrimo diena",
-                "Tarptautinė darbo diena", "Joninės", "Karaliaus Mindaugo karūnavimo diena", "Žolinė",
-                "Visų šventųjų diena", " Vėlinės", "Šv. Kūčios", "Šv. Kalėdos", "Šv. Kalėdų antroji diena");
-        List<String> dates = List.of("2018-01-01", "2018-02-16", "2018-03-11", "2018-05-01", "2018-06-24", "2018-07-06",
-            "2018-08-15", "2018-11-01", "2018-11-02", "2018-12-24", "2018-12-25", "2018-12-26");
+            List.of(
+                "Naujieji metai", "Lietuvos Valstybės atkūrimo diena", "Nepriklausomybės atkūrimo diena",
+                "Velykos", "Velykų antroji diena", "Tarptautinė darbo diena", "Joninės",
+                "Karaliaus Mindaugo karūnavimo diena", "Žolinė", "Visų šventųjų diena", " Vėlinės", "Šv. Kūčios",
+                "Šv. Kalėdos", "Šv. Kalėdų antroji diena", "Motinos diena", "Tėvo diena");
+        List<String> dates = List.of(
+            "2018-01-01", "2018-02-16", "2018-03-11", "2018-04-20", "2018-04-21", "2018-05-01", "2018-06-24",
+            "2018-07-06", "2018-08-15", "2018-11-01", "2018-11-02", "2018-12-24", "2018-12-25", "2018-12-26");
         List<String> updatedDates = dates.stream()
             .map(date -> date.replace("2018", yearValue))
             .toList();
 
         List<LocalDate> localDates = toDates(updatedDates);
+        localDates.add(getMothersDay());
+        localDates.add(getFathersDay());
 
         return IntStream.range(0, titles.size())
             .mapToObj(i -> EventMapper.toEvent(titles.get(i), localDates.get(i), EventType.HOLIDAY))
             .collect(Collectors.toList());
+    }
+
+    private LocalDate getFathersDay() {
+        int year = Integer.parseInt(yearNow());
+        Month month = Month.JUNE;
+
+        return LocalDate.of(year, month, 1)
+            .with(TemporalAdjusters.firstInMonth(DayOfWeek.SUNDAY));
+    }
+
+    private LocalDate getMothersDay() {
+        int year = Integer.parseInt(yearNow());
+        Month month = Month.MAY;
+
+        return LocalDate.of(year, month, 1)
+            .with(TemporalAdjusters.firstInMonth(DayOfWeek.SUNDAY));
     }
 
     private List<LocalDate> toDates(List<String> dates) {
@@ -99,7 +123,7 @@ public class EventService {
             .collect(Collectors.toList());
     }
 
-    private String dateNow() {
+    private String yearNow() {
         Year currentYear = Year.now();
         return String.valueOf(currentYear.getValue());
     }
