@@ -13,10 +13,12 @@ import {
   StyledColorContainer,
   StyledDashboardContainer,
   StyledFlexRowContainer,
+  WaveImage,
 } from '@app/page/home/navigation-dashboard/navigation-dashboard.styled.ts';
 import { NavigationService } from '@app/services/navigation-service.ts';
 import { SocialMediaIcons } from '@app/components/social-media-card/social-media-card.tsx';
 import { NavigationCard } from '@app/page/home/navigation-card/navigation-card.tsx';
+import waveImage from '@app/assets/wave-background/wave1.svg';
 
 export const NavigationDashboard = () => {
   const { id } = useParams();
@@ -135,6 +137,7 @@ export const NavigationDashboard = () => {
           </StyledFlexRowContainer>
         </StyledDashboardContainer>
       </StyledColorContainer>
+      <WaveImage src={waveImage} alt="wave-down" />
     </>
   );
 };

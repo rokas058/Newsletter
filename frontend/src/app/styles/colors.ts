@@ -12,6 +12,7 @@ export const colorMarron = '#633231';
 export const colorCoolGrey = '#53565A';
 
 export const colorWarmGrey = '#6E6259';
+export const colorWarmGrey20 = '#6E625920';
 
 export const colorYellow = '#E9EC6B';
 

@@ -1,9 +1,4 @@
-import {
-  HomeOutlined,
-  LogoutOutlined,
-  ReadOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
+import { HomeOutlined, ReadOutlined, UserOutlined } from '@ant-design/icons';
 import { useLocation } from 'react-router-dom';
 
 import logo from '@app/assets/logo/logoWhite.png';
@@ -43,7 +38,6 @@ export const Navbar = () => {
             </StyledIcon>
             <StyledIcon to={NavigationService.LOGOUT_PATH}>
               <StyledIconText>Logout</StyledIconText>
-              <LogoutOutlined />
             </StyledIcon>
           </StyledIconContainer>
         </StyledNavbarContainer>

@@ -5,6 +5,7 @@ import { colorViolet40 } from '@app/styles/colors.ts';
 
 export const StyledColorContainer = styled.div`
   background-color: ${colorViolet40};
+  padding: ${spacing4};
 `;
 export const StyledDashboardContainer = styled.div`
   width: 80%;
@@ -13,7 +14,6 @@ export const StyledDashboardContainer = styled.div`
   flex-direction: column;
   gap: ${spacing2};
   margin: ${spacing4} auto;
-  padding: ${spacing4};
 `;
 
 export const StyledFlexRowContainer = styled.div<{
@@ -28,4 +28,10 @@ export const StyledFlexColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${spacing2};
+`;
+
+export const WaveImage = styled.img`
+  z-index: 1;
+  position: relative;
+  background-color: ${colorViolet40};
 `;

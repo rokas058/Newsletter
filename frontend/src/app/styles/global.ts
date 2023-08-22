@@ -20,7 +20,7 @@ export const GlobalStyle = createGlobalStyle`
     height: 100%;
   }
 
-  h1, h2, h3, h4, h5, h6, div, span {
+  h1, h2, h3, h4, h5, h6, div, span, a, p {
     font-family: "Tietoevry Sans 1", serif;
   }
 

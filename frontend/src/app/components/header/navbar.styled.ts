@@ -11,7 +11,7 @@ import { spacing4 } from '@app/styles/spacing.ts';
 
 export const StyledNavbarContainer = styled.div`
   width: 100%;
-  height: 80px;
+  height: 70px;
   background-color: ${colorDarkBLue};
   display: flex;
   justify-content: space-between;

@@ -17,4 +17,5 @@ export const StyledSocialMediaContainer = styled.div`
   right: 0;
   top: 500px;
   border-radius: ${spacing2} 0 0 ${spacing2};
+  z-index: 10;
 `;
