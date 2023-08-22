@@ -1,4 +1,12 @@
-import { Button, Form, FormProps, Input, Select } from 'antd';
+import {
+  Button,
+  Checkbox,
+  DatePicker,
+  Form,
+  FormProps,
+  Input,
+  Select,
+} from 'antd';
 
 import { FormFields } from '@app/typings/form-fields.ts';
 
@@ -73,13 +81,37 @@ export const AddUserForm = (props: Props) => {
       >
         <Input />
       </Form.Item>
-
+      <Form.Item
+        label="Password"
+        name={CREATE_USER_FORM_FIELDS.password}
+        rules={[
+          { required: true, message: 'Please enter a password!' },
+          { min: 6, message: 'Password should be at least 6 characters!' },
+        ]}
+      >
+        <Input.Password placeholder="Enter your password" />
+      </Form.Item>
       <Form.Item
         label="Email"
         name={CREATE_USER_FORM_FIELDS.email}
         rules={[{ required: true, message: 'Please enter an email!' }]}
       >
         <Input />
+      </Form.Item>
+
+      <Form.Item
+        label="Birthday"
+        name={CREATE_USER_FORM_FIELDS.birthday}
+        rules={[{ required: true, message: 'Please select a birthdate!' }]}
+      >
+        <DatePicker format="YYYY-MM-DD" />
+      </Form.Item>
+
+      <Form.Item
+        name={CREATE_USER_FORM_FIELDS.confirmBirthday}
+        valuePropName="checked"
+      >
+        <Checkbox>Make my birthday public</Checkbox>
       </Form.Item>
 
       <Form.Item>

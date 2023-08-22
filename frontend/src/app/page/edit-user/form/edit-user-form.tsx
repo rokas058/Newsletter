@@ -1,4 +1,12 @@
-import { Button, Form, FormProps, Input, Select } from 'antd';
+import {
+  Button,
+  Checkbox,
+  DatePicker,
+  Form,
+  FormProps,
+  Input,
+  Select,
+} from 'antd';
 
 import { FormFields } from '@app/typings/form-fields.ts';
 
@@ -81,7 +89,19 @@ export const EditUserForm = (props: Props) => {
       >
         <Input />
       </Form.Item>
-
+      <Form.Item
+        label="Birthday"
+        name={EDIT_USER_FORM_FIELDS.birthday}
+        rules={[{ required: true, message: 'Please select a birthdate!' }]}
+      >
+        <DatePicker placeholder="2023-08-21" format="YYYY-MM-DD" />
+      </Form.Item>
+      <Form.Item
+        name={EDIT_USER_FORM_FIELDS.confirmBirthday}
+        valuePropName="checked"
+      >
+        <Checkbox>Make my birthday public</Checkbox>
+      </Form.Item>
       <Form.Item>
         <Button type="primary" htmlType="submit" loading={loading}>
           Edit user

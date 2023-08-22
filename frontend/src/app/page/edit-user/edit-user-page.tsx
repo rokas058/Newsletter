@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Spin } from 'antd';
 import { useParams } from 'react-router-dom';
+import dayjs from 'dayjs';
 
 import { useGetUser } from '@app/page/edit-user/hooks/use-get-user.ts';
 import { RequestUtils } from '@app/utils/request-utils.ts';
@@ -39,7 +40,7 @@ export const EditUserPage = () => {
         <EditUserForm
           loading={loading}
           onFinish={handleSubmit}
-          initialValues={user}
+          initialValues={{ ...user, birthday: dayjs(user.birthday) }}
         />
       ) : (
         <Spin spinning={true} />
