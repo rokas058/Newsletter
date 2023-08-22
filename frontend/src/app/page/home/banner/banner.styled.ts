@@ -11,14 +11,15 @@ import { spacing2 } from '@app/styles/spacing.ts';
 export const StyledBannerSection = styled.div`
   width: 100%;
   height: 600px;
-  background-color: ${colorViolet};
+  background-color: ${colorViolet}40;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const StyledBannerImage = styled.img`
-  height: 100%;
   width: 100%;
-  object-fit: fill;
 `;
 export const StyledPublishButton = styled(ButtonNew)<{
   $notPublished: boolean;

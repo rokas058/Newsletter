@@ -1,6 +1,16 @@
-import { PageLayout } from '@app/components/page-layout/page-layout.tsx';
-import { HrForm } from '@app/page/hr/form/HrForm.tsx';
+import {
+  StyledPageTitle,
+  StyledPageTitleContainer,
+} from '@app/page/newbies/newbies.styled.ts';
+import './styles/moving-plane.css';
+
+import ourPlane from '@app/assets/images/planeToUnemployement.png';
 
 export const NewbiesPage = () => (
-  <PageLayout childrenForm={<HrForm topicTitle="New Employee" />} />
+  <StyledPageTitleContainer>
+    <StyledPageTitle>BEDARBIAI</StyledPageTitle>
+    <div className="cloud cloud1">
+      <img style={{ height: '350px' }} src={ourPlane} />
+    </div>
+  </StyledPageTitleContainer>
 );

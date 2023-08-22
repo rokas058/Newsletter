@@ -1,0 +1,19 @@
+.cloud {
+  position: absolute;
+  top: 100px;
+  left: -900px;
+  opacity: .8;
+  animation: ease-in-out cloud 20s 0s;
+  animation-iteration-count: 1;
+  z-index: 99;
+}
+
+
+@keyframes cloud {
+  from {
+    left: -900px;
+  }
+  to {
+    left: 110%;
+  }
+}

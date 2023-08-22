@@ -18,6 +18,7 @@ export const GlobalStyle = createGlobalStyle`
   #root,
   html {
     height: 100%;
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6, div, span, a, p {
