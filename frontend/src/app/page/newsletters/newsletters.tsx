@@ -44,7 +44,6 @@ export const NewslettersPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const response = await newsLetterApiService.getAllNewsLetters();
         const data = await newsLettersApiService.getAllNewsLetters();
 
         if (data !== null) {

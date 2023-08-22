@@ -11,6 +11,11 @@ export const HomePage = () => {
   const [newsletter, setNewsletter] = useState<Backend.Newsletter | undefined>(
     undefined,
   );
+  const [newsLetters, setNewsletters] = useState<Backend.Newsletter[] | null>(
+    null,
+  );
+
+  console.log(newsLetters);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,6 +32,22 @@ export const HomePage = () => {
 
     fetchData();
   }, [id]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await newsLettersApiService.getAllNewsLetters();
+
+        if (data !== null) {
+          setNewsletters(data);
+        }
+      } catch (error) {
+        throw error;
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>
