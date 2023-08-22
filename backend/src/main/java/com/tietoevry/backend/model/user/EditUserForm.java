@@ -23,12 +23,9 @@ public class EditUserForm {
     @NotNull
     String email;
     @NotNull
-    //Fixme
-    LocalDate birthday = LocalDate.parse("2018-05-05");
+    LocalDate birthday;
     @NotNull
-    //Fixme
-    boolean confirmBirthday = false;
+    boolean confirmBirthday;
     @NotNull
-    //Fixme
-    String password = "1234";
+    String password;
 }

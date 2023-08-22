@@ -14,7 +14,6 @@ import com.tietoevry.backend.mapper.user.UserMapper;
 import com.tietoevry.backend.model.user.CreateUserForm;
 import com.tietoevry.backend.model.user.EditUserForm;
 import com.tietoevry.backend.model.user.User;
-import com.tietoevry.backend.utils.PasswordGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -47,12 +46,10 @@ public class UserService {
         if (emailExists) {
             throw new EmailIsNotUniqueException(String.format("%s email already exists.", createUserForm.getEmail()));
         }
-        String password = PasswordGenerator.generatePassword();
         String encodedPassword = passwordEncoder.encode(createUserForm.getPassword());
         UserEntity userToCreate = CreateUserFormMapper.toUserEntity(createUserForm, encodedPassword);
 
         UserEntity createdUser = userRepository.save(userToCreate);
-        log.info(String.format("Email: %s, Password: %s", createUserForm.getEmail(), password));
 
         return UserMapper.toUser(createdUser);
     }
