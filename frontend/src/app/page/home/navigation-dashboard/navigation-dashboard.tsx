@@ -45,7 +45,7 @@ export const NavigationDashboard = () => {
               width="60%"
               imageSrc={newsImage}
               imageSrcName="head-department-news"
-              heading="vadovų skyriaus naujienos"
+              heading="vadovų skyrių naujienos"
               description="Tietoevry vadovai dalinasi įvairiomis naujienomis."
               navigationUrl={NavigationService.NEWS_PATH.replace(
                 ':id',

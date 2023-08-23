@@ -53,6 +53,8 @@ export const HrPage = () => {
       <PageLayout
         childrenForm={
           <HrForm
+            firstLabel="Title"
+            secondLabel="Text"
             topicTitle="HR"
             form={form}
             onFinish={(values: any) => {

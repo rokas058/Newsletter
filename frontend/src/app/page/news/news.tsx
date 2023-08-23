@@ -1,32 +1,88 @@
+import { useEffect, useState } from 'react';
+import { Form, Modal } from 'antd';
+
 import { PageLayout } from '@app/components/page-layout/page-layout.tsx';
 import { HrForm } from '@app/page/hr/form/HrForm.tsx';
 import { HrNewsCard } from '@app/components/hr-news-card/hr-news-card.tsx';
-import headDepartmentImage1 from '@app/assets/page-images/vadovai-1.png';
-import headDepartmentImage2 from '@app/assets/page-images/vadovai-2.png';
 import { StyledCardsContainer } from '@app/page/news/news.styled.ts';
+import { useGetPage } from '@app/page/hr/hooks/use-get-page.ts';
+import { useAddSection } from '@app/page/hr/hooks/use-add-section.ts';
+import { useDeleteSection } from '@app/page/hr/hooks/use-delete-section.ts';
 
-export const NewsPage = () => (
-  <PageLayout
-    childrenForm={<HrForm />}
-    childrenCard={
-      <StyledCardsContainer>
-        <HrNewsCard
-          title="Vadovų naujienos"
-          text="Veiksmingas skaitmeninis sprendimas yra maksimaliai paprastas, patogus bei suprantamas - orientuotas į tai, ko pirmiausia reikia. Visada pradėkite nuo pagrindų, palaipsniui tobulindami sprendimą ir praktiškai įsitikinkite, kad tai teisinga kryptis. Paprastumas ir laipsniškumas kuriant sprendimą padeda sudėtingus procesus padaryti daug prieinamesnius - efektyvesnius!
-      , - sako Inga Ieraga, 'Tietoevry Create International Baltic Market Ruby on Rails' plėtros skyriaus vadovė."
-          image={headDepartmentImage1}
-          categoryName="Head Department News"
-        />
+export const NewsPage = () => {
+  const { requestState: getPageRequestState, page, getPage } = useGetPage();
+  const { addSection } = useAddSection();
+  const { loading, deleteSection } = useDeleteSection();
+  const pages = JSON.parse(sessionStorage.getItem('pages') || '[]');
+  const pageId = pages[3].id;
+  const [uploadedImage, setUploadedImage] = useState([]);
+  const [form] = Form.useForm();
 
-        <HrNewsCard
-          title="Vadovų naujienos"
-          text="Kelias nuo idėjos iki kasdieninių sprendimų apima ne tik IT profesionalus, bet ir drąsius klientus, kurie siekia greitesnio ir saugesnio veikimo.
-Skirtingų verslo sistemų ir interneto paslaugų sujungimui labai svarbios integracijos platformos, kurios supaprastina procesus ir organizacijoms suteikia realiuoju laiku gautus duomenis. Gerinant duomenų tikslumą ir analizę, pagerėja sprendimų priėmimas ir verslo valdymas.
-Susipažink su Tietoevry Create International Baltic Market Java kompetencijų grupės vadybininku Igors Vasiljevs ir Tietoevry Senior Lead Integration Architektu Fredrik Tillström požiūriu!"
-          image={headDepartmentImage2}
-          categoryName="Head Department News"
-        />
-      </StyledCardsContainer>
+  const handleOnDelete = async (sectionId: number | undefined) => {
+    Modal.confirm({
+      content: 'Are you sure you want to delete this section?',
+      okText: 'Yes',
+      cancelText: 'No',
+      okButtonProps: {
+        danger: true,
+      },
+      onOk: async () => {
+        if (!loading) {
+          await deleteSection(sectionId);
+          await getPage(pageId);
+        }
+      },
+    });
+  };
+
+  const handleOnFinish = async (values: any) => {
+    await addSection(values);
+    form.resetFields();
+    setUploadedImage([]);
+    await getPage(pageId);
+  };
+
+  useEffect(() => {
+    if (!getPageRequestState && !page) {
+      getPage(pageId);
     }
-  />
-);
+  }, [getPage, pageId, getPageRequestState, page]);
+
+  return (
+    <>
+      <PageLayout
+        childrenForm={
+          <HrForm
+            firstLabel="Title"
+            secondLabel="Text"
+            form={form}
+            onFinish={(values: any) => {
+              handleOnFinish({ ...values, pageId, image: uploadedImage });
+            }}
+            setImageState={setUploadedImage}
+          />
+        }
+        childrenCard={
+          <StyledCardsContainer>
+            {page?.sections?.map((section) => (
+              <HrNewsCard
+                key={section.id}
+                categoryName="Head Department News"
+                title={section.title}
+                text={section.text}
+                image={
+                  section.images?.length === 0
+                    ? ''
+                    : 'data:image/png;base64,' + section.images?.[0]?.image
+                }
+                onDelete={() => {
+                  handleOnDelete(section.id);
+                }}
+              />
+            ))}
+          </StyledCardsContainer>
+        }
+      />
+    </>
+  );
+};
