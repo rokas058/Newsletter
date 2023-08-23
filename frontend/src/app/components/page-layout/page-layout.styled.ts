@@ -18,6 +18,7 @@ export const StyledTravelCardsContainer = styled.div`
   align-items: center;
   z-index: 1;
 `;
+
 export const StyledFormContainer = styled.div`
   width: 50%;
   height: 100%;
