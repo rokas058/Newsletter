@@ -14,14 +14,14 @@ import { ButtonNew } from '@app/components/button-new/button-new.tsx';
 import { colorBlack, colorYellow } from '@app/styles/colors.ts';
 
 interface NewbiesCardProps {
-  title: string;
-  description: string;
+  title?: string;
+  text?: string;
   image?: string;
   onDelete?: () => void;
 }
 
 export const NewbiesCard: FC<NewbiesCardProps> = (props) => {
-  const { title, description, image, onDelete } = props;
+  const { title, text, image, onDelete } = props;
 
   return (
     <StyledNewbieCard>
@@ -40,7 +40,7 @@ export const NewbiesCard: FC<NewbiesCardProps> = (props) => {
       </StyledNewbieImageContainer>
       <StyledNewbieContent>
         <StyledNewbieName>{title}</StyledNewbieName>
-        <StyledNewbieDescription>{description}</StyledNewbieDescription>
+        <StyledNewbieDescription>{text}</StyledNewbieDescription>
       </StyledNewbieContent>
     </StyledNewbieCard>
   );

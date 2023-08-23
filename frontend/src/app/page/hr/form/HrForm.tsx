@@ -13,10 +13,13 @@ interface HrFormInterface {
   setImageState?: (uint8Array: any) => void;
   form?: any;
   topicTitle?: string;
+  firstLabel?: string;
+  secondLabel?: string;
 }
 
 export const HrForm = (props: HrFormInterface) => {
-  const { setImageState, onFinish, form, topicTitle } = props;
+  const { setImageState, onFinish, form, topicTitle, firstLabel, secondLabel } =
+    props;
 
   return (
     <HrFormStyled
@@ -27,10 +30,10 @@ export const HrForm = (props: HrFormInterface) => {
       form={form}
     >
       <h2>Create {topicTitle} Card</h2>
-      <StyledFormItem label="Title" name="title">
+      <StyledFormItem label={firstLabel} name="title">
         <Input placeholder="Enter title..." />
       </StyledFormItem>
-      <StyledFormItem label="Description" name="text">
+      <StyledFormItem label={secondLabel} name="text">
         <TextArea placeholder="Enter your text..." />
       </StyledFormItem>
       <StyledFormItem>
