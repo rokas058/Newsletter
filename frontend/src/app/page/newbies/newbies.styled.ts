@@ -5,7 +5,8 @@ import { colorWhite } from '@app/styles/colors.ts';
 import { spacing2 } from '@app/styles/spacing.ts';
 
 export const StyledPageTitleContainer = styled(Container)`
-  height: 100%;
+  min-height: 100vh;
+  max-width: 100%;
   display: flex;
   font-size: 35px;
   justify-content: center;

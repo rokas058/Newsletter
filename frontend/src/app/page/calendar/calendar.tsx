@@ -4,9 +4,10 @@ import { useEffect, useState } from 'react';
 
 import {
   StyledCalendarContainer,
+  StyledEventList,
   StyledEventListItem,
-} from 'app/page/calendar/calender.styled.ts';
-
+  StyledMonthName,
+} from '@app/page/calendar/calender.styled.ts';
 import { eventsApiService } from '@app/api/service/event-api-service.ts';
 import { NotificationService } from '@app/services/notification-service.ts';
 import { StyledPageTitleContainer } from '@app/page/newbies/newbies.styled.ts';
@@ -25,6 +26,10 @@ export const CalendarPage = () => {
 
     try {
       await eventsApiService.createEvent(event);
+      const updatedEvents = await eventsApiService.getAllEvents();
+
+      setEvents(updatedEvents);
+      formInstance.resetFields();
     } catch (_err) {
       NotificationService.error('Event creation failed');
     }
@@ -46,6 +51,18 @@ export const CalendarPage = () => {
     fetchData();
   }, []);
 
+  const getEventTypeEmoji = (eventType: string) => {
+    switch (eventType) {
+      case 'BIRTHDAY':
+        return '🍰';
+      case 'HOLIDAY':
+        return '🏖️';
+      case 'OTHER':
+        return '🍹';
+      default:
+        return '❔';
+    }
+  };
   const dateCellRender = (value: any) => {
     const listData =
       events?.filter(
@@ -55,20 +72,23 @@ export const CalendarPage = () => {
       ) || [];
 
     return (
-      <ul>
+      <StyledEventList>
         {listData.map((item) => (
           <StyledEventListItem key={item.id} eventType={item.eventType}>
-            <span>{item.title}</span>
+            <span>
+              {getEventTypeEmoji(item.eventType)} {item.title}
+            </span>
           </StyledEventListItem>
         ))}
-      </ul>
+      </StyledEventList>
     );
   };
 
   return (
     <StyledPageTitleContainer>
       <StyledCalendarContainer>
-        <Calendar dateCellRender={dateCellRender} />
+        <StyledMonthName>{dayjs().format('MMMM YYYY')}</StyledMonthName>
+        <Calendar cellRender={dateCellRender} />
         <AddEventForm formInstance={formInstance} createEvent={createEvent} />
       </StyledCalendarContainer>
     </StyledPageTitleContainer>
