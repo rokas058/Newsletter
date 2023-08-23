@@ -8,14 +8,10 @@ import { newsLettersApiService } from '@app/api/service/newsletter-api-service.t
 
 export const HomePage = () => {
   const { id } = useParams();
-  const [newsletter, setNewsletter] = useState<Backend.Newsletter | undefined>(
-    undefined,
-  );
-  const [newsLetters, setNewsletters] = useState<Backend.Newsletter[] | null>(
-    null,
-  );
+  const [, setNewsletter] = useState<Backend.Newsletter | undefined>(undefined);
 
-  console.log(newsLetters);
+  const [, setNewsletters] = useState<Backend.Newsletter[] | null>(null);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -51,11 +47,7 @@ export const HomePage = () => {
   return (
     <>
       <Container />
-      <Banner
-        id={Number(id)}
-        isPublished={newsletter?.isPublished === true}
-        setNewsLetter={setNewsletter}
-      />
+      <Banner />
       <NavigationDashboard />
     </>
   );

@@ -1,10 +1,11 @@
 import { HomeOutlined, ReadOutlined, UserOutlined } from '@ant-design/icons';
 import { useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import logo from '@app/assets/logo/logoWhite.png';
 import { NavigationService } from '@app/services/navigation-service.ts';
 import { newsLettersApiService } from '@app/api/service/newsletter-api-service.ts';
+import { useNewsletterContext } from '@app/app-context/use-newsletter-context.ts';
 
 import {
   StyledDisplayNone,
@@ -17,9 +18,10 @@ import {
 
 export const Navbar = () => {
   const location = useLocation();
-  const [publishedNewsletter, setPublishedNewsletter] = useState<
-    Backend.Newsletter[] | undefined
-  >();
+
+  const { newsletter, setNewsletter } = useNewsletterContext();
+
+  console.log(newsletter);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,7 +33,7 @@ export const Navbar = () => {
             (letter) => letter.isPublished === true,
           );
 
-          setPublishedNewsletter(filterPublished);
+          setNewsletter(filterPublished[0]);
         }
       } catch (error) {
         throw error;
@@ -59,11 +61,11 @@ export const Navbar = () => {
             </StyledIcon>
             <StyledIcon
               to={
-                publishedNewsletter === undefined
+                newsletter === undefined
                   ? NavigationService.LOGIN_PATH
                   : NavigationService.HOME_PATH_WITH_ID.replace(
                       ':id',
-                      String(publishedNewsletter[0].id),
+                      String(newsletter.id),
                     )
               }
             >

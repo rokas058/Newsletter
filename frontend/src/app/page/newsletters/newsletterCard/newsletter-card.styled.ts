@@ -7,6 +7,7 @@ import {
 } from '@app/styles/colors.ts';
 import { StyledFlexRow } from '@app/styles/mixins.ts';
 import { spacing0, spacing2 } from '@app/styles/spacing.ts';
+import { ButtonNew } from '@app/components/button-new/button-new.tsx';
 
 export const StyledNewsletterCard = styled.div`
   min-width: 600px;
@@ -24,6 +25,18 @@ export const StyledNewsletterCard = styled.div`
   &:hover {
     border: 2px solid ${colorYellow};
   }
+`;
+
+export const StyledPublishButton = styled(ButtonNew)`
+  width: 50px;
+  height: 50px;
+  background-color: ${colorWhite};
+  border: 5px solid ${colorVibrantGreen};
+`;
+
+export const StyledPublishedNewsletterButton = styled(StyledPublishButton)`
+  background-color: ${colorVibrantGreen};
+  color: ${colorWhite};
 `;
 
 export const StyledTitleAndDateContainer = styled(StyledFlexRow)`

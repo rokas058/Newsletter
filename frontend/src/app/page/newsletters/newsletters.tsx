@@ -19,6 +19,7 @@ import {
 } from '@app/page/newsletters/newsletters.styled.ts';
 import { newsLettersApiService } from '@app/api/service/newsletter-api-service.ts';
 import { NotificationService } from '@app/services/notification-service.ts';
+import { useNewsletterContext } from '@app/app-context/use-newsletter-context.ts';
 
 interface AddNewsletterFormValues {
   title: string;
@@ -39,23 +40,24 @@ export const NewslettersPage = () => {
   const [newsLetterId, setNewsLetterId] = useState<number | null>(null);
   const [showPopUp, setShowPopUp] = useState<boolean>(false);
   const navigate = useNavigate();
+  const { newsletter, setNewsletter } = useNewsletterContext();
 
   // FETCHING ALL NEWSLETTERS FROM DATABASE
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await newsLettersApiService.getAllNewsLetters();
-
-        if (data !== null) {
-          setNewsletters(data);
-        }
-      } catch (error) {
-        throw error;
-      }
-    };
-
     fetchData();
   }, []);
+
+  const fetchData = async () => {
+    try {
+      const data = await newsLettersApiService.getAllNewsLetters();
+
+      if (data !== null) {
+        setNewsletters(data);
+      }
+    } catch (error) {
+      throw error;
+    }
+  };
 
   // DELETE FUNCTIONALITY
 
@@ -103,13 +105,13 @@ export const NewslettersPage = () => {
   };
 
   const updateNewsletter = async (values: Backend.EditNewsletterForm) => {
-    const newsletter = {
+    const newsLetter = {
       title: values.title,
       publishDate: dayjs(values.publishDate).format('YYYY-MM-DD'),
     };
 
     try {
-      await newsLettersApiService.updateNewsletter(newsLetterId, newsletter);
+      await newsLettersApiService.updateNewsletter(newsLetterId, newsLetter);
       const data = await newsLettersApiService.getAllNewsLetters();
 
       if (data !== null) {
@@ -128,19 +130,52 @@ export const NewslettersPage = () => {
 
   // POST FORM DATA TO DATABASE
   const createNewsletter = async (value: Backend.CreateNewsletterForm) => {
-    const newsletter = {
+    const newsLetter = {
       ...value,
       publishDate: dayjs(value.publishDate).format('YYYY-MM-DD'),
       isPublished: false,
     };
 
     try {
-      await newsLettersApiService.postNewsLetter(newsletter);
+      await newsLettersApiService.postNewsLetter(newsLetter);
       const data = await newsLettersApiService.getAllNewsLetters();
 
       setNewsletters(data);
     } catch (_err) {
       NotificationService.error('Newsletter was not created');
+    }
+  };
+
+  // PUBLISH NEWSLETTER
+
+  const publishNewsletter = async (
+    event: React.MouseEvent<HTMLButtonElement>,
+    newsletterId: number,
+  ) => {
+    event.stopPropagation();
+    const publishData = {
+      isPublished: true,
+    };
+
+    if (!newsletter) {
+      return;
+    }
+
+    try {
+      await newsLettersApiService.publishNewsletter(newsletterId, publishData);
+      const updatedNewsLetter = await newsLettersApiService.getSingleNewsletter(
+        String(newsletter.id),
+      );
+
+      setNewsletter(updatedNewsLetter);
+      fetchData();
+      NotificationService.success('Newsletter successfully published!');
+    } catch (_err) {
+      const errorMessage = newsletter.isPublished
+        ? 'Something went wrong'
+        : 'This newsletter already published';
+
+      NotificationService.error(errorMessage);
     }
   };
 
@@ -157,35 +192,35 @@ export const NewslettersPage = () => {
           />
         )}
         <div>
-          {newsLetters?.map((newsletter) => (
+          {newsLetters?.map((newsLetter) => (
             <NewsletterCard
-              key={newsletter.id}
-              title={newsletter.title}
-              publishedDate={dayjs(newsletter.publishDate).format('YYYY-MM-DD')}
-              isPublished={newsletter.isPublished}
+              key={newsLetter.id}
+              title={newsLetter.title}
+              publishedDate={dayjs(newsLetter.publishDate).format('YYYY-MM-DD')}
+              isPublished={newsLetter.isPublished}
+              onPublish={(event) => publishNewsletter(event, newsLetter.id)}
               onEdit={(event) =>
                 handleEdit(
                   event,
-                  newsletter.id,
-                  newsletter.title,
-                  newsletter.publishDate,
+                  newsLetter.id,
+                  newsLetter.title,
+                  newsLetter.publishDate,
                 )
               }
               onNavigate={() => {
                 navigate(
                   `${NavigationService.HOME_PATH_WITH_ID.replace(
                     ':id',
-                    String(newsletter.id),
+                    String(newsLetter.id),
                   )}`,
                 );
-                sessionStorage.setItem('newsletter', String(newsletter.id));
+                sessionStorage.setItem('newsletter', String(newsLetter.id));
                 sessionStorage.setItem(
                   'pages',
-                  JSON.stringify(newsletter.pages),
+                  JSON.stringify(newsLetter.pages),
                 );
               }}
-              // onDelete={(event) => handleDelete(newsletter.id, event)}
-              onDelete={(event) => handlePopUpShow(event, newsletter.id)}
+              onDelete={(event) => handlePopUpShow(event, newsLetter.id)}
             />
           ))}
         </div>

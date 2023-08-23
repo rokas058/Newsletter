@@ -1,11 +1,18 @@
 import React, { FC, ReactElement } from 'react';
-import { CheckOutlined, DeleteOutlined, FormOutlined } from '@ant-design/icons';
+import {
+  CheckOutlined,
+  DeleteOutlined,
+  FormOutlined,
+  SaveOutlined,
+} from '@ant-design/icons';
 
 import { ButtonNew } from '@app/components/button-new/button-new.tsx';
 import {
   StyledDateCreated,
   StyledIconsContainer,
   StyledNewsletterCard,
+  StyledPublishButton,
+  StyledPublishedNewsletterButton,
   StyledTitleAndDateContainer,
 } from '@app/page/newsletters/newsletterCard/newsletter-card.styled.ts';
 import {
@@ -21,21 +28,41 @@ interface NewsletterCardInterface {
   onNavigate?: () => void;
   onEdit?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   onDelete?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onPublish?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   isPublished: boolean;
 }
 
 export const NewsletterCard: FC<NewsletterCardInterface> = (
   props,
 ): ReactElement => {
-  const { title, publishedDate, onEdit, onDelete, isPublished, onNavigate } =
-    props;
+  const {
+    title,
+    publishedDate,
+    onEdit,
+    onDelete,
+    isPublished,
+    onNavigate,
+    onPublish,
+  } = props;
 
   return (
     <StyledNewsletterCard onClick={onNavigate}>
-      {isPublished && (
-        <ButtonNew $backgroundColor={colorVibrantGreen} $color={colorDarkBLue}>
+      {isPublished ? (
+        <StyledPublishedNewsletterButton
+          $backgroundColor={colorVibrantGreen}
+          $color={colorDarkBLue}
+          onClick={onPublish}
+        >
           <CheckOutlined />
-        </ButtonNew>
+        </StyledPublishedNewsletterButton>
+      ) : (
+        <StyledPublishButton
+          $backgroundColor={colorVibrantGreen}
+          $color={colorDarkBLue}
+          onClick={onPublish}
+        >
+          <SaveOutlined />
+        </StyledPublishButton>
       )}
 
       <StyledTitleAndDateContainer>
