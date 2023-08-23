@@ -13,17 +13,15 @@ public class EventMapper {
 
     public static Event toEvent(EventEntity event) {
         return Event.builder()
-            .id(event.getEventId())
             .title(event.getTitle())
             .startDate(event.getStartDate())
             .endDate(event.getEndDate())
-            .eventType(event.getEventType())
+            .eventType(EventType.OTHER)
             .build();
     }
 
     public static Event toEvent(String title, LocalDate date, EventType type) {
         return Event.builder()
-            .id(null)
             .title(title)
             .startDate(date)
             .endDate(date)

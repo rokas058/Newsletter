@@ -2,6 +2,7 @@ package com.tietoevry.backend.controller;
 
 import java.util.List;
 
+import com.tietoevry.backend.model.event.CreatedEvent;
 import com.tietoevry.backend.model.event.Event;
 import com.tietoevry.backend.model.event.EventForm;
 import com.tietoevry.backend.service.EventService;
@@ -35,12 +36,12 @@ public class EventController {
     }
 
     @GetMapping
-    public List<Event> getEvents() {
+    public List<CreatedEvent> getEvents() {
         return eventService.getEvents();
     }
 
     @GetMapping(path = "/{id}")
-    public Event getEvent(@PathVariable Long id) {
+    public CreatedEvent getEvent(@PathVariable Long id) {
         return eventService.getEvent(id);
     }
 

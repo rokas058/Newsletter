@@ -16,9 +16,11 @@ import com.tietoevry.backend.database.entity.UserEntity;
 import com.tietoevry.backend.database.repository.EventRepository;
 import com.tietoevry.backend.database.repository.UserRepository;
 import com.tietoevry.backend.exceptions.EventNotFoundException;
+import com.tietoevry.backend.mapper.event.CreatedEventMapper;
 import com.tietoevry.backend.mapper.event.EditEventMapper;
 import com.tietoevry.backend.mapper.event.EventFormMapper;
 import com.tietoevry.backend.mapper.event.EventMapper;
+import com.tietoevry.backend.model.event.CreatedEvent;
 import com.tietoevry.backend.model.event.Event;
 import com.tietoevry.backend.model.event.EventForm;
 import lombok.RequiredArgsConstructor;
@@ -34,8 +36,7 @@ public class EventService {
     private final UserRepository userRepository;
 
     public Event createEvent(EventForm eventForm) {
-        EventType eventType = EventType.OTHER;
-        EventEntity eventToCreate = EventFormMapper.toEventEntity(eventForm, eventType);
+        EventEntity eventToCreate = EventFormMapper.toEventEntity(eventForm);
         EventEntity createdEvent = eventRepository.save(eventToCreate);
 
         return EventMapper.toEvent(createdEvent);
@@ -104,6 +105,7 @@ public class EventService {
     }
 
     private List<Event> getAllHolidays() {
+        //API geriau naudot
         String yearValue = yearNow();
 
         final List<String> titles = List.of(
@@ -156,17 +158,17 @@ public class EventService {
         return String.valueOf(currentYear.getValue());
     }
 
-    public List<Event> getEvents() {
+    public List<CreatedEvent> getEvents() {
         List<EventEntity> eventEntities = eventRepository.findAll();
 
         return eventEntities.stream()
-            .map(EventMapper::toEvent)
+            .map(CreatedEventMapper::toCreatedEvent)
             .toList();
     }
 
-    public Event getEvent(Long id) {
+    public CreatedEvent getEvent(Long id) {
         return eventRepository.findById(id)
-            .map(EventMapper::toEvent)
+            .map(CreatedEventMapper::toCreatedEvent)
             .orElseThrow(() -> new EventNotFoundException(String.format("Event with id %d does not exist.", id)));
     }
 
@@ -174,7 +176,7 @@ public class EventService {
         eventRepository.findById(id)
             .orElseThrow(() -> new EventNotFoundException(String.format("Event with id %d does not exist.", id)));
 
-        EventEntity eventEntity = EditEventMapper.toEventEntity(id, eventForm, EventType.OTHER);
+        EventEntity eventEntity = EditEventMapper.toEventEntity(id, eventForm);
         EventEntity eventEntity1 = eventRepository.save(eventEntity);
         return EventMapper.toEvent(eventEntity1);
     }

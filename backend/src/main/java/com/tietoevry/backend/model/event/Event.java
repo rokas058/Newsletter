@@ -10,7 +10,6 @@ import lombok.Value;
 @Builder
 @Value
 public class Event {
-    Long id;
     @NotNull
     String title;
     @NotNull

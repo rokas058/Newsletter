@@ -3,8 +3,6 @@ package com.tietoevry.backend.database.entity;
 import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,7 +27,4 @@ public class EventEntity {
     private LocalDate startDate;
     @NotNull
     private LocalDate endDate;
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    private EventType eventType;
 }
