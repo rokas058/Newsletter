@@ -19,10 +19,19 @@ type Props = OwnProps & ColorButtonProps & ButtonProps;
 
 export const ButtonNew: FC<Props> = (props) => {
   const { $color, $backgroundColor, children, ...rest } = props;
+  const role = sessionStorage.getItem('role');
 
   return (
-    <StyledButton $color={$color} $backgroundColor={$backgroundColor} {...rest}>
-      {children}
-    </StyledButton>
+    <>
+      {role === 'ADMIN' && (
+        <StyledButton
+          $color={$color}
+          $backgroundColor={$backgroundColor}
+          {...rest}
+        >
+          {children}
+        </StyledButton>
+      )}
+    </>
   );
 };

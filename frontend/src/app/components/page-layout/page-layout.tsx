@@ -16,13 +16,16 @@ interface PageLayoutProps {
 
 export const PageLayout: FC<PageLayoutProps> = (props) => {
   const { childrenCard, childrenForm } = props;
+  const role = sessionStorage.getItem('role');
 
   return (
     <>
       <StyledWave src={waveImage} alt="wave-image" />
       <StyledTravelPageContainer>
         <StyledTravelCardsContainer>{childrenCard}</StyledTravelCardsContainer>
-        <StyledFormContainer>{childrenForm}</StyledFormContainer>
+        {role === 'ADMIN' && (
+          <StyledFormContainer>{childrenForm}</StyledFormContainer>
+        )}
       </StyledTravelPageContainer>
     </>
   );

@@ -20,6 +20,7 @@ export const Navbar = () => {
   const location = useLocation();
 
   const { newsletter, setNewsletter } = useNewsletterContext();
+  const role = sessionStorage.getItem('role');
 
   console.log(newsletter);
 
@@ -51,14 +52,18 @@ export const Navbar = () => {
         <StyledNavbarContainer>
           <StyledLogo src={logo} alt="logo" />
           <StyledIconContainer>
-            <StyledIcon to={NavigationService.USERS_PATH}>
-              <UserOutlined />
-              <StyledIconText>Users</StyledIconText>
-            </StyledIcon>
-            <StyledIcon to={NavigationService.NEWSLETTERS_PATH}>
-              <ReadOutlined />
-              <StyledIconText>Newsletters</StyledIconText>
-            </StyledIcon>
+            {role === 'ADMIN' && (
+              <StyledIcon to={NavigationService.USERS_PATH}>
+                <UserOutlined />
+                <StyledIconText>Users</StyledIconText>
+              </StyledIcon>
+            )}
+            {role === 'ADMIN' && (
+              <StyledIcon to={NavigationService.NEWSLETTERS_PATH}>
+                <ReadOutlined />
+                <StyledIconText>Newsletters</StyledIconText>
+              </StyledIcon>
+            )}
             <StyledIcon
               to={
                 newsletter === undefined

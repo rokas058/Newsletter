@@ -16,6 +16,7 @@ export const useLogin = () => {
 
       setUsername(authenticationResponse.username);
       setRoles(authenticationResponse.roles);
+      sessionStorage.setItem('role', authenticationResponse?.roles?.[0]!);
     } catch (error) {
       NotificationService.error('Could not login');
     } finally {
