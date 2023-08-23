@@ -112,7 +112,7 @@ public class NewsletterService {
 
         newsletter.setIsPublished(true);
         NewsletterEntity updatedNewsletter = newsletterRepository.save(newsletter);
-        //sendEmailToUsers();
+        sendEmailToUsers();
         return NewsletterMapper.toNewsletter(updatedNewsletter);
 
     }
