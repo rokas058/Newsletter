@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import { Form, Modal } from 'antd';
 
 import { HrForm } from '@app/page/hr/form/HrForm.tsx';
-import { StyledHrContainer } from '@app/page/hr/hr.styled.ts';
+import { StyledCardsContainer } from '@app/page/hr/hr.styled.ts';
 import { useGetPage } from '@app/page/hr/hooks/use-get-page.ts';
-import { HrCard } from '@app/page/hr/hrCard/hr-card.tsx';
 import { useDeleteSection } from '@app/page/hr/hooks/use-delete-section.ts';
 import { useAddSection } from '@app/page/hr/hooks/use-add-section.ts';
 import { PageLayout } from '@app/components/page-layout/page-layout.tsx';
+import { HrNewsCard } from '@app/components/hr-news-card/hr-news-card.tsx';
 
 export const HrPage = () => {
   const { requestState: getPageRequestState, page, getPage } = useGetPage();
@@ -62,10 +62,11 @@ export const HrPage = () => {
           />
         }
         childrenCard={
-          <StyledHrContainer>
+          <StyledCardsContainer>
             {page?.sections?.map((section) => (
-              <HrCard
+              <HrNewsCard
                 key={section.id}
+                categoryName="HR Department News"
                 title={section.title}
                 text={section.text}
                 image={
@@ -78,7 +79,7 @@ export const HrPage = () => {
                 }}
               />
             ))}
-          </StyledHrContainer>
+          </StyledCardsContainer>
         }
       />
     </>

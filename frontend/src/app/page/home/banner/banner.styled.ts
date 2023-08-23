@@ -10,7 +10,7 @@ import { spacing2 } from '@app/styles/spacing.ts';
 
 export const StyledBannerSection = styled.div`
   width: 100%;
-  height: 500px;
+  height: 300px;
   background-color: ${colorViolet}40;
   position: relative;
   display: flex;

@@ -7,7 +7,6 @@ import {
   StyledButtonContainer,
   StyledFormItem,
 } from '@app/page/hr/form/HrForm.styled.ts';
-import { StyledLabel } from '@app/page/hr/hr.styled.ts';
 
 interface HrFormInterface {
   onFinish?: any;
@@ -28,12 +27,10 @@ export const HrForm = (props: HrFormInterface) => {
       form={form}
     >
       <h2>Create {topicTitle} Card</h2>
-      <StyledFormItem name="title">
-        <StyledLabel>Title</StyledLabel>
+      <StyledFormItem label="Title" name="title">
         <Input placeholder="Enter title..." />
       </StyledFormItem>
-      <StyledFormItem name="text">
-        <StyledLabel>Description</StyledLabel>
+      <StyledFormItem label="Description" name="text">
         <TextArea placeholder="Enter your text..." />
       </StyledFormItem>
       <StyledFormItem>

@@ -19,7 +19,7 @@ export const PageLayout: FC<PageLayoutProps> = (props) => {
 
   return (
     <>
-      <StyledWave src={waveImage} alt="backgorund" />
+      <StyledWave src={waveImage} alt="wave-image" />
       <StyledTravelPageContainer>
         <StyledTravelCardsContainer>{childrenCard}</StyledTravelCardsContainer>
         <StyledFormContainer>{childrenForm}</StyledFormContainer>

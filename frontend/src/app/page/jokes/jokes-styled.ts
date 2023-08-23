@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import { spacing12 } from '@app/styles/spacing.ts';
 import { colorPrimary, colorViolet, colorWhite } from '@app/styles/colors.ts';
 import { StyledSingleJokeContainer } from '@app/page/jokes/jokes-card/jokes-card-styled.ts';
 
@@ -64,4 +65,8 @@ export const StyledMeme = styled.img`
     transform: translate3d(-50%, -50%, 0) scale(1.015) rotate(0.5deg);
     border-radius: 1% 1% 2% 4% / 2% 6% 5% 4%;
   }
+`;
+
+export const StyledCardsContainer = styled.div`
+  padding: 0 ${spacing12} ${spacing12};
 `;

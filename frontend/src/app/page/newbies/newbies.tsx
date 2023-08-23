@@ -27,6 +27,7 @@ export const NewbiesPage = () => (
             Nekantrauju prisijungti prie komandos ir tapti jos dalimi!`}
               image={profilePictureJulius}
             />
+
             <NewbiesCard
               title="Joana Mastianica"
               description={`Front-End Developer

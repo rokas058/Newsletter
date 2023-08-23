@@ -1,40 +1,50 @@
 import { DeleteOutlined, FormOutlined } from '@ant-design/icons';
-import { FC } from 'react';
+import React, { FC } from 'react';
 
 import { ButtonNew } from '@app/components/button-new/button-new.tsx';
 import { colorBlack, colorYellow } from '@app/styles/colors.ts';
 
 import {
   StyledActionIconsContainer,
+  StyledCardContainer,
   StyledContentContainer,
   StyledDescription,
   StyledHeading5,
   StyledImage,
   StyledImageContainer,
-  StyledTravelCardContainer,
-} from './travel-card.styled.ts';
+} from './hr-news-card.styled.ts';
 
-interface TravelCardProps {
+interface HrNewsCardProps {
   image: string;
   categoryName: string;
-  title: string;
-  text: string;
+  title?: string;
+  text?: string;
+  onEdit?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onDelete?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-export const TravelCard: FC<TravelCardProps> = (props) => {
-  const { image, categoryName, title, text } = props;
+export const HrNewsCard: FC<HrNewsCardProps> = (props) => {
+  const { image, categoryName, title, text, onDelete, onEdit } = props;
 
   return (
-    <StyledTravelCardContainer>
+    <StyledCardContainer>
       <StyledImageContainer>
         <StyledImage src={image} alt="image" />
       </StyledImageContainer>
       <StyledContentContainer>
         <StyledActionIconsContainer>
-          <ButtonNew $backgroundColor={colorYellow} $color={colorBlack}>
+          <ButtonNew
+            $backgroundColor={colorYellow}
+            $color={colorBlack}
+            onClick={onEdit}
+          >
             <FormOutlined />
           </ButtonNew>
-          <ButtonNew $backgroundColor={colorYellow} $color={colorBlack}>
+          <ButtonNew
+            $backgroundColor={colorYellow}
+            $color={colorBlack}
+            onClick={onDelete}
+          >
             <DeleteOutlined />
           </ButtonNew>
         </StyledActionIconsContainer>
@@ -42,6 +52,6 @@ export const TravelCard: FC<TravelCardProps> = (props) => {
         <h2>{title}</h2>
         <StyledDescription>{text}</StyledDescription>
       </StyledContentContainer>
-    </StyledTravelCardContainer>
+    </StyledCardContainer>
   );
 };

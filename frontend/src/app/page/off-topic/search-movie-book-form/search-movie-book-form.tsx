@@ -1,10 +1,11 @@
 import { FC, useState } from 'react';
-import { Button, Form, Radio } from 'antd';
+import { Button, Radio } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { useParams } from 'react-router-dom';
 
 import {
   StyledBookMovieFrom,
+  StyledFormItem,
   StyledInput,
   StyledRadioGroup,
 } from '@app/page/off-topic/search-movie-book-form/search-movie-book-form.styled.ts';
@@ -54,12 +55,9 @@ export const SearchBookMovieForm: FC<SearchBookMovieFormProps> = (props) => {
   };
 
   return (
-    <StyledBookMovieFrom
-      onFinish={handleSubmit}
-      labelCol={{ span: 5 }}
-      wrapperCol={{ span: 12 }}
-    >
-      <Form.Item label="Title" labelAlign="right">
+    <StyledBookMovieFrom onFinish={handleSubmit}>
+      <h2>Create Recommendation</h2>
+      <StyledFormItem label="Title" labelAlign="right">
         <StyledInput
           placeholder="Please input movie or book title"
           required={true}
@@ -68,9 +66,9 @@ export const SearchBookMovieForm: FC<SearchBookMovieFormProps> = (props) => {
           value={titleValue}
           onChange={(event) => setTitle(event.target.value)}
         />
-      </Form.Item>
+      </StyledFormItem>
 
-      <Form.Item label="Select" labelAlign="right">
+      <StyledFormItem label="Select" labelAlign="right">
         <StyledRadioGroup
           value={checkboxValue}
           onChange={(event) => setCheckboxValue(event.target.value)}
@@ -82,13 +80,13 @@ export const SearchBookMovieForm: FC<SearchBookMovieFormProps> = (props) => {
             Movie
           </Radio>
         </StyledRadioGroup>
-      </Form.Item>
+      </StyledFormItem>
 
-      <Form.Item wrapperCol={{ span: 12, offset: 5 }}>
+      <StyledFormItem wrapperCol={{ span: 12, offset: 5 }}>
         <Button type="primary" htmlType="submit">
           Add
         </Button>
-      </Form.Item>
+      </StyledFormItem>
     </StyledBookMovieFrom>
   );
 };

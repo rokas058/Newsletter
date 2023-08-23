@@ -14,7 +14,7 @@ export const StyledNewbieCard = styled.div`
   border-radius: 10px;
   gap: ${spacing2};
   padding: 20px;
-  width: 300px;
+  width: 200px;
   min-width: 250px;
   height: 400px;
   position: relative;

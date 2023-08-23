@@ -1,13 +1,11 @@
 import styled from 'styled-components';
 
 import { Container } from '@app/components/container';
-import { colorViolet, colorWhite } from '@app/styles/colors.ts';
+import { colorWhite } from '@app/styles/colors.ts';
 import { spacing2 } from '@app/styles/spacing.ts';
 
 export const StyledPageTitleContainer = styled(Container)`
-  height: 100vh;
-  align-items: center;
-  background: ${colorViolet}40;
+  height: 100%;
   display: flex;
   font-size: 35px;
   justify-content: center;
