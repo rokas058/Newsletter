@@ -11,14 +11,12 @@ import {
 export const ADD_EVENT_FORM_INITIAL_VALUES = {
   title: '',
   startDate: '',
-  endDate: '',
   eventType: 'OTHER',
 };
 
 export const ADD_EVENT_FORM_FIELDS = {
   title: 'title',
   startDate: 'startDate',
-  endDate: 'endDate',
   eventType: 'eventType',
 };
 
@@ -36,7 +34,9 @@ export const AddEventForm: React.FC<AddEventFormProps> = ({
       if (typeof values === 'object' && values !== null) {
         const eventData = values as Backend.EventForm;
 
-        if (eventData.title && eventData.startDate && eventData.endDate) {
+        if (eventData.title && eventData.startDate) {
+          // Set the startDate as the endDate
+          eventData.endDate = eventData.startDate;
           createEvent(eventData);
         }
       }
@@ -64,25 +64,12 @@ export const AddEventForm: React.FC<AddEventFormProps> = ({
 
     <StyledFormItem
       name={ADD_EVENT_FORM_FIELDS.startDate}
-      label="Start Date"
+      label="Date"
       hasFeedback={true}
-      rules={[{ required: true, message: 'Please select the start date' }]}
+      rules={[{ required: true, message: 'Please select the date' }]}
     >
       <StyledDatePickerInput
         name="startDate"
-        format="YYYY-MM-DD"
-        placeholder="2023-08-21"
-      />
-    </StyledFormItem>
-
-    <StyledFormItem
-      name={ADD_EVENT_FORM_FIELDS.endDate}
-      label="End Date"
-      hasFeedback={true}
-      rules={[{ required: true, message: 'Please select the end date' }]}
-    >
-      <StyledDatePickerInput
-        name="endDate"
         format="YYYY-MM-DD"
         placeholder="2023-08-21"
       />

@@ -4,16 +4,18 @@ import { Button, DatePicker, Form, Input } from 'antd';
 import { colorPeach } from '@app/styles/colors.ts';
 
 export const StyledForm = styled(Form)`
-  width: 40%;
+  width: 100%;
   padding: 20px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: start;
   align-items: center;
   background-color: ${colorPeach};
 `;
 
 export const StyledFormItem = styled(Form.Item)`
   width: 300px;
+  margin-right: 20px;
 `;
 export const StyledFormInput = styled(Input)`
   height: 32px;
