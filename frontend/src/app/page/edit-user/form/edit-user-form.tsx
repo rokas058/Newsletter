@@ -25,7 +25,6 @@ export const EDIT_USER_FORM_FIELDS: FormFields<Backend.EditUserForm> = {
   email: 'email',
   birthday: 'birthday',
   confirmBirthday: 'confirmBirthday',
-  password: 'password',
 };
 
 const roleSelectValues: Record<Backend.Role, string> = {
