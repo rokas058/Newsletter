@@ -1,21 +1,24 @@
 import { Calendar, Form } from 'antd';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
+import Moment from 'moment';
 
 import {
+  StyledButton,
   StyledCalendarContainer,
+  StyledCalendarPage,
   StyledEventList,
   StyledEventListItem,
   StyledMonthName,
 } from '@app/page/calendar/calender.styled.ts';
 import { eventsApiService } from '@app/api/service/event-api-service.ts';
 import { NotificationService } from '@app/services/notification-service.ts';
-import { StyledPageTitleContainer } from '@app/page/newbies/newbies.styled.ts';
 import { AddEventForm } from '@app/page/calendar/form/add-event-form.tsx';
 
 export const CalendarPage = () => {
   const [events, setEvents] = useState<Backend.Event[] | null>(null);
   const [formInstance] = Form.useForm();
+  const [currentMonth, setCurrentMonth] = useState(dayjs());
 
   const createEvent = async (eventData: Backend.EventForm) => {
     const event = {
@@ -33,6 +36,10 @@ export const CalendarPage = () => {
     } catch (_err) {
       NotificationService.error('Event creation failed');
     }
+  };
+
+  const onPanelChange = (value: any) => {
+    setCurrentMonth(value);
   };
 
   useEffect(() => {
@@ -84,13 +91,40 @@ export const CalendarPage = () => {
     );
   };
 
+  const headerRender = ({
+    value,
+    onChange,
+  }: {
+    value: Moment;
+    onChange: (value: Moment) => void;
+  }) => (
+    <div>
+      <StyledButton
+        type="primary"
+        onClick={() => onChange(value.subtract(1, 'month'))}
+      >
+        Prev
+      </StyledButton>
+      <StyledButton
+        type="primary"
+        onClick={() => onChange(value.add(1, 'month'))}
+      >
+        Next
+      </StyledButton>
+    </div>
+  );
+
   return (
-    <StyledPageTitleContainer>
+    <StyledCalendarPage>
       <StyledCalendarContainer>
-        <StyledMonthName>{dayjs().format('MMMM YYYY')}</StyledMonthName>
-        <Calendar cellRender={dateCellRender} />
+        <StyledMonthName>{currentMonth.format('MMMM YYYY')}</StyledMonthName>
+        <Calendar
+          cellRender={dateCellRender}
+          onPanelChange={onPanelChange}
+          headerRender={headerRender}
+        />
         <AddEventForm formInstance={formInstance} createEvent={createEvent} />
       </StyledCalendarContainer>
-    </StyledPageTitleContainer>
+    </StyledCalendarPage>
   );
 };

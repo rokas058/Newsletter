@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Button } from 'antd';
 
 import { spacing12, spacing4 } from '@app/styles/spacing.ts';
 
@@ -10,12 +11,23 @@ export const StyledCalendarContainer = styled.div`
   justify-content: space-between;
   box-shadow: 10px 10px 20px -14px rgb(0 0 0 / 65%);
 `;
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 
+export const StyledCalendarPage = styled.div`
+  background: #d0c5e0;
+`;
+
+export const StyledButton = styled(Button)`
+  margin-left: 20px;
+`;
 export const StyledMonthName = styled.div`
   font-size: 24px;
   font-weight: bold;
-  padding-bottom: 16px;
-  padding-top: 16px;
+  padding-bottom: 20px;
+  padding-top: 20px;
   background: white;
   text-align: center;
   font-family: 'Tietoevry Sans 1', serif;
