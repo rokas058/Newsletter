@@ -27,7 +27,7 @@ export const LoginForm = (props: Props) => {
       layout="vertical"
     >
       <Form.Item
-        label="Username"
+        label="Vartotojas"
         name={LOGIN_FORM_FIELDS.username}
         rules={[{ required: true, message: 'Please input your username!' }]}
       >
@@ -35,7 +35,7 @@ export const LoginForm = (props: Props) => {
       </Form.Item>
 
       <Form.Item
-        label="Password"
+        label="Slaptažodis"
         name={LOGIN_FORM_FIELDS.password}
         rules={[{ required: true, message: 'Please input your password!' }]}
       >

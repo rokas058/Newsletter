@@ -29,6 +29,17 @@ export const usersColumns = (
     key: 'lastName',
   },
   {
+    title: 'Birthday',
+    dataIndex: 'birthday',
+    key: 'birthday',
+  },
+  {
+    title: 'Confirm Birthday',
+    dataIndex: 'confirmBirthday',
+    key: 'confirm_birthday',
+    render: (confirmBirthday: boolean) => (confirmBirthday ? 'Taip' : 'Ne'),
+  },
+  {
     title: 'Email',
     key: 'email',
     dataIndex: 'email',
