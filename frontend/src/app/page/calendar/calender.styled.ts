@@ -10,14 +10,12 @@ export const StyledCalendarContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   box-shadow: 10px 10px 20px -14px rgb(0 0 0 / 65%);
-`;
-export const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
+  border-radius: 10px;
 `;
 
 export const StyledCalendarPage = styled.div`
   background: #d0c5e0;
+  max-height: 100vh;
 `;
 
 export const StyledButton = styled(Button)`

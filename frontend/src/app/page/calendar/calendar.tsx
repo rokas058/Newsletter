@@ -1,7 +1,6 @@
 import { Calendar, Form } from 'antd';
-import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
-import Moment from 'moment';
+import dayjs from 'dayjs';
 
 import {
   StyledButton,
@@ -81,7 +80,7 @@ export const CalendarPage = () => {
     return (
       <StyledEventList>
         {listData.map((item) => (
-          <StyledEventListItem key={item.id} eventType={item.eventType}>
+          <StyledEventListItem key={item.title} eventType={item.eventType}>
             <span>
               {getEventTypeEmoji(item.eventType)} {item.title}
             </span>
@@ -95,8 +94,8 @@ export const CalendarPage = () => {
     value,
     onChange,
   }: {
-    value: Moment;
-    onChange: (value: Moment) => void;
+    value: dayjs.Dayjs;
+    onChange: (value: dayjs.Dayjs) => void;
   }) => (
     <div>
       <StyledButton
