@@ -15,7 +15,7 @@ export const StyledCalendarContainer = styled.div`
 
 export const StyledCalendarPage = styled.div`
   background: #d0c5e0;
-  max-height: 100vh;
+  min-height: 90%;
 `;
 
 export const StyledButton = styled(Button)`

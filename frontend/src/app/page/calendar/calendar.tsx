@@ -15,6 +15,7 @@ import { NotificationService } from '@app/services/notification-service.ts';
 import { AddEventForm } from '@app/page/calendar/form/add-event-form.tsx';
 
 export const CalendarPage = () => {
+  const role = sessionStorage.getItem('role');
   const [events, setEvents] = useState<Backend.Event[] | null>(null);
   const [formInstance] = Form.useForm();
   const [currentMonth, setCurrentMonth] = useState(dayjs());
@@ -122,7 +123,9 @@ export const CalendarPage = () => {
           onPanelChange={onPanelChange}
           headerRender={headerRender}
         />
-        <AddEventForm formInstance={formInstance} createEvent={createEvent} />
+        {role === 'ADMIN' && (
+          <AddEventForm formInstance={formInstance} createEvent={createEvent} />
+        )}
       </StyledCalendarContainer>
     </StyledCalendarPage>
   );
