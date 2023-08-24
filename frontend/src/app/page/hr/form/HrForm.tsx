@@ -37,7 +37,15 @@ export const HrForm = (props: HrFormInterface) => {
         <TextArea placeholder="Enter your text..." />
       </StyledFormItem>
       <StyledFormItem>
-        <StyledFormItem name="image">
+        <StyledFormItem
+          name="image"
+          rules={[
+            {
+              required: true,
+              message: 'Please upload a picture',
+            },
+          ]}
+        >
           <Upload.Dragger
             beforeUpload={(file) => {
               const reader = new FileReader();
