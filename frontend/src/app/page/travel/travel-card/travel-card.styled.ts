@@ -6,22 +6,16 @@ import {
   colorWarmGrey20,
   colorWhite,
 } from '@app/styles/colors.ts';
-import {
-  spacing0,
-  spacing14,
-  spacing2,
-  spacing4,
-} from '@app/styles/spacing.ts';
+import { spacing0, spacing2, spacing4 } from '@app/styles/spacing.ts';
 
 export const StyledTravelCardContainer = styled.div`
   width: 100%;
-  height: auto;
+  min-height: 400px;
   background-color: ${colorWarmGrey20};
   border-radius: ${spacing4};
   display: flex;
   justify-content: flex-end;
   box-shadow: 5px 6px 16px -5px rgb(0 0 0 / 75%);
-  margin-bottom: ${spacing14};
   position: relative;
 `;
 export const StyledImageContainer = styled.div`

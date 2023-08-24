@@ -53,6 +53,7 @@ export const NewsPage = () => {
       <PageLayout
         childrenForm={
           <HrForm
+            topicTitle="News"
             firstLabel="Title"
             secondLabel="Text"
             form={form}

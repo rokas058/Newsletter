@@ -1,6 +1,6 @@
 import { PageLayout } from '@app/components/page-layout/page-layout.tsx';
 import { HrForm } from '@app/page/hr/form/HrForm.tsx';
-import { TravelCard } from '@app/page/news/travel-card/travel-card.tsx';
+import { TravelCard } from '@app/page/travel/travel-card/travel-card.tsx';
 import travelImage1 from '@app/assets/page-images/travel.jpeg';
 import desertImage1 from '@app/assets/page-images/travel-image.jpg';
 import desertImage2 from '@app/assets/page-images/desert2.jpeg';

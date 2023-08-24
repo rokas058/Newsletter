@@ -14,11 +14,11 @@ import { HrForm } from '@app/page/hr/form/HrForm.tsx';
 export const JokesPage = () => (
   <>
     <PageLayout
-      childrenForm={<HrForm />}
+      childrenForm={<HrForm topicTitle="Joke" />}
       childrenCard={
         <StyledCardsContainer>
           <StyledMemeContainer>
-            Meme of the Month <StyledMeme src={memeOfTheMonth} />
+            <StyledMeme src={memeOfTheMonth} />
           </StyledMemeContainer>
           <StyledJokesContainer>
             <JokesCard
