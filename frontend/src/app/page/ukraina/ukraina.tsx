@@ -64,7 +64,7 @@ export const UkrainaPage = () => (
           <StyledSpan>Paskirtis: Parama</StyledSpan>
           <StyledSpan>Adresas: Vilnius, Peteliškių g. 9-10</StyledSpan>
           <StyledSpan>Direktorius: Oleg Šurajev</StyledSpan>
-          <StyledAnchorElement href="https://www.aukok.lt/proje.../Musu-sirdys-ir-rankos-Ukrainai">
+          <StyledAnchorElement href="https://suukraina.lt/pagalba-ukrainai/aukojimas/1k-paramos-fondas/">
             1K Paramos Fondas 💛
           </StyledAnchorElement>
         </StyledMiniDiv>
@@ -97,7 +97,7 @@ export const UkrainaPage = () => (
         <StyledMiniDiv>
           <StyledSpan>Gyvūnų globa</StyledSpan>
           <StyledAnchorElement href="https://bit.ly/PrieglobstisGyvunams">
-            CGI 💙
+            GGI 💙
           </StyledAnchorElement>
         </StyledMiniDiv>
         <StyledMiniDiv>
