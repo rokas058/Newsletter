@@ -6,7 +6,7 @@ import { recommendationsApiService } from '@app/api/service/recommendations-api-
 import {
   StyledCardsContainer,
   StyledFormContainer,
-  StyledMoviesBooksContainer,
+  StyledRecommendationsContainer,
 } from '@app/page/off-topic/off-topic.styled.ts';
 import { MovieBookCard } from '@app/page/off-topic/movie-book-card/movie-book-card.tsx';
 import { StyledHeading } from '@app/page/off-topic/movie-book-card/movie-book-card.styled.ts';
@@ -72,7 +72,7 @@ export const OffTopicPage = () => {
                 {/*  setBooks={setAllBooks}*/}
                 {/*  allBooks={allBooks}*/}
                 {/*/ >*/}
-                <StyledMoviesBooksContainer>
+                <StyledRecommendationsContainer>
                   {allBooks?.map((book: Backend.Volume) => (
                     <MovieBookCard
                       key={book.entityId}
@@ -84,11 +84,11 @@ export const OffTopicPage = () => {
                       onDelete={() => handleDelete(book.entityId!)}
                     />
                   ))}
-                </StyledMoviesBooksContainer>
+                </StyledRecommendationsContainer>
               </StyledFormContainer>
 
               <StyledHeading>Movies Recommendations</StyledHeading>
-              <StyledMoviesBooksContainer>
+              <StyledRecommendationsContainer>
                 {allMovies?.map((movie: Backend.OmdbMovie) => (
                   <MovieBookCard
                     key={movie.entityId}
@@ -100,7 +100,7 @@ export const OffTopicPage = () => {
                     onDelete={() => handleDelete(movie.entityId!)}
                   />
                 ))}
-              </StyledMoviesBooksContainer>
+              </StyledRecommendationsContainer>
             </StyledCardsContainer>
           </>
         }

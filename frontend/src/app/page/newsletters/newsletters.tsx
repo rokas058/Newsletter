@@ -164,7 +164,7 @@ export const NewslettersPage = () => {
     try {
       await newsLettersApiService.publishNewsletter(newsletterId, publishData);
       const updatedNewsLetter = await newsLettersApiService.getSingleNewsletter(
-        String(newsletter.id),
+        String(newsletterId),
       );
 
       setNewsletter(updatedNewsLetter);

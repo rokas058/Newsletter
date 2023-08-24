@@ -14,14 +14,15 @@ export const StyledFormContainer = styled.div`
   flex-direction: row-reverse;
 `;
 
-export const StyledMoviesBooksContainer = styled.div`
-  max-width: 800px;
+export const StyledRecommendationsContainer = styled.div`
+  width: 800px;
   height: 500px;
   padding: ${spacing4};
   display: flex;
   gap: ${spacing4};
   background-color: ${colorViolet}40;
   overflow-x: scroll;
+  box-shadow: 5px 6px 16px -5px rgb(0 0 0 / 75%);
 `;
 
 export const StyledCardsContainer = styled.div`
