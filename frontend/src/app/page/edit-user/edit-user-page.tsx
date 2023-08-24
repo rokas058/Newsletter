@@ -40,7 +40,7 @@ export const EditUserPage = () => {
         <EditUserForm
           loading={loading}
           onFinish={handleSubmit}
-          initialValues={{ ...user, birthday: dayjs(user.birthday) }}
+          initialValues={{ ...user, birthday: dayjs(user.birthday).hour(12) }}
         />
       ) : (
         <Spin spinning={true} />
