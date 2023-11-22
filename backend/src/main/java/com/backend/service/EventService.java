@@ -126,6 +126,7 @@ public class EventService {
         localDates.add(getEasterDay());
         localDates.add(getEasterDay().plusDays(1));
 
+
         return IntStream.range(0, titles.size())
             .mapToObj(i -> EventMapper.toEvent(titles.get(i), localDates.get(i), EventType.HOLIDAY))
             .collect(Collectors.toList());
