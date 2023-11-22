@@ -1,10 +1,10 @@
-package com.tietoevry.backend.mapper.section;
+package com.backend.mapper.section;
 
 import java.util.List;
 
-import com.tietoevry.backend.database.entity.SectionEntity;
-import com.tietoevry.backend.mapper.image.ImageMapper;
-import com.tietoevry.backend.model.section.Section;
+import com.backend.model.section.Section;
+import com.backend.database.entity.SectionEntity;
+import com.backend.mapper.image.ImageMapper;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)

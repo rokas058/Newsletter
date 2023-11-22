@@ -1,6 +1,6 @@
-package com.tietoevry.backend.model.recommendation;
+package com.backend.model.recommendation;
 
-import com.tietoevry.backend.database.entity.MediaType;
+import com.backend.database.entity.MediaType;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Value;

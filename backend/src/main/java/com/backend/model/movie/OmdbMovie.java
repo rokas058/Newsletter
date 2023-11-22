@@ -1,4 +1,4 @@
-package com.tietoevry.backend.model.movie;
+package com.backend.model.movie;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;

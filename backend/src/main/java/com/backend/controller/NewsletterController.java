@@ -1,11 +1,11 @@
-package com.tietoevry.backend.controller;
+package com.backend.controller;
 
 import java.util.List;
 
-import com.tietoevry.backend.model.newsletter.CreateNewsletterForm;
-import com.tietoevry.backend.model.newsletter.EditNewsletterForm;
-import com.tietoevry.backend.model.newsletter.Newsletter;
-import com.tietoevry.backend.service.NewsletterService;
+import com.backend.model.newsletter.CreateNewsletterForm;
+import com.backend.model.newsletter.EditNewsletterForm;
+import com.backend.model.newsletter.Newsletter;
+import com.backend.service.NewsletterService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;

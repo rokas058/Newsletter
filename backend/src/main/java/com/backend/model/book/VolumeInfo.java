@@ -1,4 +1,4 @@
-package com.tietoevry.backend.model.book;
+package com.backend.model.book;
 
 import java.util.List;
 

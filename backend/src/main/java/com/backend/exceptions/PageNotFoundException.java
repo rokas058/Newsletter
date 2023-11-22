@@ -1,4 +1,4 @@
-package com.tietoevry.backend.exceptions;
+package com.backend.exceptions;
 
 public class PageNotFoundException extends RuntimeException {
     public PageNotFoundException(String message) {

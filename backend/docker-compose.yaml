@@ -7,7 +7,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: S*DLf5wM782C
       MYSQL_DATABASE: month_with_id_db
-      MYSQL_USER: monthWithIT
-      MYSQL_PASSWORD: 2Tw!q1A7856W
+      MYSQL_USER: booo
+      MYSQL_PASSWORD: java
     ports:
-      - 3306:3306
+      - 3307:3306

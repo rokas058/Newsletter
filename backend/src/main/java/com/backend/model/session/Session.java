@@ -1,8 +1,8 @@
-package com.tietoevry.backend.model.session;
+package com.backend.model.session;
 
 import java.util.List;
 
-import com.tietoevry.backend.database.entity.Role;
+import com.backend.database.entity.Role;
 import lombok.Builder;
 import lombok.Value;
 

@@ -1,9 +1,9 @@
-package com.tietoevry.backend.controller;
+package com.backend.controller;
 
 import java.util.List;
 
-import com.tietoevry.backend.model.section.Section;
-import com.tietoevry.backend.service.SectionService;
+import com.backend.model.section.Section;
+import com.backend.service.SectionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;

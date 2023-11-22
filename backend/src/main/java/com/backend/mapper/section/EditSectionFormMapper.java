@@ -1,9 +1,9 @@
-package com.tietoevry.backend.mapper.section;
+package com.backend.mapper.section;
 
 import java.util.List;
 
-import com.tietoevry.backend.database.entity.SectionEntity;
-import com.tietoevry.backend.model.section.EditSectionForm;
+import com.backend.model.section.EditSectionForm;
+import com.backend.database.entity.SectionEntity;
 
 public class EditSectionFormMapper {
     public static SectionEntity toSectionEntity(Long id, EditSectionForm section) {

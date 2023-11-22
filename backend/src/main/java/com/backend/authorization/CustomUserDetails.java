@@ -1,9 +1,9 @@
-package com.tietoevry.backend.authorization;
+package com.backend.authorization;
 
 import java.util.Collection;
 import java.util.List;
 
-import com.tietoevry.backend.database.entity.Role;
+import com.backend.database.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.security.core.CredentialsContainer;

@@ -1,4 +1,4 @@
-package com.tietoevry.backend.model.event;
+package com.backend.model.event;
 
 import java.time.LocalDate;
 

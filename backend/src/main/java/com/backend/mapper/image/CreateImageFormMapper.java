@@ -1,9 +1,8 @@
-package com.tietoevry.backend.mapper.image;
+package com.backend.mapper.image;
 
-import static com.tietoevry.backend.utils.ImageFileUtil.toBytes;
-
-import com.tietoevry.backend.database.entity.ImageEntity;
-import com.tietoevry.backend.model.image.CreateImageForm;
+import com.backend.database.entity.ImageEntity;
+import com.backend.model.image.CreateImageForm;
+import com.backend.utils.ImageFileUtil;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,7 +17,7 @@ public class CreateImageFormMapper {
 
     public static CreateImageForm toCreateImageForm(MultipartFile imageFile) {
         return CreateImageForm.builder()
-            .image(toBytes(imageFile))
+            .image(ImageFileUtil.toBytes(imageFile))
             .build();
     }
 }

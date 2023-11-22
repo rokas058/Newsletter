@@ -1,6 +1,6 @@
-package com.tietoevry.backend.database.repository;
+package com.backend.database.repository;
 
-import com.tietoevry.backend.database.entity.SectionEntity;
+import com.backend.database.entity.SectionEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

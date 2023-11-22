@@ -1,19 +1,19 @@
-package com.tietoevry.backend.service;
+package com.backend.service;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.tietoevry.backend.database.entity.NewsletterEntity;
-import com.tietoevry.backend.database.entity.PageEntity;
-import com.tietoevry.backend.database.repository.NewsletterRepository;
-import com.tietoevry.backend.database.repository.PageRepository;
-import com.tietoevry.backend.exceptions.PageNotFoundException;
-import com.tietoevry.backend.mapper.page.CreatePageFormMapper;
-import com.tietoevry.backend.mapper.page.EditPageFormMapper;
-import com.tietoevry.backend.mapper.page.PageMapper;
-import com.tietoevry.backend.model.page.CreatePageForm;
-import com.tietoevry.backend.model.page.EditPageForm;
-import com.tietoevry.backend.model.page.Page;
+import com.backend.database.entity.NewsletterEntity;
+import com.backend.mapper.page.CreatePageFormMapper;
+import com.backend.mapper.page.EditPageFormMapper;
+import com.backend.mapper.page.PageMapper;
+import com.backend.model.page.CreatePageForm;
+import com.backend.model.page.EditPageForm;
+import com.backend.model.page.Page;
+import com.backend.database.entity.PageEntity;
+import com.backend.database.repository.NewsletterRepository;
+import com.backend.database.repository.PageRepository;
+import com.backend.exceptions.PageNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

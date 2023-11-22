@@ -1,9 +1,9 @@
-package com.tietoevry.backend.mapper.newsletter;
+package com.backend.mapper.newsletter;
 
-import com.tietoevry.backend.database.entity.NewsletterEntity;
-import com.tietoevry.backend.mapper.page.PageMapper;
-import com.tietoevry.backend.mapper.recommendation.RecommendationMapper;
-import com.tietoevry.backend.model.newsletter.Newsletter;
+import com.backend.database.entity.NewsletterEntity;
+import com.backend.mapper.page.PageMapper;
+import com.backend.model.newsletter.Newsletter;
+import com.backend.mapper.recommendation.RecommendationMapper;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

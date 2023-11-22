@@ -1,7 +1,7 @@
-package com.tietoevry.backend.mapper.user;
+package com.backend.mapper.user;
 
-import com.tietoevry.backend.database.entity.UserEntity;
-import com.tietoevry.backend.model.user.CreateUserForm;
+import com.backend.database.entity.UserEntity;
+import com.backend.model.user.CreateUserForm;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

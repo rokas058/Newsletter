@@ -1,4 +1,4 @@
-package com.tietoevry.backend.exceptions;
+package com.backend.exceptions;
 
 public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException(String message) {

@@ -1,9 +1,9 @@
-package com.tietoevry.backend.mapper.session;
+package com.backend.mapper.session;
 
 import java.util.Optional;
 
-import com.tietoevry.backend.authorization.CustomUserDetails;
-import com.tietoevry.backend.model.session.Session;
+import com.backend.model.session.Session;
+import com.backend.authorization.CustomUserDetails;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

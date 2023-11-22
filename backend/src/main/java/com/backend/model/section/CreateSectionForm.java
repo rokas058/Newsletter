@@ -1,4 +1,4 @@
-package com.tietoevry.backend.model.section;
+package com.backend.model.section;
 
 import java.util.List;
 

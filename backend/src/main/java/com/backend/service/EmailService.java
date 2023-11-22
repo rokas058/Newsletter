@@ -1,4 +1,4 @@
-package com.tietoevry.backend.service;
+package com.backend.service;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;

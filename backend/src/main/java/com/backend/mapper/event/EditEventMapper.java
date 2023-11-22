@@ -1,7 +1,7 @@
-package com.tietoevry.backend.mapper.event;
+package com.backend.mapper.event;
 
-import com.tietoevry.backend.database.entity.EventEntity;
-import com.tietoevry.backend.model.event.EventForm;
+import com.backend.database.entity.EventEntity;
+import com.backend.model.event.EventForm;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

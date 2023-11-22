@@ -1,19 +1,19 @@
-package com.tietoevry.backend.service;
+package com.backend.service;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.tietoevry.backend.database.entity.Role;
-import com.tietoevry.backend.database.entity.UserEntity;
-import com.tietoevry.backend.database.repository.UserRepository;
-import com.tietoevry.backend.exceptions.EmailIsNotUniqueException;
-import com.tietoevry.backend.exceptions.UserNotFoundException;
-import com.tietoevry.backend.mapper.user.CreateUserFormMapper;
-import com.tietoevry.backend.mapper.user.EditUserFormMapper;
-import com.tietoevry.backend.mapper.user.UserMapper;
-import com.tietoevry.backend.model.user.CreateUserForm;
-import com.tietoevry.backend.model.user.EditUserForm;
-import com.tietoevry.backend.model.user.User;
+import com.backend.database.entity.UserEntity;
+import com.backend.database.entity.Role;
+import com.backend.database.repository.UserRepository;
+import com.backend.exceptions.EmailIsNotUniqueException;
+import com.backend.exceptions.UserNotFoundException;
+import com.backend.mapper.user.CreateUserFormMapper;
+import com.backend.mapper.user.EditUserFormMapper;
+import com.backend.mapper.user.UserMapper;
+import com.backend.model.user.CreateUserForm;
+import com.backend.model.user.EditUserForm;
+import com.backend.model.user.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;

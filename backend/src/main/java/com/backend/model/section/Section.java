@@ -1,8 +1,8 @@
-package com.tietoevry.backend.model.section;
+package com.backend.model.section;
 
 import java.util.List;
 
-import com.tietoevry.backend.model.image.Image;
+import com.backend.model.image.Image;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Value;

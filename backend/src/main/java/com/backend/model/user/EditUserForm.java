@@ -1,9 +1,9 @@
-package com.tietoevry.backend.model.user;
+package com.backend.model.user;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import com.tietoevry.backend.database.entity.Role;
+import com.backend.database.entity.Role;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;

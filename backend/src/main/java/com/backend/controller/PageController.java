@@ -1,11 +1,11 @@
-package com.tietoevry.backend.controller;
+package com.backend.controller;
 
 import java.util.List;
 
-import com.tietoevry.backend.model.page.CreatePageForm;
-import com.tietoevry.backend.model.page.EditPageForm;
-import com.tietoevry.backend.model.page.Page;
-import com.tietoevry.backend.service.PageService;
+import com.backend.model.page.CreatePageForm;
+import com.backend.model.page.EditPageForm;
+import com.backend.model.page.Page;
+import com.backend.service.PageService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;

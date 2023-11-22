@@ -1,4 +1,4 @@
-package com.tietoevry.backend.database.entity;
+package com.backend.database.entity;
 
 import java.time.LocalDate;
 

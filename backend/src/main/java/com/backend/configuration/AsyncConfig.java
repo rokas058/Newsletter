@@ -1,4 +1,4 @@
-package com.tietoevry.backend.configuration;
+package com.backend.configuration;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

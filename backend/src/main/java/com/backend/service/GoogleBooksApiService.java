@@ -1,9 +1,9 @@
-package com.tietoevry.backend.service;
+package com.backend.service;
 
 import java.util.Optional;
 
-import com.tietoevry.backend.model.book.GoogleVolumes;
-import com.tietoevry.backend.model.book.Volume;
+import com.backend.model.book.GoogleVolumes;
+import com.backend.model.book.Volume;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;

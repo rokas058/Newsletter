@@ -1,8 +1,8 @@
-package com.tietoevry.backend.database.repository;
+package com.backend.database.repository;
 
 import java.util.Optional;
 
-import com.tietoevry.backend.database.entity.UserEntity;
+import com.backend.database.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

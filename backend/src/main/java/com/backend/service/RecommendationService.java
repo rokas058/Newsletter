@@ -1,19 +1,19 @@
-package com.tietoevry.backend.service;
+package com.backend.service;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.tietoevry.backend.database.entity.MediaType;
-import com.tietoevry.backend.database.entity.NewsletterEntity;
-import com.tietoevry.backend.database.entity.RecommendationEntity;
-import com.tietoevry.backend.database.repository.NewsletterRepository;
-import com.tietoevry.backend.database.repository.RecommendationRepository;
-import com.tietoevry.backend.mapper.recommendation.CreateRecommendationMapper;
-import com.tietoevry.backend.mapper.recommendation.RecommendationMapper;
-import com.tietoevry.backend.model.book.Volume;
-import com.tietoevry.backend.model.movie.OmdbMovie;
-import com.tietoevry.backend.model.recommendation.CreateRecommendationForm;
-import com.tietoevry.backend.model.recommendation.Recommendation;
+import com.backend.database.entity.NewsletterEntity;
+import com.backend.model.recommendation.CreateRecommendationForm;
+import com.backend.model.recommendation.Recommendation;
+import com.backend.database.entity.MediaType;
+import com.backend.database.entity.RecommendationEntity;
+import com.backend.database.repository.NewsletterRepository;
+import com.backend.database.repository.RecommendationRepository;
+import com.backend.mapper.recommendation.CreateRecommendationMapper;
+import com.backend.mapper.recommendation.RecommendationMapper;
+import com.backend.model.book.Volume;
+import com.backend.model.movie.OmdbMovie;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

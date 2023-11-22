@@ -1,8 +1,8 @@
-package com.tietoevry.backend.controller;
+package com.backend.controller;
 
-import com.tietoevry.backend.model.session.LoginData;
-import com.tietoevry.backend.model.session.Session;
-import com.tietoevry.backend.service.SessionService;
+import com.backend.model.session.LoginData;
+import com.backend.model.session.Session;
+import com.backend.service.SessionService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

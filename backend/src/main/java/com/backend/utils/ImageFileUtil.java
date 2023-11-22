@@ -1,4 +1,4 @@
-package com.tietoevry.backend.utils;
+package com.backend.utils;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

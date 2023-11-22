@@ -1,9 +1,9 @@
-package com.tietoevry.backend.service;
+package com.backend.service;
 
-import com.tietoevry.backend.authorization.CustomUserDetails;
-import com.tietoevry.backend.authorization.SecurityContextService;
-import com.tietoevry.backend.mapper.session.SessionMapper;
-import com.tietoevry.backend.model.session.Session;
+import com.backend.model.session.Session;
+import com.backend.authorization.CustomUserDetails;
+import com.backend.authorization.SecurityContextService;
+import com.backend.mapper.session.SessionMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

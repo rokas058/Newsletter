@@ -1,4 +1,4 @@
-package com.tietoevry.backend.model.image;
+package com.backend.model.image;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;

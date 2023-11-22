@@ -1,8 +1,8 @@
-package com.tietoevry.backend.database.repository;
+package com.backend.database.repository;
 
 import java.util.List;
 
-import com.tietoevry.backend.database.entity.ImageEntity;
+import com.backend.database.entity.ImageEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

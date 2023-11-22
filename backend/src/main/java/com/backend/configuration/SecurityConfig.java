@@ -1,4 +1,4 @@
-package com.tietoevry.backend.configuration;
+package com.backend.configuration;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

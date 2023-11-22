@@ -1,6 +1,6 @@
-package com.tietoevry.backend.service;
+package com.backend.service;
 
-import com.tietoevry.backend.model.movie.OmdbMovie;
+import com.backend.model.movie.OmdbMovie;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;

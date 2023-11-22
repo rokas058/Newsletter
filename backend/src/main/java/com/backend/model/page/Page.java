@@ -1,9 +1,9 @@
-package com.tietoevry.backend.model.page;
+package com.backend.model.page;
 
 import java.util.List;
 
-import com.tietoevry.backend.database.entity.Type;
-import com.tietoevry.backend.model.section.Section;
+import com.backend.database.entity.Type;
+import com.backend.model.section.Section;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Value;

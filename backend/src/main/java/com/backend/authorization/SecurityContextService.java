@@ -1,4 +1,4 @@
-package com.tietoevry.backend.authorization;
+package com.backend.authorization;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;

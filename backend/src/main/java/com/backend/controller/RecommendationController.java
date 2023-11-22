@@ -1,13 +1,13 @@
-package com.tietoevry.backend.controller;
+package com.backend.controller;
 
 import java.util.List;
 
-import com.tietoevry.backend.database.entity.MediaType;
-import com.tietoevry.backend.model.book.Volume;
-import com.tietoevry.backend.model.movie.OmdbMovie;
-import com.tietoevry.backend.model.recommendation.CreateRecommendationForm;
-import com.tietoevry.backend.model.recommendation.Recommendation;
-import com.tietoevry.backend.service.RecommendationService;
+import com.backend.database.entity.MediaType;
+import com.backend.model.recommendation.CreateRecommendationForm;
+import com.backend.model.recommendation.Recommendation;
+import com.backend.service.RecommendationService;
+import com.backend.model.book.Volume;
+import com.backend.model.movie.OmdbMovie;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;

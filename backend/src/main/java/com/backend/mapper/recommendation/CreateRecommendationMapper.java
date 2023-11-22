@@ -1,7 +1,7 @@
-package com.tietoevry.backend.mapper.recommendation;
+package com.backend.mapper.recommendation;
 
-import com.tietoevry.backend.database.entity.RecommendationEntity;
-import com.tietoevry.backend.model.recommendation.CreateRecommendationForm;
+import com.backend.model.recommendation.CreateRecommendationForm;
+import com.backend.database.entity.RecommendationEntity;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)

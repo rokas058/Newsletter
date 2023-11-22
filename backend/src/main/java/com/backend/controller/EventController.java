@@ -1,11 +1,11 @@
-package com.tietoevry.backend.controller;
+package com.backend.controller;
 
 import java.util.List;
 
-import com.tietoevry.backend.model.event.CreatedEvent;
-import com.tietoevry.backend.model.event.Event;
-import com.tietoevry.backend.model.event.EventForm;
-import com.tietoevry.backend.service.EventService;
+import com.backend.model.event.CreatedEvent;
+import com.backend.model.event.Event;
+import com.backend.model.event.EventForm;
+import com.backend.service.EventService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;

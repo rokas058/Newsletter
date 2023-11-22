@@ -1,11 +1,11 @@
-package com.tietoevry.backend.controller;
+package com.backend.controller;
 
 import java.util.List;
 
-import com.tietoevry.backend.model.user.CreateUserForm;
-import com.tietoevry.backend.model.user.EditUserForm;
-import com.tietoevry.backend.model.user.User;
-import com.tietoevry.backend.service.UserService;
+import com.backend.model.user.CreateUserForm;
+import com.backend.model.user.EditUserForm;
+import com.backend.model.user.User;
+import com.backend.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

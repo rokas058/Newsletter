@@ -1,4 +1,4 @@
-package com.tietoevry.backend.configuration;
+package com.backend.configuration;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;

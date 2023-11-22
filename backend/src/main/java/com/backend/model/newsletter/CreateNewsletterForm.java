@@ -1,4 +1,4 @@
-package com.tietoevry.backend.model.newsletter;
+package com.backend.model.newsletter;
 
 import java.time.LocalDate;
 

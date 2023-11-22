@@ -1,4 +1,4 @@
-package com.tietoevry.backend.exceptions;
+package com.backend.exceptions;
 
 public class SectionNotFoundException extends RuntimeException {
     public SectionNotFoundException(String message) {

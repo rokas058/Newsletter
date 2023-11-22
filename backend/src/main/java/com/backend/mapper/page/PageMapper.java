@@ -1,12 +1,12 @@
-package com.tietoevry.backend.mapper.page;
+package com.backend.mapper.page;
 
 import java.util.List;
 
-import com.tietoevry.backend.database.entity.NewsletterEntity;
-import com.tietoevry.backend.database.entity.PageEntity;
-import com.tietoevry.backend.database.entity.Type;
-import com.tietoevry.backend.mapper.section.SectionMapper;
-import com.tietoevry.backend.model.page.Page;
+import com.backend.database.entity.NewsletterEntity;
+import com.backend.database.entity.Type;
+import com.backend.model.page.Page;
+import com.backend.database.entity.PageEntity;
+import com.backend.mapper.section.SectionMapper;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)

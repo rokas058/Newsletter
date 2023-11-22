@@ -1,4 +1,4 @@
-package com.tietoevry.backend.service;
+package com.backend.service;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -10,22 +10,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import com.tietoevry.backend.database.entity.EventEntity;
-import com.tietoevry.backend.database.entity.EventType;
-import com.tietoevry.backend.database.entity.UserEntity;
-import com.tietoevry.backend.database.repository.EventRepository;
-import com.tietoevry.backend.database.repository.UserRepository;
-import com.tietoevry.backend.exceptions.EventNotFoundException;
-import com.tietoevry.backend.mapper.event.CreatedEventMapper;
-import com.tietoevry.backend.mapper.event.EditEventMapper;
-import com.tietoevry.backend.mapper.event.EventFormMapper;
-import com.tietoevry.backend.mapper.event.EventMapper;
-import com.tietoevry.backend.model.event.CreatedEvent;
-import com.tietoevry.backend.model.event.Event;
-import com.tietoevry.backend.model.event.EventForm;
+import com.backend.database.entity.EventEntity;
+import com.backend.database.entity.EventType;
+import com.backend.database.entity.UserEntity;
+import com.backend.database.repository.EventRepository;
+import com.backend.database.repository.UserRepository;
+import com.backend.exceptions.EventNotFoundException;
+import com.backend.mapper.event.CreatedEventMapper;
+import com.backend.mapper.event.EditEventMapper;
+import com.backend.mapper.event.EventFormMapper;
+import com.backend.mapper.event.EventMapper;
+import com.backend.model.event.*;
+import com.backend.model.movie.OmdbMovie;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 @RequiredArgsConstructor
@@ -34,6 +36,10 @@ public class EventService {
     private final EventRepository eventRepository;
 
     private final UserRepository userRepository;
+
+    @Value("${event.url}")
+    private String apiUrl;
+
 
     public Event createEvent(EventForm eventForm) {
         EventEntity eventToCreate = EventFormMapper.toEventEntity(eventForm);
@@ -58,34 +64,6 @@ public class EventService {
         allEvents.addAll(getAllBirthdays);
 
         return allEvents;
-
-
-    }
-
-    private LocalDate getEasterDay() {
-        int year = Integer.parseInt(yearNow());
-
-        return calculateEasterDate(year);
-    }
-
-    private LocalDate calculateEasterDate(int year) {
-        int a = year % 19;
-        int b = year / 100;
-        int c = year % 100;
-        int d = b / 4;
-        int e = b % 4;
-        int f = (b + 8) / 25;
-        int g = (b - f + 1) / 3;
-        int h = (19 * a + b - d - g + 15) % 30;
-        int i = c / 4;
-        int k = c % 4;
-        int l = (32 + 2 * e + 2 * i - h - k) % 7;
-        int m = (a + 11 * h + 22 * l) / 451;
-        int i1 = h + l - 7 * m + 114;
-        int month = i1 / 31;
-        int day = (i1 % 31) + 1;
-
-        return LocalDate.of(year, month, day);
     }
 
     private List<Event> getAllBirthdays() {
@@ -105,48 +83,25 @@ public class EventService {
     }
 
     private List<Event> getAllHolidays() {
-        //API geriau naudot
-        String yearValue = yearNow();
+        RestTemplate restTemplate = new RestTemplate();
+        NonWorkingDaysResponse datesResponse = restTemplate.getForObject(apiUrl, NonWorkingDaysResponse.class);
 
-        final List<String> titles = List.of(
-            "Naujieji metai", "Lietuvos Valstybės atkūrimo diena", "Nepriklausomybės atkūrimo diena",
-            "Tarptautinė darbo diena", "Joninės", "Karaliaus Mindaugo karūnavimo diena", "Žolinė",
-            "Visų šventųjų diena", " Vėlinės", "Šv. Kūčios", "Šv. Kalėdos", "Šv. Kalėdų antroji diena",
-            "Motinos diena", "Tėvo diena", "Velykos", "Velykų antroji diena");
-        final List<String> dates = List.of(
-            "2018-01-01", "2018-02-16", "2018-03-11", "2018-05-01", "2018-06-24", "2018-07-06", "2018-08-15",
-            "2018-11-01", "2018-11-02", "2018-12-24", "2018-12-25", "2018-12-26");
-        List<String> updatedDates = dates.stream()
-            .map(date -> date.replace("2018", yearValue))
+        assert datesResponse != null;
+        List<String> names = datesResponse.getNonWorkingDates().stream()
+            .map(NonWorkingDay::getName)
             .toList();
 
-        List<LocalDate> localDates = toDates(updatedDates);
-        localDates.add(getMothersDay());
-        localDates.add(getFathersDay());
-        localDates.add(getEasterDay());
-        localDates.add(getEasterDay().plusDays(1));
+        List<String> dateStrings = datesResponse.getNonWorkingDates().stream()
+            .map(NonWorkingDay::getDate)
+            .toList();
 
+        List<LocalDate> localDates = toDates(dateStrings);
 
-        return IntStream.range(0, titles.size())
-            .mapToObj(i -> EventMapper.toEvent(titles.get(i), localDates.get(i), EventType.HOLIDAY))
+        return IntStream.range(0, names.size())
+            .mapToObj(i -> EventMapper.toEvent(names.get(i), localDates.get(i), EventType.HOLIDAY))
             .collect(Collectors.toList());
     }
 
-    private LocalDate getFathersDay() {
-        int year = Integer.parseInt(yearNow());
-        Month month = Month.JUNE;
-
-        return LocalDate.of(year, month, 1)
-            .with(TemporalAdjusters.firstInMonth(DayOfWeek.SUNDAY));
-    }
-
-    private LocalDate getMothersDay() {
-        int year = Integer.parseInt(yearNow());
-        Month month = Month.MAY;
-
-        return LocalDate.of(year, month, 1)
-            .with(TemporalAdjusters.firstInMonth(DayOfWeek.SUNDAY));
-    }
 
     private List<LocalDate> toDates(List<String> dates) {
         return dates.stream()

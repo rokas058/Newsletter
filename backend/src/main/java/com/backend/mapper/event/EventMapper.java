@@ -1,10 +1,10 @@
-package com.tietoevry.backend.mapper.event;
+package com.backend.mapper.event;
 
 import java.time.LocalDate;
 
-import com.tietoevry.backend.database.entity.EventEntity;
-import com.tietoevry.backend.database.entity.EventType;
-import com.tietoevry.backend.model.event.Event;
+import com.backend.database.entity.EventEntity;
+import com.backend.database.entity.EventType;
+import com.backend.model.event.Event;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

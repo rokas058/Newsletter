@@ -1,22 +1,22 @@
-package com.tietoevry.backend.service;
+package com.backend.service;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.tietoevry.backend.database.entity.NewsletterEntity;
-import com.tietoevry.backend.database.entity.PageEntity;
-import com.tietoevry.backend.database.entity.Type;
-import com.tietoevry.backend.database.entity.UserEntity;
-import com.tietoevry.backend.database.repository.NewsletterRepository;
-import com.tietoevry.backend.database.repository.UserRepository;
-import com.tietoevry.backend.exceptions.NewsletterNotFoundException;
-import com.tietoevry.backend.mapper.newsletter.CreateNewsletterFormMapper;
-import com.tietoevry.backend.mapper.newsletter.NewsletterMapper;
-import com.tietoevry.backend.mapper.page.PageMapper;
-import com.tietoevry.backend.model.newsletter.CreateNewsletterForm;
-import com.tietoevry.backend.model.newsletter.EditNewsletterForm;
-import com.tietoevry.backend.model.newsletter.Newsletter;
+import com.backend.database.entity.NewsletterEntity;
+import com.backend.database.entity.PageEntity;
+import com.backend.database.entity.Type;
+import com.backend.database.entity.UserEntity;
+import com.backend.database.repository.NewsletterRepository;
+import com.backend.database.repository.UserRepository;
+import com.backend.exceptions.NewsletterNotFoundException;
+import com.backend.mapper.newsletter.CreateNewsletterFormMapper;
+import com.backend.mapper.newsletter.NewsletterMapper;
+import com.backend.mapper.page.PageMapper;
+import com.backend.model.newsletter.CreateNewsletterForm;
+import com.backend.model.newsletter.EditNewsletterForm;
+import com.backend.model.newsletter.Newsletter;
 import jakarta.mail.MessagingException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

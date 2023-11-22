@@ -1,8 +1,8 @@
-package com.tietoevry.backend.model.event;
+package com.backend.model.event;
 
 import java.time.LocalDate;
 
-import com.tietoevry.backend.database.entity.EventType;
+import com.backend.database.entity.EventType;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Value;
